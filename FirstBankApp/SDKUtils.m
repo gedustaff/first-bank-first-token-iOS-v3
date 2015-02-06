@@ -8,8 +8,7 @@
 //
 
 #import "SDKUtils.h"
-#import "ETIdentityProvider.h"
-#import "ETSoftTokenSDK.h"
+
 
 #define kFileName @"FBIdentityFirstToken123KGH"
 #define kFileNameB @"FBPINFirstToken459SVX"

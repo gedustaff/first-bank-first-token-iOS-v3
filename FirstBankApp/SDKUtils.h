@@ -8,7 +8,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ETIdentity.h"
+#import "ETIdentityProvider.h"
+#import "ETSoftTokenSDK.h"
+
 #import "ETConfigurationFile.h"
 
 @interface SDKUtils : NSObject
