@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ETIdentity.h"
+#import "EstablishPINViewController.h"
+#import "ETIdentityProvider.h"
 
 @interface AddIdentityViewController : UIViewController<UITextFieldDelegate>{
     ETIdentity *identity;

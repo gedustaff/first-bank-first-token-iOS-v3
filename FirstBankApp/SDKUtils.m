@@ -8,7 +8,6 @@
 //
 
 #import "SDKUtils.h"
-#import "ETConfigurationFile.h"
 #import "ETIdentityProvider.h"
 #import "ETSoftTokenSDK.h"
 

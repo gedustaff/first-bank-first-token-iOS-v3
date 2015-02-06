@@ -7,7 +7,7 @@
 //
 
 #import "AddIdentityViewController.h"
-#import "EstablishPINViewController.h"
+
 NSString *serialNumber;
 NSString *activationCode;
 
@@ -20,7 +20,7 @@ NSString *activationCode;
 @property (nonatomic, assign) BOOL checkSerial;
 
 @end
-#import "ETIdentityProvider.h"
+
 
 @implementation AddIdentityViewController
 @synthesize identity;

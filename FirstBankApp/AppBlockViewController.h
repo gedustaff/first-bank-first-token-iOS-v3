@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ETIdentity.h"
 #import "SDKUtils.h"
+#import "ETIdentity.h"
 
 @interface AppBlockViewController : UIViewController<UITextFieldDelegate>{
     NSString *blockKey;
