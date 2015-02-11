@@ -7,7 +7,7 @@
 //
 
 #import "PINRequestViewController.h"
-#import "SecurityCodeViewController.h"
+
 int counter;
 
 @interface PINRequestViewController ()
@@ -18,8 +18,18 @@ int counter;
 @implementation PINRequestViewController
 @synthesize retrievedID, retrievedPIN;
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (![ETSoftTokenSDK isDeviceSecure]) {
+        // Display a waring or error message to user.
+        // Possibly quit the application.
+        
+        UIAlertView *pinAlert = [[UIAlertView alloc] initWithTitle:@"Application Login Error " message:@"Your device is rooted \nIt is recommended that you do not continue \n Do you?" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
+        [pinAlert show];
+
+        
+    }
     counter = 3;
     self.mRetrievePIN.delegate = self;    
     self.mRetrievePIN.borderStyle = UITextBorderStyleRoundedRect;
@@ -98,6 +108,7 @@ int counter;
     } else {
         if ([retrievedPIN isEqualToString: self.mRetrievePIN.text]) {
             [self performSegueWithIdentifier:@"pinReqTosecCode" sender:self];
+            [self.mRetrievePIN setText:@""];
         } else {
             //Clear textfield
             [_mRetrievePIN setText:@""];

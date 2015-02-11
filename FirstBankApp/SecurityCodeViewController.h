@@ -12,7 +12,7 @@
 
 @interface SecurityCodeViewController : UIViewController{
     ETIdentity *getIdentity;
-    NSTimer *timer;
+    NSTimer *timer, *idleTimer;
     NSString *OTP;
     CircularProgressView *cpw;
 }

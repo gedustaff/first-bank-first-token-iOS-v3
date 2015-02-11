@@ -8,6 +8,7 @@
 
 #import "SecurityCodeViewController.h"
 int timeRemaining = 29;
+#define kMaxIdleTimeSeconds 15.0
 
 @interface SecurityCodeViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *showOTP;
@@ -26,15 +27,63 @@ int timeRemaining = 29;
     OTP = [SecurityCodeViewController getOtpForIdentity:getIdentity];
     [_showOTP setText:OTP];
     [self countdownTimer];
+    [self resetIdleTimer];
     
     
     // Do any additional setup after loading the view.
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+    
+    
+    [super viewDidDisappear:YES];
+    
+    if ([timer isValid]) {
+        [timer invalidate];
+        [idleTimer invalidate];
+    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void)resetIdleTimer {
+    if (!idleTimer) {
+        idleTimer = [NSTimer scheduledTimerWithTimeInterval:kMaxIdleTimeSeconds
+                                                      target:self
+                                                    selector:@selector(idleTimerExceeded)
+                                                    userInfo:nil
+                                                     repeats:NO];
+    }
+    else {
+        if (fabs([idleTimer.fireDate timeIntervalSinceNow]) < kMaxIdleTimeSeconds-1.0) {
+            [idleTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:kMaxIdleTimeSeconds]];
+        }
+    }
+}
+
+- (void)idleTimerExceeded {
+    [self resetIdleTimer];
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier:@"TimeOut" sender:self];
+    
+    //[self dismissViewControllerAnimated:YES completion:nil];
+
+
+    
+    //[self.storyboard instantiateViewControllerWithIdentifier:@"pinReq"];
+}
+
+- (UIResponder *)nextResponder {
+    [self resetIdleTimer];
+    return [super nextResponder];
+}
+
 
 
 + (NSString *) getOtpForIdentity:(ETIdentity *)identity {

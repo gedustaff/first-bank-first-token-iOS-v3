@@ -10,6 +10,7 @@
 #import "ETIdentity.h"
 #import "EstablishPINViewController.h"
 #import "ETIdentityProvider.h"
+#import "ETSoftTokenSDK.h"
 
 @interface AddIdentityViewController : UIViewController<UITextFieldDelegate>{
     ETIdentity *identity;

@@ -53,8 +53,9 @@
             BOOL saveID = [SDKUtils saveIdentity:strIdentity];
             BOOL savePIN =[SDKUtils savePIN:strPIN];
             if (saveID && savePIN) {
-                //[self.navigationController popViewControllerAnimated:YES];
+                
                 [self performSegueWithIdentifier:@"regToSec" sender:self];
+                [self.navigationController popViewControllerAnimated:YES];
             }
             else{
                 UIAlertView *pinAlert = [[UIAlertView alloc] initWithTitle:@"Application Activation Error" message:@"Sorry this application cannot be activated. Please contact your administrator" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];

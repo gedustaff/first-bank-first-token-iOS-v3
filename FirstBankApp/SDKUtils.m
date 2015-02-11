@@ -232,6 +232,7 @@ static NSString *dataFileName, *dataFileNameB, *dataFileNameC;
 }
 
 
+
 /**
  * Store the transaction url in the user defaults.
  * Note: You could save this in your identity file.

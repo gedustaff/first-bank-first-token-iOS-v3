@@ -29,9 +29,22 @@ NSString *activationCode;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (![ETSoftTokenSDK isDeviceSecure]) {
+        // Display a waring or error message to user.
+        // Possibly quit the application.
+        
+        UIAlertView *pinAlert = [[UIAlertView alloc] initWithTitle:@"Application Login Error " message:@"Your device is rooted \nIt is recommended that you do not continue \n Do you?" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
+        [pinAlert show];
+        
+        
+    }
+    
     // Do any additional setup after loading the view.
     self.tvSerNum.delegate = self;
     self.tvActNum.delegate = self;
+    self.tvSerNum.borderStyle = UITextBorderStyleRoundedRect;
+    self.tvActNum.borderStyle = UITextBorderStyleRoundedRect;
     UIColor *mycolor = [AddIdentityViewController colorFromHexString:@"#01214C"];
     NSDictionary *size = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Arial" size:15.0], NSFontAttributeName, mycolor, NSForegroundColorAttributeName, nil];
     self.navigationController.navigationBar.titleTextAttributes = size;
@@ -102,7 +115,7 @@ NSString *activationCode;
 
 -(void)animateTextField:(UITextField*)textField up:(BOOL)up
 {
-    const int movementDistance = -100; // tweak as needed
+    const int movementDistance = -140; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? movementDistance : -movementDistance);

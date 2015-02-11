@@ -24,6 +24,8 @@
     // Do any additional setup after loading the view.
     self.mPin.delegate = self;
     self.mConfirmPin.delegate = self;
+    self.mPin.borderStyle = UITextBorderStyleRoundedRect;
+    self.mConfirmPin.borderStyle = UITextBorderStyleRoundedRect;
     self.title = @"PIN Registration";
     UIColor *mycolor = [EstablishPINViewController colorFromHexString:@"#01214C"];
     NSDictionary *size = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Arial" size:15.0], NSFontAttributeName, mycolor, NSForegroundColorAttributeName, nil];
