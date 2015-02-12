@@ -12,9 +12,11 @@
 
 @interface SecurityCodeViewController : UIViewController{
     ETIdentity *getIdentity;
-    NSTimer *timer, *idleTimer;
     NSString *OTP;
     CircularProgressView *cpw;
 }
 @property (nonatomic, strong, readwrite) ETIdentity *getIdentity;
+@property (nonatomic, weak) NSTimer *timer;
+@property (nonatomic, weak) NSTimer *timeout;
+@property (nonatomic, weak) NSTimer *idleTimer;
 @end

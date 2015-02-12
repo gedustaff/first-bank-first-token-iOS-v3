@@ -7,7 +7,8 @@
 //
 
 #import "SecurityCodeViewController.h"
-int timeRemaining = 29;
+NSInteger timeRemaining = 29;
+NSInteger timingout;
 #define kMaxIdleTimeSeconds 15.0
 
 @interface SecurityCodeViewController ()
@@ -18,7 +19,7 @@ int timeRemaining = 29;
 @end
 
 @implementation SecurityCodeViewController
-@synthesize getIdentity;
+@synthesize getIdentity, timer, idleTimer, timeout;
 
 
 
@@ -29,6 +30,12 @@ int timeRemaining = 29;
     [self countdownTimer];
     [self resetIdleTimer];
     
+    if (timingout<=0) {
+        timeRemaining=29;
+    }else{
+        timeRemaining = timingout;
+    }
+    
     
     // Do any additional setup after loading the view.
 }
@@ -38,12 +45,46 @@ int timeRemaining = 29;
     
     [super viewDidDisappear:YES];
     
-    if ([timer isValid]) {
-        [timer invalidate];
-        [idleTimer invalidate];
+    
+        [self.timer invalidate];
+        [self.idleTimer invalidate];
+    self.timer=nil;
+    
+   
+    //[self.idleTimer invalidate];
+    self.idleTimer=nil;
+    
+    //New timer to calculate after time out
+    
+   // self.timeout = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounted:) userInfo:nil repeats:YES];
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+    
+    
+    if (timingout<=0) {
+        timeRemaining=29;
+    }else{
+        timeRemaining = timingout;
     }
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
     
+        [self.timer invalidate];
+        [self.idleTimer invalidate];
+    self.timer=nil;
     
+    //[self.idleTimer invalidate];
+    self.idleTimer=nil;
+    self.timeout = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounted:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,25 +94,30 @@ int timeRemaining = 29;
 
 
 - (void)resetIdleTimer {
-    if (!idleTimer) {
-        idleTimer = [NSTimer scheduledTimerWithTimeInterval:kMaxIdleTimeSeconds
+    if (!self.idleTimer) {
+        self.idleTimer = [NSTimer scheduledTimerWithTimeInterval:kMaxIdleTimeSeconds
                                                       target:self
                                                     selector:@selector(idleTimerExceeded)
                                                     userInfo:nil
                                                      repeats:NO];
     }
     else {
-        if (fabs([idleTimer.fireDate timeIntervalSinceNow]) < kMaxIdleTimeSeconds-1.0) {
-            [idleTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:kMaxIdleTimeSeconds]];
+        if (fabs([self.idleTimer.fireDate timeIntervalSinceNow]) < kMaxIdleTimeSeconds-1.0) {
+            [self.idleTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:kMaxIdleTimeSeconds]];
         }
     }
 }
 
 - (void)idleTimerExceeded {
-    [self resetIdleTimer];
-    //[self dismissViewControllerAnimated:YES completion:nil];
-    [self performSegueWithIdentifier:@"TimeOut" sender:self];
-    
+    //[self resetIdleTimer];
+    [self.timer invalidate];
+    self.timer=nil;
+    [self.idleTimer invalidate];
+    self.idleTimer=nil;
+        //[self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier:@"SecToReq" sender:self];
+    [self.navigationController popViewControllerAnimated:NO];
+
     //[self dismissViewControllerAnimated:YES completion:nil];
 
 
@@ -79,10 +125,6 @@ int timeRemaining = 29;
     //[self.storyboard instantiateViewControllerWithIdentifier:@"pinReq"];
 }
 
-- (UIResponder *)nextResponder {
-    [self resetIdleTimer];
-    return [super nextResponder];
-}
 
 
 
@@ -94,6 +136,7 @@ int timeRemaining = 29;
 - (void)updateCounter:(NSTimer *)theTimer {
     if(timeRemaining > 0 ){
         timeRemaining -- ;
+        timingout = timeRemaining;
         
         _showTimer.text = [NSString stringWithFormat:@"%ds", timeRemaining];
         
@@ -106,13 +149,21 @@ int timeRemaining = 29;
     }
 
 
+
+- (void)updateCounted:(NSTimer *)theTimer {
+    
+    timingout--;
+    
+}
+
+
 -(void) countdownTimer{
     /**if([timer isValid])
     {
         [timer release];
     }**/
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
     /*CGRect frame = CGRectMake(60, 360, 200, 150);
     cpw = [[CircularProgressView alloc] initWithFrame:frame];
     cpw.percent = 100;

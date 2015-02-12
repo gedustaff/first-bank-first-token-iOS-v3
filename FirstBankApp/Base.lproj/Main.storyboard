@@ -309,6 +309,7 @@
                     <connections>
                         <outlet property="showOTP" destination="x2e-ro-EEX" id="6kK-Eb-TQo"/>
                         <outlet property="showTimer" destination="Hvu-Ge-Ga5" id="Tgw-Jh-bvn"/>
+                        <segue destination="L1i-XX-YBS" kind="showDetail" identifier="SecToReq" id="Z87-CA-XPk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qjw-OP-9ph" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -483,12 +484,15 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="nheader" translatesAutoresizingMaskIntoConstraints="NO" id="Tgc-DR-VD3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="nheader" translatesAutoresizingMaskIntoConstraints="NO" id="Tgc-DR-VD3">
                                 <rect key="frame" x="0.0" y="64" width="320" height="173"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOe-Gx-0bs">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOe-Gx-0bs">
                                 <rect key="frame" x="16" y="498" width="288" height="50"/>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.12941176469999999" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="LzJ-HB-28b"/>
+                                </constraints>
                                 <state key="normal" title="OK">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -497,13 +501,16 @@
                                     <action selector="submitReg:" destination="MkL-WP-CHO" eventType="touchUpInside" id="MT2-VL-8LG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter the registration code below into the Self-service web page, or give it to your help desk to complete adding the Identity" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8w6-5u-eiI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enter the registration code below into the Self-service web page, or give it to your help desk to complete adding the Identity" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8w6-5u-eiI">
                                 <rect key="frame" x="16" y="245" width="288" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="kds-tW-dPv"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.0039215686269999999" green="0.12941176469999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmZ-E2-KLT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmZ-E2-KLT">
                                 <rect key="frame" x="16" y="303" width="288" height="187"/>
                                 <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
@@ -513,13 +520,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="SOe-Gx-0bs" firstAttribute="leading" secondItem="FmZ-E2-KLT" secondAttribute="leading" id="1dT-Vy-0xV"/>
+                            <constraint firstItem="FmZ-E2-KLT" firstAttribute="trailing" secondItem="SOe-Gx-0bs" secondAttribute="trailing" id="63W-0v-CVA"/>
+                            <constraint firstItem="8w6-5u-eiI" firstAttribute="top" secondItem="Tgc-DR-VD3" secondAttribute="bottom" constant="8" symbolic="YES" id="9dz-le-spr"/>
+                            <constraint firstItem="FmZ-E2-KLT" firstAttribute="leading" secondItem="ugo-BW-vg3" secondAttribute="leadingMargin" id="F66-rt-BaD"/>
+                            <constraint firstItem="Tgc-DR-VD3" firstAttribute="centerX" secondItem="8w6-5u-eiI" secondAttribute="centerX" id="JAq-fb-9HR"/>
+                            <constraint firstAttribute="trailing" secondItem="Tgc-DR-VD3" secondAttribute="trailing" id="Of6-6N-Xfr"/>
+                            <constraint firstItem="8w6-5u-eiI" firstAttribute="leading" secondItem="FmZ-E2-KLT" secondAttribute="leading" id="UoQ-kB-DkT"/>
                             <constraint firstItem="FmZ-E2-KLT" firstAttribute="height" secondItem="Tgc-DR-VD3" secondAttribute="height" id="cYu-OK-miQ"/>
+                            <constraint firstItem="FmZ-E2-KLT" firstAttribute="top" secondItem="8w6-5u-eiI" secondAttribute="bottom" constant="8" symbolic="YES" id="cbG-dE-aIn"/>
+                            <constraint firstItem="Tgc-DR-VD3" firstAttribute="leading" secondItem="ugo-BW-vg3" secondAttribute="leading" id="g64-IS-E7g"/>
+                            <constraint firstItem="FmZ-E2-KLT" firstAttribute="trailing" secondItem="8w6-5u-eiI" secondAttribute="trailing" id="iBP-x4-jCg"/>
+                            <constraint firstItem="SOe-Gx-0bs" firstAttribute="top" secondItem="FmZ-E2-KLT" secondAttribute="bottom" constant="8" symbolic="YES" id="vO2-eD-WRL"/>
+                            <constraint firstItem="Tgc-DR-VD3" firstAttribute="top" secondItem="ZG2-o1-sH2" secondAttribute="bottom" id="vRA-sa-Zdy"/>
+                            <constraint firstAttribute="bottom" secondItem="SOe-Gx-0bs" secondAttribute="bottom" constant="20" symbolic="YES" id="xMm-Ya-1vy"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tvRegDisplay" destination="FmZ-E2-KLT" id="K1F-WN-JYG"/>
-                        <segue destination="apY-31-d65" kind="presentation" identifier="regToSec" id="aHa-2Y-UpJ"/>
+                        <segue destination="apY-31-d65" kind="show" identifier="regToSec" id="aHa-2Y-UpJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DOi-dC-UVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -645,7 +665,7 @@
         <image name="nheader" width="306" height="189"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aHa-2Y-UpJ"/>
+        <segue reference="hp1-cp-Y6C"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.12941176469999999" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>
