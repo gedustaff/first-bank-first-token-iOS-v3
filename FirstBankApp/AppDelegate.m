@@ -43,7 +43,7 @@ BOOL isRegistered = NO;
      setTitleTextAttributes:
      @{NSForegroundColorAttributeName:color,
        NSShadowAttributeName:shadow,
-       NSFontAttributeName:[UIFont boldSystemFontOfSize:11.0]
+       NSFontAttributeName:[UIFont boldSystemFontOfSize:13]
        }
      forState:UIControlStateNormal];
     

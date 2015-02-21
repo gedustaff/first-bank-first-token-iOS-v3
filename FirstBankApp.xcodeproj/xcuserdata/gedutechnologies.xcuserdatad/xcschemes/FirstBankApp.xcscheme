@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "07088A781A4031C20010E3B8"
-               BuildableName = "FirstBankApp.app"
+               BuildableName = "FirstToken.app"
                BlueprintName = "FirstBankApp"
                ReferencedContainer = "container:FirstBankApp.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "07088A781A4031C20010E3B8"
-            BuildableName = "FirstBankApp.app"
+            BuildableName = "FirstToken.app"
             BlueprintName = "FirstBankApp"
             ReferencedContainer = "container:FirstBankApp.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "07088A781A4031C20010E3B8"
-            BuildableName = "FirstBankApp.app"
+            BuildableName = "FirstToken.app"
             BlueprintName = "FirstBankApp"
             ReferencedContainer = "container:FirstBankApp.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "07088A781A4031C20010E3B8"
-            BuildableName = "FirstBankApp.app"
+            BuildableName = "FirstToken.app"
             BlueprintName = "FirstBankApp"
             ReferencedContainer = "container:FirstBankApp.xcodeproj">
          </BuildableReference>

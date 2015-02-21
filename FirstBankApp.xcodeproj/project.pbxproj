@@ -39,7 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07088A791A4031C20010E3B8 /* FirstBankApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstBankApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07088A791A4031C20010E3B8 /* FirstToken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstToken.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07088A7D1A4031C20010E3B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07088A7E1A4031C20010E3B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		07088A801A4031C20010E3B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		07088A7A1A4031C20010E3B8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				07088A791A4031C20010E3B8 /* FirstBankApp.app */,
+				07088A791A4031C20010E3B8 /* FirstToken.app */,
 				07088A921A4031C20010E3B8 /* FirstBankAppTests.xctest */,
 			);
 			name = Products;
@@ -194,7 +194,7 @@
 			);
 			name = FirstBankApp;
 			productName = FirstBankApp;
-			productReference = 07088A791A4031C20010E3B8 /* FirstBankApp.app */;
+			productReference = 07088A791A4031C20010E3B8 /* FirstToken.app */;
 			productType = "com.apple.product-type.application";
 		};
 		07088A911A4031C20010E3B8 /* FirstBankAppTests */ = {
@@ -425,7 +425,7 @@
 					"$(inherited)",
 					/Users/gedutechnologies/Documents/EntrustMacIOSMobileSDK/IGMobileSDK/MacOSX_iOS/lib_iOS/Debug,
 				);
-				PRODUCT_NAME = FirstBankApp;
+				PRODUCT_NAME = FirstToken;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -452,7 +452,7 @@
 					"$(inherited)",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = FirstBankApp;
+				PRODUCT_NAME = FirstToken;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = /Users/gedutechnologies/Documents/EntrustMacIOSMobileSDK/IGMobileSDK/MacOSX_iOS/include;
