@@ -28,13 +28,13 @@ NSInteger timingout;
     OTP = [SecurityCodeViewController getOtpForIdentity:getIdentity];
     [_showOTP setText:OTP];
     [self countdownTimer];
-    [self resetIdleTimer];
+    //[self resetIdleTimer];
     
-    if (timingout<=0) {
+    /*if (timingout<=0) {
         timeRemaining=29;
     }else{
         timeRemaining = timingout;
-    }
+    }*/
     
     
     // Do any additional setup after loading the view.
@@ -47,12 +47,12 @@ NSInteger timingout;
     
     
         [self.timer invalidate];
-        [self.idleTimer invalidate];
-    self.timer=nil;
+        //[self.idleTimer invalidate];
+    //self.timer=nil;
     
    
     //[self.idleTimer invalidate];
-    self.idleTimer=nil;
+    //self.idleTimer=nil;
     
     //New timer to calculate after time out
     
@@ -65,12 +65,12 @@ NSInteger timingout;
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
     
-    
+    /*
     if (timingout<=0) {
         timeRemaining=29;
     }else{
         timeRemaining = timingout;
-    }
+    }*/
 
 }
 
@@ -83,8 +83,8 @@ NSInteger timingout;
     self.timer=nil;
     
     //[self.idleTimer invalidate];
-    self.idleTimer=nil;
-    self.timeout = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounted:) userInfo:nil repeats:YES];
+    //self.idleTimer=nil;
+   // self.timeout = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounted:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,7 +93,7 @@ NSInteger timingout;
 }
 
 
-- (void)resetIdleTimer {
+/*- (void)resetIdleTimer {
     if (!self.idleTimer) {
         self.idleTimer = [NSTimer scheduledTimerWithTimeInterval:kMaxIdleTimeSeconds
                                                       target:self
@@ -124,7 +124,7 @@ NSInteger timingout;
     
     //[self.storyboard instantiateViewControllerWithIdentifier:@"pinReq"];
 }
-
+*/
 
 
 
@@ -136,7 +136,7 @@ NSInteger timingout;
 - (void)updateCounter:(NSTimer *)theTimer {
     if(timeRemaining > 0 ){
         timeRemaining -- ;
-        timingout = timeRemaining;
+        //timingout = timeRemaining;
         
         _showTimer.text = [NSString stringWithFormat:@"%ds", timeRemaining];
         
@@ -150,11 +150,11 @@ NSInteger timingout;
 
 
 
-- (void)updateCounted:(NSTimer *)theTimer {
+/*- (void)updateCounted:(NSTimer *)theTimer {
     
     timingout--;
     
-}
+}*/
 
 
 -(void) countdownTimer{

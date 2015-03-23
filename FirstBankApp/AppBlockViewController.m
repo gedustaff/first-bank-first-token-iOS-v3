@@ -104,6 +104,7 @@ CAKeyframeAnimation *anim;
                 [self performSegueWithIdentifier:@"appblockToReset" sender:self];
             }else{
                 //Alert User that application has been blocked
+                //[self performSegueWithIdentifier:@"appblockToReset" sender:self];
                 UIAlertView *blockAlert = [[UIAlertView alloc] initWithTitle:@"Application Unlock Unsuccessful " message:@"Check the number and re-enter again" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
                 [blockAlert show];
             }
