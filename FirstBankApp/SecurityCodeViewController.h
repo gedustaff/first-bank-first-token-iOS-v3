@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ETIdentity.h"
-#import "CircularProgressView.h"
+
+#import "SettingsViewController.h"
 
 @interface SecurityCodeViewController : UIViewController{
     ETIdentity *getIdentity;
     NSString *OTP;
-    CircularProgressView *cpw;
+    
 }
 @property (nonatomic, strong, readwrite) ETIdentity *getIdentity;
 @property (nonatomic, weak) NSTimer *timer;

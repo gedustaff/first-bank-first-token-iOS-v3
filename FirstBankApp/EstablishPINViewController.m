@@ -52,7 +52,7 @@
     [self.mConfirmPin resignFirstResponder];
     NSString *pin = self.mPin.text;
     NSString *confirmPin = self.mConfirmPin.text;
-    int pinLength = [confirmPin length];
+    NSUInteger pinLength = [confirmPin length];
     
     if ([pin isEqualToString:confirmPin] && pinLength == 4) {
         pinValue = confirmPin;

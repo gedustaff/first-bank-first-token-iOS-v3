@@ -35,7 +35,7 @@
     
     NSString *pin = self.mResetPIN.text;
     NSString *confirmPin = self.mResetConfirm.text;
-    int pinLength = [confirmPin length];
+    NSUInteger pinLength = [confirmPin length];
     
     if ([pin isEqualToString:confirmPin] && pinLength == 4) {
         

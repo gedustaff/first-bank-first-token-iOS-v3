@@ -25,9 +25,35 @@ NSInteger timingout;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /*self.navigationController.toolbarHidden=NO;
+    UIBarButtonItem *flexiableItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];*/
+    /*UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];*/
+    
+    /*UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"\u2699" style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];
+    
+    UIFont *customFont = [UIFont fontWithName:@"Helvetica" size:35.0];
+    NSDictionary *fontDictionary = @{NSFontAttributeName : customFont};
+    [settingsButton setTitleTextAttributes:fontDictionary forState:UIControlStateNormal];*/
+    
+    /*UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"\u2699" style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];*/
+    
+    /*NSArray *items = [NSArray arrayWithObjects:flexiableItem, settingsButton, nil];
+    self.toolbarItems = items;*/
+    
+    
     OTP = [SecurityCodeViewController getOtpForIdentity:getIdentity];
     [_showOTP setText:OTP];
     [self countdownTimer];
+    timeRemaining = 29;
+    
+   /*UISwipeGestureRecognizer *swipeUp= [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUp:)];
+    [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
+    [self.view addGestureRecognizer:swipeUp];*/
+    
+    
+    
+    
+    
     //[self resetIdleTimer];
     
     /*if (timingout<=0) {
@@ -44,9 +70,7 @@ NSInteger timingout;
     
     
     [super viewDidDisappear:YES];
-    
-    
-        [self.timer invalidate];
+        //[self.timer invalidate];
         //[self.idleTimer invalidate];
     //self.timer=nil;
     
@@ -61,9 +85,16 @@ NSInteger timingout;
     
 }
 
+
+/*- (void)handleSwipeUp:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    [self.navigationController setToolbarHidden:NO];
+}*/
+
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
+    timeRemaining = 29;
     
     /*
     if (timingout<=0) {
@@ -75,12 +106,12 @@ NSInteger timingout;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+   // [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
     
-        [self.timer invalidate];
-        [self.idleTimer invalidate];
-    self.timer=nil;
+    //    [self.timer invalidate];
+      //  [self.idleTimer invalidate];
+    //self.timer=nil;
     
     //[self.idleTimer invalidate];
     //self.idleTimer=nil;
@@ -138,14 +169,18 @@ NSInteger timingout;
         timeRemaining -- ;
         //timingout = timeRemaining;
         
-        _showTimer.text = [NSString stringWithFormat:@"%ds", timeRemaining];
+        _showTimer.text = [NSString stringWithFormat:@"%lds", (long)timeRemaining];
         
     }else if (timeRemaining == 0){
-        _showTimer.text = @"29s";
+        /*_showTimer.text = @"29s";
         OTP = [SecurityCodeViewController getOtpForIdentity:getIdentity];
         [_showOTP setText:OTP];
-        timeRemaining = 29;
-    }
+        timeRemaining = 29;*/
+        [self.timer invalidate];
+        self.timer=nil;
+        //[self dismissViewControllerAnimated:YES completion:nil];
+        [self performSegueWithIdentifier:@"SecToReq" sender:self];
+        [self.navigationController popViewControllerAnimated:NO];    }
     }
 
 
@@ -155,6 +190,7 @@ NSInteger timingout;
     timingout--;
     
 }*/
+
 
 
 -(void) countdownTimer{
@@ -169,15 +205,24 @@ NSInteger timingout;
     cpw.percent = 100;
     [self.view addSubview: cpw];**/
 }
+- (IBAction)showSettings:(id)sender {
+    [self.timer invalidate];
+    self.timer=nil;
+    [self performSegueWithIdentifier:@"SecToSettings" sender:self];
+}
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"SecToSettings"]) {
+        SettingsViewController *vcSett = [segue destinationViewController];
+        vcSett.setIdentity = self.getIdentity;
+    }
 }
-*/
+
 
 @end

@@ -36,6 +36,7 @@ int counter;
     
     [self.mRetrievePIN addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     // Do any additional setup after loading the view.
+    retrievedID = [SDKUtils loadIdentity];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,7 +112,7 @@ int counter;
 
 
 - (IBAction)submitPIN:(id)sender {
-    retrievedID = [SDKUtils loadIdentity];
+    
     retrievedPIN = [SDKUtils retrievePIN];
     
     if (retrievedID == nil) {
@@ -165,6 +166,9 @@ int counter;
     
     
 }
+- (IBAction)openSettings:(id)sender {
+    [self performSegueWithIdentifier:@"ReqToSettings" sender:self];
+}
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -201,6 +205,11 @@ int counter;
     if ([[segue identifier] isEqualToString:@"pinReqTosecCode"]) {
         SecurityCodeViewController *svc = [segue destinationViewController];
         svc.getIdentity = self.retrievedID;
+    }
+    
+    if ([[segue identifier] isEqualToString:@"ReqToSettings"]) {
+        SettingsViewController *vcSett = [segue destinationViewController];
+        vcSett.setIdentity = self.retrievedID;
     }
     
 }
