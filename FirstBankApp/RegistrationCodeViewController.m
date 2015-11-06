@@ -32,6 +32,13 @@
     self.navigationController.navigationBar.titleTextAttributes = size;
     
     
+    _tvRegDisplay.numberOfLines = 1;
+    //_tvRegDisplay.minimumFontSize = 8;
+    _tvRegDisplay.minimumScaleFactor = 10./_tvRegDisplay.font.pointSize;
+    _tvRegDisplay.adjustsFontSizeToFitWidth = YES;
+    
+    
+    
     [_tvRegDisplay setText: regCode];
     
 }

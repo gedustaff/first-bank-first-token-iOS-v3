@@ -40,6 +40,12 @@ CAKeyframeAnimation *anim;
     // Get Block challenge from SDK
     blockKey = [ETIdentity getUnlockChallenge];
     //Set label as the retrieved key to use
+    
+    _labelLockKey.numberOfLines = 1;
+    _labelLockKey.minimumScaleFactor = 10./_labelLockKey.font.pointSize;
+    _labelLockKey.adjustsFontSizeToFitWidth = YES;
+
+    
     [_labelLockKey setText:blockKey];
 }
 

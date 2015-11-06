@@ -22,10 +22,11 @@
 		075D11F11A66703B00BC9D78 /* AppBlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D11F01A66703B00BC9D78 /* AppBlockViewController.m */; };
 		075D11F41A67A30100BC9D78 /* ResetPINViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D11F31A67A30100BC9D78 /* ResetPINViewController.m */; };
 		0776A14F1AD3D88C002E0361 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0776A14E1AD3D88C002E0361 /* libz.dylib */; };
-		0776A1511AD3D8D5002E0361 /* libEntrustIGMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0776A1501AD3D8D5002E0361 /* libEntrustIGMobileSDK.a */; };
 		077A57A91ADC12C7004DB946 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 077A57A81ADC12C7004DB946 /* SettingsViewController.m */; };
 		07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07C0AAA81AC0484D002F4EEB /* Settings.bundle */; };
 		07C75E931A48531000B97714 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C75E921A48531000B97714 /* Security.framework */; };
+		07C8EE451BED2719006B91FA /* libEntrustIGMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C8EE441BED2719006B91FA /* libEntrustIGMobileSDK.a */; };
+		07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C8EE461BED2DE4006B91FA /* Images-2.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		077A57A81ADC12C7004DB946 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		07C0AAA81AC0484D002F4EEB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		07C75E921A48531000B97714 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		07C8EE441BED2719006B91FA /* libEntrustIGMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEntrustIGMobileSDK.a; path = ../../../Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/Release/libEntrustIGMobileSDK.a; sourceTree = "<group>"; };
+		07C8EE461BED2DE4006B91FA /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +82,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07C8EE451BED2719006B91FA /* libEntrustIGMobileSDK.a in Frameworks */,
 				0776A14F1AD3D88C002E0361 /* libz.dylib in Frameworks */,
 				07C75E931A48531000B97714 /* Security.framework in Frameworks */,
-				0776A1511AD3D8D5002E0361 /* libEntrustIGMobileSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +101,7 @@
 		07088A701A4031C20010E3B8 = {
 			isa = PBXGroup;
 			children = (
+				07C8EE441BED2719006B91FA /* libEntrustIGMobileSDK.a */,
 				0776A1501AD3D8D5002E0361 /* libEntrustIGMobileSDK.a */,
 				0776A14E1AD3D88C002E0361 /* libz.dylib */,
 				07C75E921A48531000B97714 /* Security.framework */,
@@ -144,6 +148,7 @@
 				07088AAF1A4071390010E3B8 /* SecurityCodeViewController.m */,
 				077A57A71ADC12C7004DB946 /* SettingsViewController.h */,
 				077A57A81ADC12C7004DB946 /* SettingsViewController.m */,
+				07C8EE461BED2DE4006B91FA /* Images-2.xcassets */,
 			);
 			path = FirstBankApp;
 			sourceTree = "<group>";
@@ -218,7 +223,7 @@
 		07088A711A4031C20010E3B8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Gedu Technologies";
 				TargetAttributes = {
 					07088A781A4031C20010E3B8 = {
@@ -258,6 +263,7 @@
 				07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */,
 				07088A881A4031C20010E3B8 /* Main.storyboard in Resources */,
 				07088A8D1A4031C20010E3B8 /* LaunchScreen.xib in Resources */,
+				07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */,
 				07088A8A1A4031C20010E3B8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,23 +413,25 @@
 		07088A9D1A4031C20010E3B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/gedutechnologies/Downloads/IGMobileSDK-2/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
+					"/Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
+					/Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/Release,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-objC";
 				PRODUCT_NAME = FirstToken;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "/Users/gedutechnologies/Downloads/IGMobileSDK-2/MacOSX_iOS/include";
+				USER_HEADER_SEARCH_PATHS = /Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/include;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
@@ -431,23 +439,25 @@
 		07088A9E1A4031C20010E3B8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/gedutechnologies/Downloads/IGMobileSDK-2/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
+					"/Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
 					"$(inherited)",
+					/Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/Release,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-objC";
 				PRODUCT_NAME = FirstToken;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "/Users/gedutechnologies/Downloads/IGMobileSDK-2/MacOSX_iOS/include";
+				USER_HEADER_SEARCH_PATHS = /Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/include;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;

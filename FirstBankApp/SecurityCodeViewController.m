@@ -42,6 +42,11 @@ NSInteger timingout;
     
     
     OTP = [SecurityCodeViewController getOtpForIdentity:getIdentity];
+    
+    _showOTP.numberOfLines = 1;
+    _showOTP.minimumScaleFactor = 10./_showOTP.font.pointSize;
+    _showOTP.adjustsFontSizeToFitWidth = YES;
+    
     [_showOTP setText:OTP];
     [self countdownTimer];
     timeRemaining = 29;
