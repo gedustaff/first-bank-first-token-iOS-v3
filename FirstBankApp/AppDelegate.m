@@ -32,20 +32,21 @@ BOOL isRegistered = NO;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIColor *color = [AppDelegate colorFromHexString:@"#01214C"];
     
+    NSString *message = @"test message";
+    NSLog( @"Here is a test message: '%@'", message );
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowOffset = CGSizeMake(0.0, 1.0);
     shadow.shadowColor = [UIColor whiteColor];
     
     
-    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
+    /**[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
      setTitleTextAttributes:
      @{NSForegroundColorAttributeName:color,
        NSShadowAttributeName:shadow,
        NSFontAttributeName:[UIFont boldSystemFontOfSize:13]
        }
-     forState:UIControlStateNormal];
+     forState:UIControlStateNormal];**/
     
     loadingID = [SDKUtils loadIdentity];
     lockStateValue = [SDKUtils fetchLockState];
@@ -76,9 +77,10 @@ BOOL isRegistered = NO;
     }
     else
     {
-       UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        UIViewController *ivc = [storyboard instantiateViewControllerWithIdentifier:@"addID"];
-        [(UINavigationController*)self.window.rootViewController pushViewController:ivc animated:NO];
+        NSString *message = @"test message";
+        NSLog( @"Here is a test message: '%@'", message );
+        
+       self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"addID"];
         
         return YES;
         

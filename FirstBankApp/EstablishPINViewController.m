@@ -9,27 +9,41 @@
 #import "EstablishPINViewController.h"
 #import "RegistrationCodeViewController.h"
 
-
+BOOL isCreated = NO;
 @interface EstablishPINViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *mPin;
-@property (weak, nonatomic) IBOutlet UITextField *mConfirmPin;
+
+@property (weak, nonatomic) IBOutlet UITextField *enteredOTP;
+@property (weak, nonatomic) IBOutlet UITextField *pinValue;
+@property (weak, nonatomic) IBOutlet UITextField *pinConfirm;
+
 
 @end
 
 @implementation EstablishPINViewController
-@synthesize pinValue, idPIN;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Submit"
-                                                                              style:UIBarButtonItemStyleDone
-                                                                             target:self
-                                                                             action:@selector(submitPIN:)];
+    
+    UIColor *color = [UIColor whiteColor];
+    _enteredOTP.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Enter your OTP"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    
+    _pinValue.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Select your token PIN"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    _pinConfirm.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Confirm your token PIN"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    
+    
     // Do any additional setup after loading the view.
-    self.mPin.delegate = self;
-    self.mConfirmPin.delegate = self;
-    self.mPin.borderStyle = UITextBorderStyleRoundedRect;
-    self.mConfirmPin.borderStyle = UITextBorderStyleRoundedRect;
+    self.pinValue.delegate = self;
+    self.pinConfirm.delegate = self;
+    
     self.title = @"PIN Registration";
     UIColor *mycolor = [EstablishPINViewController colorFromHexString:@"#01214C"];
     NSDictionary *size = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Arial" size:15.0], NSFontAttributeName, mycolor, NSForegroundColorAttributeName, nil];
@@ -38,6 +52,18 @@
     
     
 }
+
+- (IBAction)submitPin:(id)sender {
+    
+    
+    if (isCreated){
+    [self performSegueWithIdentifier:@"otpToactive" sender:self];
+    }else{
+        [self performSegueWithIdentifier:@"otpTocreate" sender:self];
+    }
+    
+}
+
 
 - (BOOL)disablesAutomaticKeyboardDismissal {
     return NO;
@@ -48,14 +74,17 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)submitPIN:(id)sender {
-    [self.mPin resignFirstResponder];
-    [self.mConfirmPin resignFirstResponder];
-    NSString *pin = self.mPin.text;
-    NSString *confirmPin = self.mConfirmPin.text;
+    [self.pinValue resignFirstResponder];
+    [self.pinConfirm resignFirstResponder];
+    NSString *otp = self.enteredOTP.text;
+    NSString *pin = self.pinValue.text;
+    NSString *confirmPin = self.pinConfirm.text;
     NSUInteger pinLength = [confirmPin length];
     
     if ([pin isEqualToString:confirmPin] && pinLength == 4) {
-        pinValue = confirmPin;
+        //Check OTP value
+        
+        pin = confirmPin;
         [self performSegueWithIdentifier:@"PINtoRegCode" sender:self];
     } else {
         if (pinLength < 4) {
@@ -134,11 +163,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([[segue identifier] isEqualToString:@"PINtoRegCode"]) {
-        RegistrationCodeViewController *vcReg = [segue destinationViewController];
-        vcReg.strIdentity = self.idPIN;
-        vcReg.strPIN = self.pinValue;
-    }
+    
 }
 
 

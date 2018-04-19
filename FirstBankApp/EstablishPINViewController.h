@@ -10,13 +10,9 @@
 #import "ETIdentity.h"
 
 @interface EstablishPINViewController : UIViewController<UITextFieldDelegate>{
-    NSString *pinValue;
-    ETIdentity *idPIN;
     
     
 }
 
-@property (nonatomic, strong, readwrite) NSString *pinValue;
-@property (nonatomic, strong, readwrite) ETIdentity *idPIN;
 
 @end

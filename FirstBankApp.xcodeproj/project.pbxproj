@@ -12,7 +12,6 @@
 		07088A881A4031C20010E3B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07088A861A4031C20010E3B8 /* Main.storyboard */; };
 		07088A8A1A4031C20010E3B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07088A891A4031C20010E3B8 /* Images.xcassets */; };
 		07088A8D1A4031C20010E3B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07088A8B1A4031C20010E3B8 /* LaunchScreen.xib */; };
-		07088A991A4031C20010E3B8 /* FirstBankAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07088A981A4031C20010E3B8 /* FirstBankAppTests.m */; };
 		07088AA71A4061E30010E3B8 /* AddIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07088AA61A4061E30010E3B8 /* AddIdentityViewController.m */; };
 		07088AAA1A4062160010E3B8 /* EstablishPINViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07088AA91A4062160010E3B8 /* EstablishPINViewController.m */; };
 		07088AAD1A4062330010E3B8 /* RegistrationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07088AAC1A4062330010E3B8 /* RegistrationCodeViewController.m */; };
@@ -21,23 +20,15 @@
 		075D11EE1A5EC9F500BC9D78 /* PINRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D11ED1A5EC9F500BC9D78 /* PINRequestViewController.m */; };
 		075D11F11A66703B00BC9D78 /* AppBlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D11F01A66703B00BC9D78 /* AppBlockViewController.m */; };
 		075D11F41A67A30100BC9D78 /* ResetPINViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D11F31A67A30100BC9D78 /* ResetPINViewController.m */; };
-		0776A14F1AD3D88C002E0361 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0776A14E1AD3D88C002E0361 /* libz.dylib */; };
 		077A57A91ADC12C7004DB946 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 077A57A81ADC12C7004DB946 /* SettingsViewController.m */; };
 		07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07C0AAA81AC0484D002F4EEB /* Settings.bundle */; };
-		07C75E931A48531000B97714 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C75E921A48531000B97714 /* Security.framework */; };
-		07C8EE451BED2719006B91FA /* libEntrustIGMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C8EE441BED2719006B91FA /* libEntrustIGMobileSDK.a */; };
 		07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C8EE461BED2DE4006B91FA /* Images-2.xcassets */; };
+		3C55124C20861C6B0054A089 /* CreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C55124B20861C6B0054A089 /* CreateUserViewController.m */; };
+		3C5DBCFE2084BE2000F144E0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5DBCFD2084BE2000F144E0 /* libz.tbd */; };
+		3C5DBCFF2084C2CC00F144E0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C75E921A48531000B97714 /* Security.framework */; };
+		3CB5AB322080CB8300578CB7 /* libEntrustIGMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB5AB312080CB8200578CB7 /* libEntrustIGMobileSDK.a */; };
+		3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE38E3920860CE20098B44C /* ActivatedViewController.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		07088A931A4031C20010E3B8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 07088A711A4031C20010E3B8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 07088A781A4031C20010E3B8;
-			remoteInfo = FirstBankApp;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		07088A791A4031C20010E3B8 /* FirstToken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstToken.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +39,6 @@
 		07088A871A4031C20010E3B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		07088A891A4031C20010E3B8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		07088A8C1A4031C20010E3B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		07088A921A4031C20010E3B8 /* FirstBankAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstBankAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07088A971A4031C20010E3B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07088A981A4031C20010E3B8 /* FirstBankAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstBankAppTests.m; sourceTree = "<group>"; };
 		07088AA51A4061E30010E3B8 /* AddIdentityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddIdentityViewController.h; sourceTree = "<group>"; };
@@ -67,14 +57,19 @@
 		075D11F01A66703B00BC9D78 /* AppBlockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppBlockViewController.m; sourceTree = "<group>"; };
 		075D11F21A67A30100BC9D78 /* ResetPINViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPINViewController.h; sourceTree = "<group>"; };
 		075D11F31A67A30100BC9D78 /* ResetPINViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPINViewController.m; sourceTree = "<group>"; };
-		0776A14E1AD3D88C002E0361 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		0776A1501AD3D8D5002E0361 /* libEntrustIGMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEntrustIGMobileSDK.a; path = "../../../Downloads/IGMobileSDK-2/MacOSX_iOS/lib_iOS/Release/libEntrustIGMobileSDK.a"; sourceTree = "<group>"; };
 		077A57A71ADC12C7004DB946 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		077A57A81ADC12C7004DB946 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		07C0AAA81AC0484D002F4EEB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		07C75E921A48531000B97714 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		07C8EE441BED2719006B91FA /* libEntrustIGMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEntrustIGMobileSDK.a; path = ../../../Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/Release/libEntrustIGMobileSDK.a; sourceTree = "<group>"; };
 		07C8EE461BED2DE4006B91FA /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		3C55124A20861C6B0054A089 /* CreateUserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateUserViewController.h; sourceTree = "<group>"; };
+		3C55124B20861C6B0054A089 /* CreateUserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateUserViewController.m; sourceTree = "<group>"; };
+		3C5DBCFD2084BE2000F144E0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		3CB5AB2D2080B68400578CB7 /* libEntrustIGMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEntrustIGMobileSDK.a; path = "../../../../../SDK/SDK/iOS/IGMobileSDK-2/MacOSX_iOS/lib_iOS/Debug/libEntrustIGMobileSDK.a"; sourceTree = "<group>"; };
+		3CB5AB2F2080C47C00578CB7 /* libEntrustIGMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEntrustIGMobileSDK.a; path = "../../../../../SDK/SDK/iOS/IGMobileSDK-2/MacOSX_iOS/lib_iOS/Release/libEntrustIGMobileSDK.a"; sourceTree = "<group>"; };
+		3CB5AB312080CB8200578CB7 /* libEntrustIGMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEntrustIGMobileSDK.a; path = "../../../../../IGMobileSDK-2/MacOSX_iOS/lib_iOS/Release/libEntrustIGMobileSDK.a"; sourceTree = "<group>"; };
+		3CE38E3820860CE20098B44C /* ActivatedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivatedViewController.h; sourceTree = "<group>"; };
+		3CE38E3920860CE20098B44C /* ActivatedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivatedViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,16 +77,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07C8EE451BED2719006B91FA /* libEntrustIGMobileSDK.a in Frameworks */,
-				0776A14F1AD3D88C002E0361 /* libz.dylib in Frameworks */,
-				07C75E931A48531000B97714 /* Security.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		07088A8F1A4031C20010E3B8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				3C5DBCFF2084C2CC00F144E0 /* Security.framework in Frameworks */,
+				3CB5AB322080CB8300578CB7 /* libEntrustIGMobileSDK.a in Frameworks */,
+				3C5DBCFE2084BE2000F144E0 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,13 +89,12 @@
 		07088A701A4031C20010E3B8 = {
 			isa = PBXGroup;
 			children = (
-				07C8EE441BED2719006B91FA /* libEntrustIGMobileSDK.a */,
-				0776A1501AD3D8D5002E0361 /* libEntrustIGMobileSDK.a */,
-				0776A14E1AD3D88C002E0361 /* libz.dylib */,
+				3CB5AB2F2080C47C00578CB7 /* libEntrustIGMobileSDK.a */,
 				07C75E921A48531000B97714 /* Security.framework */,
 				07088A7B1A4031C20010E3B8 /* FirstBankApp */,
 				07088A951A4031C20010E3B8 /* FirstBankAppTests */,
 				07088A7A1A4031C20010E3B8 /* Products */,
+				3CB5AB2C2080B68400578CB7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				07088A791A4031C20010E3B8 /* FirstToken.app */,
-				07088A921A4031C20010E3B8 /* FirstBankAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,11 +109,15 @@
 		07088A7B1A4031C20010E3B8 /* FirstBankApp */ = {
 			isa = PBXGroup;
 			children = (
+				3CE38E3820860CE20098B44C /* ActivatedViewController.h */,
+				3CE38E3920860CE20098B44C /* ActivatedViewController.m */,
 				07088A801A4031C20010E3B8 /* AppDelegate.h */,
 				07088A811A4031C20010E3B8 /* AppDelegate.m */,
 				075D11EF1A66703B00BC9D78 /* AppBlockViewController.h */,
 				075D11F01A66703B00BC9D78 /* AppBlockViewController.m */,
 				07088A861A4031C20010E3B8 /* Main.storyboard */,
+				3C55124A20861C6B0054A089 /* CreateUserViewController.h */,
+				3C55124B20861C6B0054A089 /* CreateUserViewController.m */,
 				07C0AAA81AC0484D002F4EEB /* Settings.bundle */,
 				075D11F21A67A30100BC9D78 /* ResetPINViewController.h */,
 				075D11F31A67A30100BC9D78 /* ResetPINViewController.m */,
@@ -179,6 +169,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		3CB5AB2C2080B68400578CB7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C5DBCFD2084BE2000F144E0 /* libz.tbd */,
+				3CB5AB312080CB8200578CB7 /* libEntrustIGMobileSDK.a */,
+				3CB5AB2D2080B68400578CB7 /* libEntrustIGMobileSDK.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -199,24 +199,6 @@
 			productReference = 07088A791A4031C20010E3B8 /* FirstToken.app */;
 			productType = "com.apple.product-type.application";
 		};
-		07088A911A4031C20010E3B8 /* FirstBankAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 07088A9F1A4031C20010E3B8 /* Build configuration list for PBXNativeTarget "FirstBankAppTests" */;
-			buildPhases = (
-				07088A8E1A4031C20010E3B8 /* Sources */,
-				07088A8F1A4031C20010E3B8 /* Frameworks */,
-				07088A901A4031C20010E3B8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				07088A941A4031C20010E3B8 /* PBXTargetDependency */,
-			);
-			name = FirstBankAppTests;
-			productName = FirstBankAppTests;
-			productReference = 07088A921A4031C20010E3B8 /* FirstBankAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -229,10 +211,6 @@
 					07088A781A4031C20010E3B8 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 4MFRETC4QY;
-					};
-					07088A911A4031C20010E3B8 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = 07088A781A4031C20010E3B8;
 					};
 				};
 			};
@@ -250,7 +228,6 @@
 			projectRoot = "";
 			targets = (
 				07088A781A4031C20010E3B8 /* FirstBankApp */,
-				07088A911A4031C20010E3B8 /* FirstBankAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -268,13 +245,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		07088A901A4031C20010E3B8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -287,32 +257,18 @@
 				075D11EE1A5EC9F500BC9D78 /* PINRequestViewController.m in Sources */,
 				07088AA71A4061E30010E3B8 /* AddIdentityViewController.m in Sources */,
 				07088A821A4031C20010E3B8 /* AppDelegate.m in Sources */,
+				3C55124C20861C6B0054A089 /* CreateUserViewController.m in Sources */,
 				075D11F41A67A30100BC9D78 /* ResetPINViewController.m in Sources */,
 				07088A7F1A4031C20010E3B8 /* main.m in Sources */,
 				075D11F11A66703B00BC9D78 /* AppBlockViewController.m in Sources */,
+				3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */,
 				077A57A91ADC12C7004DB946 /* SettingsViewController.m in Sources */,
 				07088AB01A4071390010E3B8 /* SecurityCodeViewController.m in Sources */,
 				07088AAA1A4062160010E3B8 /* EstablishPINViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		07088A8E1A4031C20010E3B8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				07088A991A4031C20010E3B8 /* FirstBankAppTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		07088A941A4031C20010E3B8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 07088A781A4031C20010E3B8 /* FirstBankApp */;
-			targetProxy = 07088A931A4031C20010E3B8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		07088A861A4031C20010E3B8 /* Main.storyboard */ = {
@@ -413,86 +369,57 @@
 		07088A9D1A4031C20010E3B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
-					/Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/Release,
+					"/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-objC";
+				OTHER_LDFLAGS = (
+					"-objC",
+					"-fobjc-arc",
+				);
 				PRODUCT_NAME = FirstToken;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8a3c60a3-7341-4a60-b7ee-51bd5d863ef5";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = /Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/include;
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				USER_HEADER_SEARCH_PATHS = "/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/include";
+				VALID_ARCHS = "";
+				"VALID_ARCHS[sdk=*]" = arm64;
 			};
 			name = Debug;
 		};
 		07088A9E1A4031C20010E3B8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
 					"$(inherited)",
-					/Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/lib_iOS/Release,
+					"/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-objC";
+				OTHER_LDFLAGS = (
+					"-objC",
+					"-fobjc-arc",
+				);
 				PRODUCT_NAME = FirstToken;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8a3c60a3-7341-4a60-b7ee-51bd5d863ef5";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = /Users/gedutechnologies/Downloads/IGMobileSDKiOS/MacOSX_iOS/include;
-				VALID_ARCHS = "arm64 armv7 armv7s";
-			};
-			name = Release;
-		};
-		07088AA01A4031C20010E3B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = FirstBankAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = FirstBankAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstBankApp.app/FirstBankApp";
-			};
-			name = Debug;
-		};
-		07088AA11A4031C20010E3B8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = FirstBankAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = FirstBankAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstBankApp.app/FirstBankApp";
+				USER_HEADER_SEARCH_PATHS = "/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/include";
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
@@ -513,15 +440,6 @@
 			buildConfigurations = (
 				07088A9D1A4031C20010E3B8 /* Debug */,
 				07088A9E1A4031C20010E3B8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		07088A9F1A4031C20010E3B8 /* Build configuration list for PBXNativeTarget "FirstBankAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				07088AA01A4031C20010E3B8 /* Debug */,
-				07088AA11A4031C20010E3B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

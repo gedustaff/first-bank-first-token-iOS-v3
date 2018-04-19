@@ -13,7 +13,8 @@
 #import "SecurityCodeViewController.h"
 
 @interface RegistrationCodeViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *tvRegDisplay;
+@property (weak, nonatomic) IBOutlet UITextField *panCode;
+@property (weak, nonatomic) IBOutlet UITextField *pinCode;
 
 @end
 
@@ -23,6 +24,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIColor *color = [UIColor whiteColor];
+    _panCode.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Debit/ATM Card Number"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    
+    _pinCode.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Card PIN"
+     attributes:@{NSForegroundColorAttributeName:color}];
     
     // Do any additional setup after loading the view.
     NSString *regCode = strIdentity.registrationCode;
@@ -31,29 +42,18 @@
     NSDictionary *size = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Arial" size:15.0], NSFontAttributeName, mycolor, NSForegroundColorAttributeName, nil];
     self.navigationController.navigationBar.titleTextAttributes = size;
     
-    
-    _tvRegDisplay.numberOfLines = 1;
-    //_tvRegDisplay.minimumFontSize = 8;
-    _tvRegDisplay.minimumScaleFactor = 10./_tvRegDisplay.font.pointSize;
-    _tvRegDisplay.adjustsFontSizeToFitWidth = YES;
-    
-    
-    
-    [_tvRegDisplay setText: regCode];
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)submitReg:(id)sender {
-    //Get the values of the identity and PIN and protect or encrypted both of them before displaying the OTP.
+- (IBAction)submitPan:(id)sender {
     
-    UIAlertView *activationAlert = [[UIAlertView alloc] initWithTitle:@"Confirmation" message:@"Have you used this registration code yet? It will not be displayed again" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
-    [activationAlert show];
+    [self performSegueWithIdentifier:@"panTootp" sender:self];
 }
-    - (void) alertView:(UIAlertView *) alertView didDismissWithButtonIndex:(NSInteger) buttonIndex
+
+- (void) alertView:(UIAlertView *) alertView didDismissWithButtonIndex:(NSInteger) buttonIndex
     {
         if (buttonIndex==1) {
             

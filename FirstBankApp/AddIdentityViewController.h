@@ -17,7 +17,6 @@
 }
 
 @property (nonatomic, retain) ETIdentity *identity;
-- (IBAction)validateIdentity:(id)sender;
 
 
 @end

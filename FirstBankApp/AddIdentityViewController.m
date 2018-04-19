@@ -15,8 +15,6 @@ NSString *activationCode;
 #define MAXLENGTH2 16
 
 @interface AddIdentityViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *tvSerNum;
-@property (weak, nonatomic) IBOutlet UITextField *tvActNum;
 @property (nonatomic, assign) BOOL checkSerial;
 
 @end
@@ -24,6 +22,10 @@ NSString *activationCode;
 
 @implementation AddIdentityViewController
 @synthesize identity;
+- (IBAction)sendIntro:(id)sender {
+    
+    [self performSegueWithIdentifier:@"introToCard" sender:self];
+}
 
 
 
@@ -41,10 +43,6 @@ NSString *activationCode;
     }
     
     // Do any additional setup after loading the view.
-    self.tvSerNum.delegate = self;
-    self.tvActNum.delegate = self;
-    self.tvSerNum.borderStyle = UITextBorderStyleRoundedRect;
-    self.tvActNum.borderStyle = UITextBorderStyleRoundedRect;
     UIColor *mycolor = [AddIdentityViewController colorFromHexString:@"#01214C"];
     NSDictionary *size = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Arial" size:15.0], NSFontAttributeName, mycolor, NSForegroundColorAttributeName, nil];
     self.navigationController.navigationBar.titleTextAttributes = size;
@@ -72,60 +70,17 @@ NSString *activationCode;
 
 
 
-- (BOOL)textField:(UITextField *) textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    NSUInteger oldLength = [textField.text length];
-    NSUInteger replacementLength = [string length];
-    NSUInteger rangeLength = range.length;
-    
-    NSUInteger newLength = oldLength - rangeLength + replacementLength;
-    
-    BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
-    
-    if (textField==self.tvSerNum) {
-        return newLength <= MAXLENGTH1 || returnKey;
-            }else{
-        return newLength <= MAXLENGTH2 || returnKey;
-    }
-    
-    
-}
+
 
 - (BOOL)disablesAutomaticKeyboardDismissal {
     return NO;
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    [self animateTextField:textField up:YES];
-    
-}
 
 
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if (textField==self.tvSerNum) {
-        [self animateTextField:textField up:NO];
-    }else{
-         [self animateTextField:textField up:NO];
-    }
-    
-}
 
--(void)animateTextField:(UITextField*)textField up:(BOOL)up
-{
-    const int movementDistance = -140; // tweak as needed
-    const float movementDuration = 0.3f; // tweak as needed
-    
-    int movement = (up ? movementDistance : -movementDistance);
-    
-    [UIView beginAnimations: @"animateTextField" context: nil];
-    [UIView setAnimationBeginsFromCurrentState: YES];
-    [UIView setAnimationDuration: movementDuration];
-    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-    [UIView commitAnimations];
-}
+
 
 
 
@@ -180,63 +135,7 @@ NSString *activationCode;
 }
 
 
-- (IBAction)validateIdentity:(id)sender {
-    
-    serialNumber = self.tvSerNum.text;
-    activationCode = self.tvActNum.text;
-    NSString *fakeSerial1 = @"9999999999";
-    NSString *fakeSerial2 = @"0000000000";
-    NSString *fakeAct1 = @"9999999999999995";
-    NSString *fakeAct2 = @"0000000000000000";
-    [self.tvActNum resignFirstResponder];
-    [self.tvSerNum resignFirstResponder];
-    
-    
-    if ([serialNumber isEqualToString :fakeSerial1] || [serialNumber isEqualToString: fakeSerial2] || [serialNumber isEqualToString: fakeAct1] || [serialNumber isEqualToString: fakeAct2] ) {
-        UIAlertView *activationAlert = [[UIAlertView alloc] initWithTitle:@"Application Activation Error " message:@"Invalid Serial Number and Activation Number Combination" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-        [activationAlert show];
-        [_tvSerNum setText:@""];
-        [_tvActNum setText:@""];
-    }else{
-    
-        // See if the serial number is valid
-        
-        if ([AddIdentityViewController checkSerialNumber] && [AddIdentityViewController checkActivationNumber]) {
-            
-            // Both codes are valid at this point. Create
-            // a new identity.
-            // This identity is not going to be registered for
-            // transactions, so pass in nil for the device ID.
-            
-            identity = [ETIdentityProvider generate:nil
-                                       serialNumber:serialNumber
-                                     activationCode:activationCode];
-            [self performSegueWithIdentifier:@"AddIdToEstablishPin" sender:self];
-            
-            //NSString *idnum = identity.registrationCode;
-            // The registrationCode property of the returned
-            
-            // identity should be displayed to the user,
-            // so the user can complete the soft token activation
-            // with Entrust IdentityGuard.
-            //return identity;
-            
-            //[self.lblIdentity setText:idnum];
-           
-            
-            // The identity can be encoded using the NSCoding protocol,
-            // or it can be saved by accessing and saving all
-            // of the properties individually.
-            // Note: an identity may or may not require PIN protection.
-            // It is up to the application to implement such protection,sdfsdafdasfdafas // if required. Although not recommended, applications may
-            // choose to ignore PIN protection.
-            
-        }
-        
-    }
-    
 
-}
 
 
 
@@ -247,10 +146,7 @@ NSString *activationCode;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([[segue identifier] isEqualToString:@"AddIdToEstablishPin"]) {
-        EstablishPINViewController *vc = [segue destinationViewController];
-        vc.idPIN = self.identity;
-    }
+  
 }
 
 
