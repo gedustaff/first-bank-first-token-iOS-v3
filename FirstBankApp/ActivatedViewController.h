@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ActivatedViewController : UIViewController
-
+@property (nonatomic, weak) NSTimer *timer;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ActivatedViewController.h"
+NSInteger timeRemaining = 5;
 
 @interface ActivatedViewController ()
 
@@ -17,11 +18,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self countdownTimer];
+    timeRemaining = 5;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateCounter:(NSTimer *)theTimer {
+    if (timeRemaining == 0){
+        
+        [self.timer invalidate];
+        self.timer=nil;
+        //[self dismissViewControllerAnimated:YES completion:nil];
+        [self performSegueWithIdentifier:@"activateTosecurity" sender:self];
+    }
+}
+
+-(void) countdownTimer{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
 }
 
 /*

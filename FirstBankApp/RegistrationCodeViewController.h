@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "ETIdentity.h"
+#import "TripleDES.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface RegistrationCodeViewController : UIViewController <UIAlertViewDelegate>{
-    ETIdentity *strIdentity;
-    NSString *strPIN;
+@interface RegistrationCodeViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, NSURLConnectionDelegate>{
+    NSString *responseCode, *message;
+    NSMutableData *responseData;
     
 }
-@property (nonatomic, strong, readwrite) ETIdentity *strIdentity;
-@property (nonatomic, strong, readwrite) NSString *strPIN;
+
+@property (nonatomic, strong, readwrite) NSString *responseCode, *message ;
+@property (nonatomic, retain) NSMutableData *responseData;
 @end

@@ -11,7 +11,7 @@
 
 #import "SettingsViewController.h"
 
-@interface SecurityCodeViewController : UIViewController{
+@interface SecurityCodeViewController : UIViewController<UITextFieldDelegate>{
     ETIdentity *getIdentity;
     NSString *OTP;
     

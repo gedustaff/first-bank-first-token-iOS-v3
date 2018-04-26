@@ -8,11 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "ETIdentity.h"
+#import "ETIdentityProvider.h"
+#import "ETSoftTokenSDK.h"
+#import "CreateUserViewController.h"
+#import "SDKUtils.h"
 
 @interface EstablishPINViewController : UIViewController<UITextFieldDelegate>{
-    
+    NSString *otpReference, *userID, *accountNumber;
+    NSMutableData *responseDataEP;
+    ETIdentity *identity;
     
 }
+@property (nonatomic, strong, readwrite) NSString *otpReference, *userID, *accountNumber;
+@property (nonatomic, retain) NSMutableData *responseDataEP;
+@property (nonatomic, retain) ETIdentity *identity;
 
 
 @end

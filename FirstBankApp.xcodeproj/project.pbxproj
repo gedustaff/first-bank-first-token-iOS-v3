@@ -23,6 +23,8 @@
 		077A57A91ADC12C7004DB946 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 077A57A81ADC12C7004DB946 /* SettingsViewController.m */; };
 		07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07C0AAA81AC0484D002F4EEB /* Settings.bundle */; };
 		07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C8EE461BED2DE4006B91FA /* Images-2.xcassets */; };
+		3C3B8F78208DC98500A9777F /* TripleDES.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B8F77208DC98500A9777F /* TripleDES.m */; };
+		3C3B8F7B208E0A4200A9777F /* URLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B8F7A208E0A4200A9777F /* URLConnection.m */; };
 		3C55124C20861C6B0054A089 /* CreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C55124B20861C6B0054A089 /* CreateUserViewController.m */; };
 		3C5DBCFE2084BE2000F144E0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5DBCFD2084BE2000F144E0 /* libz.tbd */; };
 		3C5DBCFF2084C2CC00F144E0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C75E921A48531000B97714 /* Security.framework */; };
@@ -62,6 +64,10 @@
 		07C0AAA81AC0484D002F4EEB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		07C75E921A48531000B97714 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		07C8EE461BED2DE4006B91FA /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		3C3B8F76208DC98500A9777F /* TripleDES.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripleDES.h; sourceTree = "<group>"; };
+		3C3B8F77208DC98500A9777F /* TripleDES.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripleDES.m; sourceTree = "<group>"; };
+		3C3B8F79208E0A4200A9777F /* URLConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLConnection.h; sourceTree = "<group>"; };
+		3C3B8F7A208E0A4200A9777F /* URLConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLConnection.m; sourceTree = "<group>"; };
 		3C55124A20861C6B0054A089 /* CreateUserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateUserViewController.h; sourceTree = "<group>"; };
 		3C55124B20861C6B0054A089 /* CreateUserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateUserViewController.m; sourceTree = "<group>"; };
 		3C5DBCFD2084BE2000F144E0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -123,8 +129,12 @@
 				075D11F31A67A30100BC9D78 /* ResetPINViewController.m */,
 				075D11EC1A5EC9F500BC9D78 /* PINRequestViewController.h */,
 				075D11ED1A5EC9F500BC9D78 /* PINRequestViewController.m */,
+				3C3B8F76208DC98500A9777F /* TripleDES.h */,
+				3C3B8F77208DC98500A9777F /* TripleDES.m */,
 				075D11E91A5C05E300BC9D78 /* SDKUtils.h */,
 				075D11EA1A5C05E300BC9D78 /* SDKUtils.m */,
+				3C3B8F79208E0A4200A9777F /* URLConnection.h */,
+				3C3B8F7A208E0A4200A9777F /* URLConnection.m */,
 				07088A891A4031C20010E3B8 /* Images.xcassets */,
 				07088A8B1A4031C20010E3B8 /* LaunchScreen.xib */,
 				07088A7C1A4031C20010E3B8 /* Supporting Files */,
@@ -252,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C3B8F7B208E0A4200A9777F /* URLConnection.m in Sources */,
 				075D11EB1A5C05E300BC9D78 /* SDKUtils.m in Sources */,
 				07088AAD1A4062330010E3B8 /* RegistrationCodeViewController.m in Sources */,
 				075D11EE1A5EC9F500BC9D78 /* PINRequestViewController.m in Sources */,
@@ -264,6 +275,7 @@
 				3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */,
 				077A57A91ADC12C7004DB946 /* SettingsViewController.m in Sources */,
 				07088AB01A4071390010E3B8 /* SecurityCodeViewController.m in Sources */,
+				3C3B8F78208DC98500A9777F /* TripleDES.m in Sources */,
 				07088AAA1A4062160010E3B8 /* EstablishPINViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
