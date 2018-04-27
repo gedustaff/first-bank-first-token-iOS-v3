@@ -9,44 +9,161 @@
 #import "AppBlockViewController.h"
 #import "ResetPINViewController.h"
 CAKeyframeAnimation *anim;
+NSString *retreivedPIN;
+NSInteger timerems = 2;
 
 @interface AppBlockViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *labelLockKey;
-@property (weak, nonatomic) IBOutlet UITextField *tvUnlockKey;
+@property (weak, nonatomic) IBOutlet UITextField *oldPIN;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPIN;
+@property (weak, nonatomic) IBOutlet UITextField *freshPIN;
+
+
 
 @end
 
 @implementation AppBlockViewController
-@synthesize blockKey, unblockKey, blockRetrievedID;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.tvUnlockKey.borderStyle = UITextBorderStyleRoundedRect;
-    self.tvUnlockKey.delegate = self;
+    timerems =2;
+    UIColor *color = [UIColor whiteColor];
     
-    //Set up animation package
+    // Set Placeholder Colour as White
+    _oldPIN.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Enter Old PIN"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    _confirmPIN.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Enter New PIN"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    _freshPIN.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Confirm New PIN"
+     attributes:@{NSForegroundColorAttributeName:color}];
     
-    anim = [ CAKeyframeAnimation animationWithKeyPath:@"transform" ] ;
-    anim.values = @[ [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(-5.0f, 0.0f, 0.0f) ], [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(5.0f, 0.0f, 0.0f) ] ] ;
-    anim.autoreverses = YES ;
-    anim.repeatCount = 2.0f ;
-    anim.duration = 0.07f ;
+    //Set Border Colour as Gold colour
     
-    //Alert User that application has been blocked
-    UIAlertView *blockAlert = [[UIAlertView alloc] initWithTitle:@"Application Blocked " message:@"Your application has been blocked. Please contact your nearest branch to unlock it" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
-    [blockAlert show];
-    blockRetrievedID = [SDKUtils loadIdentity];
-    // Get Block challenge from SDK
-    blockKey = [ETIdentity getUnlockChallenge];
-    //Set label as the retrieved key to use
+    _oldPIN.layer.masksToBounds=YES;
+    _oldPIN.layer.borderColor = [[AppBlockViewController colorFromHexString:@"#eaab00"] CGColor];
+    _oldPIN.layer.borderWidth= 2.0f;
     
-    _labelLockKey.numberOfLines = 1;
-    _labelLockKey.minimumScaleFactor = 10./_labelLockKey.font.pointSize;
-    _labelLockKey.adjustsFontSizeToFitWidth = YES;
-
+    _confirmPIN.layer.masksToBounds=YES;
+    _confirmPIN.layer.borderColor = [[AppBlockViewController colorFromHexString:@"#eaab00"] CGColor];
+    _confirmPIN.layer.borderWidth= 2.0f;
     
-    [_labelLockKey setText:blockKey];
+    _freshPIN.layer.masksToBounds=YES;
+    _freshPIN.layer.borderColor = [[AppBlockViewController colorFromHexString:@"#eaab00"] CGColor];
+    _freshPIN.layer.borderWidth= 2.0f;
+    
+    //Fetch Identity Value
+    retreivedPIN = [SDKUtils retrievePIN];
+    
+    
+    
+}
+- (IBAction)submitChangePIN:(id)sender {
+    
+    NSString *old_pin = _oldPIN.text;
+    NSString *new_pin = _freshPIN.text;
+    NSString *confirm_pin = _confirmPIN.text;
+    if([_oldPIN hasText]&&[_confirmPIN hasText]&&[_freshPIN hasText]&& old_pin.length==4&&new_pin.length==4&& confirm_pin.length==4 && [new_pin isEqualToString:confirm_pin] && [old_pin isEqualToString:retreivedPIN]){
+        
+        if([SDKUtils deletePIN]){
+            [SDKUtils savePIN:new_pin];
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"FirstToken"
+                                         message:@"PIN change successful"
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* yesButton = [UIAlertAction
+                                        actionWithTitle:@"Okay"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action) {
+                                            //Handle your yes please button action here
+                                            [self performSegueWithIdentifier:@"changeTorequest" sender:self];
+                                        }];
+            
+            [alert addAction:yesButton];
+            [self presentViewController:alert animated:YES completion:nil];
+            
+            
+        }else{
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"PIN Creation Error"
+                                         message:@"Error creating new PIN \n Please contact the nearest branch"
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* yesButton = [UIAlertAction
+                                        actionWithTitle:@"Okay"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action) {
+                                            //Handle your yes please button action here
+                                           
+                                        }];
+            
+            [alert addAction:yesButton];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        
+    }else if(![_oldPIN hasText]){
+        [ _oldPIN.layer addAnimation:anim forKey:nil ];
+    }else if (![_freshPIN hasText]){
+        [ _freshPIN.layer addAnimation:anim forKey:nil ];
+    }else if (![_confirmPIN hasText]){
+        [ _confirmPIN.layer addAnimation:anim forKey:nil ];
+    }else if(![new_pin isEqualToString:confirm_pin]){
+        [ _freshPIN.layer addAnimation:anim forKey:nil ];
+        [ _confirmPIN.layer addAnimation:anim forKey:nil ];
+        _freshPIN.text = @"";
+        _confirmPIN.text = @"";
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"PIN Creation Error"
+                                     message:@"PIN values do not match. Please verify and try again"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:@"Okay"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        //Handle your yes please button action here
+                                    }];
+        
+        [alert addAction:yesButton];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else if (![old_pin isEqualToString:retreivedPIN]){
+        [ _oldPIN.layer addAnimation:anim forKey:nil ];
+        _freshPIN.text = @"";
+        _confirmPIN.text = @"";
+        _oldPIN.text = @"";
+        
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"PIN Creation Error"
+                                     message:@"Wrong PIN value. \n If you have forgotten your PIN, please use the PIN Reset option"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:@"Okay"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        //Handle your yes please button action here
+                                        timerems--;
+                                        if(timerems==0){
+                                            [self performSegueWithIdentifier:@"changeTorequest" sender:self];
+                                        }
+                                    }];
+        
+        [alert addAction:yesButton];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+}
++ (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,52 +191,9 @@ CAKeyframeAnimation *anim;
     
     BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
     
-    return newLength <= 8 || returnKey;
+    return newLength <= 4 || returnKey;
 }
 
-- (IBAction)unblockApp:(id)sender {
-    //check that text has been entered into textbox
-    
-    if ([self.tvUnlockKey.text isEqualToString:@""]) {
-        
-        
-        
-        [_tvUnlockKey.layer addAnimation:anim forKey:nil ];
-        
-    } else {
-        
-        //fetch text from text box
-        
-        unblockKey = self.tvUnlockKey.text;
-        
-        //Validate Text in text box
-        
-        if (unblockKey.length!=8) {
-           [_tvUnlockKey.layer addAnimation:anim forKey:nil ];
-        
-        
-        
-        }else{
-            
-            //Validate unblock action
-            
-            BOOL carryGo;
-            carryGo = NO;
-            carryGo = [blockRetrievedID confirmUnlockCode:unblockKey forChallenge:blockKey];
-            if (carryGo) {
-                [self performSegueWithIdentifier:@"appblockToReset" sender:self];
-            }else{
-                //Alert User that application has been blocked
-                //[self performSegueWithIdentifier:@"appblockToReset" sender:self];
-                UIAlertView *blockAlert = [[UIAlertView alloc] initWithTitle:@"Application Unlock Unsuccessful " message:@"Check the number and re-enter again" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
-                [blockAlert show];
-            }
-            
-        }
-    }
-    
-    
-}
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -133,7 +207,7 @@ CAKeyframeAnimation *anim;
 
 -(void)animateTextField:(UITextField*)textField up:(BOOL)up
 {
-    const int movementDistance = -150; // tweak as needed
+    const int movementDistance = -80; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? movementDistance : -movementDistance);

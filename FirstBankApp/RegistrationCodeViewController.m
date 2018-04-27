@@ -15,6 +15,7 @@
 NSString *userid, *account, *otp_reference;
 NSURLConnection *conn, *conn1, *conn2, *conn3;
 NSMutableURLRequest *requested, *requestOTP;
+UIActivityIndicatorView *indicators;
 
 @interface RegistrationCodeViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *panCode;
@@ -27,6 +28,12 @@ NSMutableURLRequest *requested, *requestOTP;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    indicators = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicators.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicators.center = self.view.center;
+    [self.view addSubview:indicators];
+    [indicators bringSubviewToFront:self.view];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
     
     responseData = [NSMutableData new];
     
@@ -147,6 +154,7 @@ NSMutableURLRequest *requested, *requestOTP;
     NSData *pinData = [pin dataUsingEncoding:NSUTF8StringEncoding];
     
     if(retrievedPan.length==16 && retrievedPin.length==4 && [_panCode hasText] && [_pinCode hasText]){
+        [indicators startAnimating];
     
     NSData *data = [TripleDES transformData:panData operation:kCCEncrypt withPassword:key];
     NSData *pinValue = [TripleDES transformData:pinData operation:kCCEncrypt withPassword:key];
@@ -401,6 +409,8 @@ NSMutableURLRequest *requested, *requestOTP;
                 }
                 
             }else{
+                [indicators stopAnimating];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
                 UIAlertController * alertIncorrect = [UIAlertController
                                                       alertControllerWithTitle:@"Error verifying card details"
                                                       message:@"Please try again"
@@ -416,6 +426,8 @@ NSMutableURLRequest *requested, *requestOTP;
                 [self presentViewController:alertIncorrect animated:YES completion:nil];
             }
         }else{
+            [indicators stopAnimating];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
             NSLog(@"Error Activating App. Please contact the bank");
             UIAlertController * alertIncorrect = [UIAlertController
                                                   alertControllerWithTitle:@"Error Activating App"
@@ -454,6 +466,8 @@ NSMutableURLRequest *requested, *requestOTP;
                     NSLog(@"Connection could not be made");
                 }
             }else{
+                [indicators stopAnimating];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
                 UIAlertController * alertIncorrect = [UIAlertController
                                                       alertControllerWithTitle:@"Error fetching account number"
                                                       message:@"Please try again"
@@ -470,6 +484,8 @@ NSMutableURLRequest *requested, *requestOTP;
             }
             
         }else{
+            [indicators stopAnimating];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
             NSLog(@"Error Activating App. Please contact the bank");
             UIAlertController * alertIncorrect = [UIAlertController
                                                   alertControllerWithTitle:@"Error Activating App"
@@ -500,10 +516,13 @@ NSMutableURLRequest *requested, *requestOTP;
             if ([responseCode isEqualToString:@"000"]){
                 otp_reference = [jsonOTP valueForKey:@"OTPReferenceNumber"];
                 //Perform Segue
-                
+                [indicators stopAnimating];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
                 [self performSegueWithIdentifier:@"panTootp" sender:self];
                 
             }else{
+                [indicators stopAnimating];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
                 UIAlertController * alertIncorrect = [UIAlertController
                                                       alertControllerWithTitle:@"Error sending OTP"
                                                       message:@"Please try again"
@@ -520,6 +539,8 @@ NSMutableURLRequest *requested, *requestOTP;
             }
             
         }else{
+            [indicators stopAnimating];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
             NSLog(@"Error Activating App. Please contact the bank");
             UIAlertController * alertIncorrect = [UIAlertController
                                                   alertControllerWithTitle:@"Error Activating App"

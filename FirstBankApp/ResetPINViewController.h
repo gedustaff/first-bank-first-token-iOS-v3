@@ -14,9 +14,13 @@
 @interface ResetPINViewController : UIViewController<UITextFieldDelegate>{
     
     ETIdentity *resetID;
+    NSString *ref;
+    NSMutableData *responseDataRP;
     
 }
 
 @property (nonatomic, strong, readwrite) ETIdentity *resetID;
+@property (nonatomic, strong, readwrite) NSString *ref;
+@property (nonatomic, retain) NSMutableData *responseDataRP;
 
 @end

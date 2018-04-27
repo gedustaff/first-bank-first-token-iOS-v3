@@ -431,7 +431,7 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
     
     //Set URL
     //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestUser setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/getSerial.php"]];
+    [requestUser setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/create.php"]];
     
     //set HTTP Method
     [requestUser setHTTPMethod:@"POST"];

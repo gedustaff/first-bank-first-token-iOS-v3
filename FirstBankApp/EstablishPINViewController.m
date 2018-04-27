@@ -13,6 +13,7 @@ BOOL isCreated = NO;
 NSString *submittedOTP, *submitPIN, *submitConfirm, *ref, *responseCode, *userIdentity, *account, *serial, *activation, *registration, *serialNumber, *pinCode, *activationCode;
 NSURLConnection *connValidateOTP, *connCheckUser, *connIssuance, *connActive, *connSerial, *connActivate;
 NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActive, *requestSerial, *requestActivate;
+UIActivityIndicatorView *indicator;
 @interface EstablishPINViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *enteredOTP;
@@ -27,6 +28,14 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
+    
     responseDataEP = [NSMutableData new];
     
     UIColor *color = [UIColor whiteColor];
@@ -94,6 +103,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
     if(submittedOTP.length==6 && submitPIN.length==4 && submitConfirm.length==4 && [submitPIN isEqualToString: submitConfirm]){
         
         //Carry out OTP verification
+        [indicator startAnimating];
         [EstablishPINViewController validateOTP];
         
         connValidateOTP = [[NSURLConnection alloc] initWithRequest:requestVerify delegate:self];
@@ -159,6 +169,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
     NSLog(@"error message: %@", error);
+    [indicator stopAnimating];
     UIAlertController * alertIncorrect = [UIAlertController
                                           alertControllerWithTitle:@"Activation Error"
                                           message:@"Please check your internet connection and try again"
@@ -188,7 +199,8 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
         if ([json objectForKey:@"OTPReferenceNumber"]){
             responseCode = [json valueForKey:@"ResponseCode"];
             NSLog(@"Received Code, %@", responseCode);
-            if ([responseCode isEqualToString:@"000"]){
+            //if ([responseCode isEqualToString:@"000"]){
+            if ([responseCode isEqualToString:@"111"]){
                 
                 [EstablishPINViewController checkUser];
                 connCheckUser = [[NSURLConnection alloc] initWithRequest:requestUser delegate:self];
@@ -199,6 +211,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
                 }
                 
             }else{
+                [indicator stopAnimating];
                 UIAlertController * alertIncorrect = [UIAlertController
                                                       alertControllerWithTitle:@"Error validating OTP"
                                                       message:@"Please try again"
@@ -213,6 +226,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
                 [self presentViewController:alertIncorrect animated:YES completion:nil];
             }
         }else{
+            [indicator stopAnimating];
             NSLog(@"Error Activating App. Please contact the bank");
             UIAlertController * alertIncorrect = [UIAlertController
                                                   alertControllerWithTitle:@"Error Activating App"
@@ -254,6 +268,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
                  [self performSegueWithIdentifier:@"otpTocreate" sender:self];
                 
             }else{
+                [indicator stopAnimating];
                 UIAlertController * alertIncorrect = [UIAlertController
                                                       alertControllerWithTitle:@"Error checking user state"
                                                       message:@"Please try again"
@@ -269,6 +284,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
                 [self presentViewController:alertIncorrect animated:YES completion:nil];
             }
         }else{
+            [indicator stopAnimating];
             NSLog(@"Error Activating App. Please contact the bank");
             UIAlertController * alertIncorrect = [UIAlertController
                                                   alertControllerWithTitle:@"Error Activating App"
@@ -293,8 +309,12 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
         NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         if ([json objectForKey:@"Status"]){
-             BOOL statusRetrieved = [json boolForKey:@"Status"];
+            NSLog(@"1");
+            
+            BOOL statusRetrieved = [[json valueForKey:@"Status"] boolValue];
+            //NSString *statusRetrieved = [json valueForKey:@"Status"];
             NSLog(@"Received Code, %d", statusRetrieved);
+            NSLog(@"2");
             if (statusRetrieved){
                 
                 //Get Serial
@@ -341,7 +361,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
         NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         if ([json objectForKey:@"Status"]){
-            BOOL statusRetrieved = [json boolForKey:@"Status"];
+            BOOL statusRetrieved = [[json valueForKey:@"Status"] boolValue];
             NSLog(@"Received Code, %d", statusRetrieved);
             if (statusRetrieved){
                 
@@ -507,7 +527,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
             if ([messageReceived isEqualToString:@"Successful" ]){
                 BOOL checkStorePIN = [SDKUtils savePIN:submitPIN];
                 if (checkStorePIN){
-                    [self performSegueWithIdentifier:@"panTootp" sender:self];
+                    [self performSegueWithIdentifier:@"otpToactive" sender:self];
                 }
                 
             }else{
@@ -615,7 +635,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
     
     //Set URL
     //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestUser setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/validateOTP.php"]];
+    [requestUser setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
     
     //set HTTP Method
     [requestUser setHTTPMethod:@"POST"];
@@ -642,6 +662,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
     
     
     NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
+    //NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", @"12321321" ];
     NSLog(@"Post Request, %@", post);
     
     //Encode string
@@ -766,7 +787,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
 
 + (void) activateSoftToken {
     
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@&acc=%@&reg=%@&act=%@&ser=%@",@"6",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity, serial, activation, registration, account];
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@&acc=%@&reg=%@&act=%@&ser=%@",@"6",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity, account, registration, activationCode, serialNumber];
     NSLog(@"Post Request, %@", post);
     
     //Encode string
@@ -842,7 +863,7 @@ NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActi
         return newLength <= 4 || returnKey;
         
     }
-    }
+}
 
 -(BOOL)textFieldShouldReturn:(UITextField *) textField {
     [textField resignFirstResponder];

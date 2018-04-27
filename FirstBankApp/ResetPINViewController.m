@@ -8,21 +8,68 @@
 
 #import "ResetPINViewController.h"
 #import "SecurityCodeViewController.h"
+NSURLConnection *connValidateOTP;
+NSMutableURLRequest *requestVerify;
+NSString *otp, *reference;
+NSString *pin;
 
 @interface ResetPINViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *mResetPIN;
-@property (weak, nonatomic) IBOutlet UITextField *mResetConfirm;
+@property (weak, nonatomic) IBOutlet UITextField *otpValue;
+@property (weak, nonatomic) IBOutlet UITextField *pinOne;
+@property (weak, nonatomic) IBOutlet UITextField *pinTwo;
 
 @end
 
 @implementation ResetPINViewController
-@synthesize resetID;
+@synthesize resetID, ref, responseDataRP;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.mResetPIN.delegate = self;
-    self.mResetConfirm.delegate = self;
+    self.otpValue.delegate = self;
+    self.pinOne.delegate = self;
+    self.pinTwo.delegate = self;
+    reference = ref;
+    UIColor *color = [UIColor whiteColor];
+    
+    // Set Placeholder Colour as White
+    _otpValue.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Enter OTP"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    _pinOne.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Enter New PIN"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    _pinTwo.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Confirm New PIN"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    
+    //Set Border Colour as Gold colour
+    
+    _otpValue.layer.masksToBounds=YES;
+    _otpValue.layer.borderColor = [[ResetPINViewController colorFromHexString:@"#eaab00"] CGColor];
+    _otpValue.layer.borderWidth= 2.0f;
+    
+    _pinOne.layer.masksToBounds=YES;
+    _pinOne.layer.borderColor = [[ResetPINViewController colorFromHexString:@"#eaab00"] CGColor];
+    _pinOne.layer.borderWidth= 2.0f;
+    
+    _pinTwo.layer.masksToBounds=YES;
+    _pinTwo.layer.borderColor = [[ResetPINViewController colorFromHexString:@"#eaab00"] CGColor];
+    _pinTwo.layer.borderWidth= 2.0f;
+    
     // Do any additional setup after loading the view.
+}
+
++ (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+- (IBAction)submitReset:(id)sender {
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,41 +77,200 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)resetPIN:(id)sender {
-    [self.mResetPIN resignFirstResponder];
-    [self.mResetConfirm resignFirstResponder];
+    [self.otpValue resignFirstResponder];
+    [self.pinOne resignFirstResponder];
+    [self.pinTwo resignFirstResponder];
     
-    NSString *pin = self.mResetPIN.text;
-    NSString *confirmPin = self.mResetConfirm.text;
+    CAKeyframeAnimation * anim = [ CAKeyframeAnimation animationWithKeyPath:@"transform" ] ;
+    anim.values = @[ [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(-5.0f, 0.0f, 0.0f) ], [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(5.0f, 0.0f, 0.0f) ] ] ;
+    anim.autoreverses = YES ;
+    anim.repeatCount = 2.0f ;
+    anim.duration = 0.07f ;
+    
+    otp = self.otpValue.text;
+    pin = self.pinOne.text;
+    NSString *confirmPin = self.pinTwo.text;
     NSUInteger pinLength = [confirmPin length];
     
-    if ([pin isEqualToString:confirmPin] && pinLength == 4) {
+    if ([pin isEqualToString:confirmPin] && pinLength == 4 && otp.length==6) {
+        [ResetPINViewController validateOTP];
+        connValidateOTP = [[NSURLConnection alloc] initWithRequest:requestVerify delegate:self];
         
-        if ([SDKUtils deleteLockState] && [SDKUtils deletePIN]) {
-            resetID = [SDKUtils loadIdentity];
-            [SDKUtils savePIN:confirmPin];
-            
-            [self performSegueWithIdentifier:@"resetTosec" sender:self];
-        }
-        else{
-            UIAlertView *alertError = [[UIAlertView alloc] initWithTitle:@"PIN Creation Error" message:@"Error creating new PIN \n Please contact Administrator" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
-            [alertError show];
+        if(connValidateOTP) {
+            NSLog(@"Connection Successful");
+        } else {
+            NSLog(@"Connection could not be made");
         }
         
-        
+    }else if(![_otpValue hasText]){
+        [ _otpValue.layer addAnimation:anim forKey:nil ];
+    }else if (![_pinOne hasText]){
+        [ _pinOne.layer addAnimation:anim forKey:nil ];
+    }else if (![_pinTwo hasText]){
+        [ _pinTwo.layer addAnimation:anim forKey:nil ];
     } else {
-        if (pinLength < 4) {
-            UIAlertView *pinAlert = [[UIAlertView alloc] initWithTitle:@"PIN Creation Error " message:@"PIN must be 4 digits long" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-            [pinAlert show];
-        } else if (pin!=confirmPin) {
-            UIAlertView *pinAlert2 = [[UIAlertView alloc] initWithTitle:@"PIN Creation Error " message:@"Error creating PIN, Please make sure that the PIN values are equal" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-            [pinAlert2 show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Incorrect Input"
+                                     message:@"Please verify and try again"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:@"Okay"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        //Handle your yes please button action here
+                                    }];
+        
+        [alert addAction:yesButton];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+}
+
+- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [responseDataRP setLength:0];
+}
+
+
+// This method is used to receive the data which we get using post method.
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data{
+    
+    [responseDataRP appendData: data];
+    NSLog(@"recieved data @push %@", data);
+    
+}
+
+// This method receives the error report in case of connection is not made to server.
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    
+    NSLog(@"error message: %@", error);
+    UIAlertController * alertIncorrect = [UIAlertController
+                                          alertControllerWithTitle:@"Activation Error"
+                                          message:@"Please check your internet connection and try again"
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesIncorrectButton = [UIAlertAction
+                                         actionWithTitle:@"Close"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action) {
+                                             //Handle your yes please button action here
+                                         }];
+    [alertIncorrect addAction:yesIncorrectButton];
+    [self presentViewController:alertIncorrect animated:YES completion:nil];
+    
+    
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
+    
+    NSString *responseText = [[NSString alloc] initWithData:responseDataRP encoding:NSUTF8StringEncoding];
+    NSLog(@"Received Response COnn, %@", responseText);
+    //Parse Response
+    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    if ([json objectForKey:@"OTPReferenceNumber"]){
+        NSString *responseCode = [json valueForKey:@"ResponseCode"];
+        NSLog(@"Received Code, %@", responseCode);
+        if ([responseCode isEqualToString:@"000"]){
+            if([SDKUtils deletePIN]){
+                [SDKUtils savePIN:pin];
+                [self performSegueWithIdentifier:@"resetTorequest" sender:self];
+            }
+        }else{
+            UIAlertController * alertIncorrect = [UIAlertController
+                                                  alertControllerWithTitle:@"Error validating OTP"
+                                                  message:@"Please try again"
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* yesIncorrectButton = [UIAlertAction
+                                                 actionWithTitle:@"Okay"
+                                                 style:UIAlertActionStyleDefault
+                                                 handler:^(UIAlertAction * action) {
+                                                     //Handle your yes please button action here
+                                                 }];
+            [alertIncorrect addAction:yesIncorrectButton];
+            [self presentViewController:alertIncorrect animated:YES completion:nil];
         }
+    }else{
+        NSLog(@"Error Activating App. Please contact the bank");
+        UIAlertController * alertIncorrect = [UIAlertController
+                                              alertControllerWithTitle:@"Error Activating App"
+                                              message:@"Please contact the bank"
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* yesIncorrectButton = [UIAlertAction
+                                             actionWithTitle:@"Okay"
+                                             style:UIAlertActionStyleDefault
+                                             handler:^(UIAlertAction * action) {
+                                                 //Handle your yes please button action here
+                                             }];
+        [alertIncorrect addAction:yesIncorrectButton];
+        [self presentViewController:alertIncorrect animated:YES completion:nil];
     }
     
 }
 
 
+-(void)animateTextField:(UITextField*)textField up:(BOOL)up
+{
+    const int movementDistance = -70; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? movementDistance : -movementDistance);
+    
+    [UIView beginAnimations: @"animateTextField" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
+
++ (void) validateOTP {
+    
+    
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&one=%@&ref=%@",@"2",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", otp,reference ];
+    NSLog(@"Post Request, %@", post);
+    
+    //Encode string
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+    NSLog(@"Final Posted Data , %@", posted);
+    NSLog(@"Final Post Data , %@", postData);
+    
+    //Calculate Length of message
+    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    
+    //Create URL Request
+    requestVerify = [[NSMutableURLRequest alloc] init];
+    
+    //Set URL
+    //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
+    [requestVerify setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/validateOTP.php"]];
+    
+    //set HTTP Method
+    [requestVerify setHTTPMethod:@"POST"];
+    
+    //set HTTP Header
+    [requestVerify setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    //set Encoded header
+    [requestVerify setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    //set Body
+    [requestVerify setHTTPBody:postData];
+    
+    NSLog(@"Final Request Structure, %@", requestVerify);
+    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"Posted Request, %@", requestVerify.HTTPBody);
+    
+    
+    
+}
+
+
 - (BOOL)textField:(UITextField *) textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if(textField == _otpValue){
     
     NSUInteger oldLength = [textField.text length];
     NSUInteger replacementLength = [string length];
@@ -74,7 +280,18 @@
     
     BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
     
-    return newLength <= 4 || returnKey;
+    return newLength <= 6 || returnKey;
+    }else{
+        NSUInteger oldLength = [textField.text length];
+        NSUInteger replacementLength = [string length];
+        NSUInteger rangeLength = range.length;
+        
+        NSUInteger newLength = oldLength - rangeLength + replacementLength;
+        
+        BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
+        
+        return newLength <= 4 || returnKey;
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *) textField {
@@ -97,19 +314,6 @@
     [self resignFirstResponder];
 }
 
--(void)animateTextField:(UITextField*)textField up:(BOOL)up
-{
-    const int movementDistance = -150; // tweak as needed
-    const float movementDuration = 0.3f; // tweak as needed
-    
-    int movement = (up ? movementDistance : -movementDistance);
-    
-    [UIView beginAnimations: @"animateTextField" context: nil];
-    [UIView setAnimationBeginsFromCurrentState: YES];
-    [UIView setAnimationDuration: movementDuration];
-    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-    [UIView commitAnimations];
-}
 
 
 #pragma mark - Navigation

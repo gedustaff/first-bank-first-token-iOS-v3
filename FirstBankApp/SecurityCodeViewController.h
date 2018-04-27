@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ETIdentity.h"
-
+#import "SDKUtils.h"
 #import "SettingsViewController.h"
 
 @interface SecurityCodeViewController : UIViewController<UITextFieldDelegate>{
