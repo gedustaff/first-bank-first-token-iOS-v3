@@ -10,10 +10,11 @@
 #import "RegistrationCodeViewController.h"
 
 BOOL isCreated = NO;
+BOOL activeIssue = NO;
 NSString *submittedOTP, *submitPIN, *submitConfirm, *ref, *responseCode, *userIdentity, *account, *serial, *activation, *registration, *serialNumber, *pinCode, *activationCode;
 NSURLConnection *connValidateOTP, *connCheckUser, *connIssuance, *connActive, *connSerial, *connActivate;
 NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActive, *requestSerial, *requestActivate;
-UIActivityIndicatorView *indicator;
+UIAlertController * alertIncorrect;
 @interface EstablishPINViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *enteredOTP;
@@ -29,15 +30,8 @@ UIActivityIndicatorView *indicator;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
-    indicator.center = self.view.center;
-    [self.view addSubview:indicator];
-    [indicator bringSubviewToFront:self.view];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
-    
     responseDataEP = [NSMutableData new];
-    
+    activeIssue = NO;
     UIColor *color = [UIColor whiteColor];
     _enteredOTP.attributedPlaceholder =
     [[NSAttributedString alloc]
@@ -103,8 +97,19 @@ UIActivityIndicatorView *indicator;
     if(submittedOTP.length==6 && submitPIN.length==4 && submitConfirm.length==4 && [submitPIN isEqualToString: submitConfirm]){
         
         //Carry out OTP verification
-        [indicator startAnimating];
-        [EstablishPINViewController validateOTP];
+        
+        alertIncorrect = [UIAlertController
+                             alertControllerWithTitle:@"Activating App"
+                             message:@"Validating OTP..."
+                             preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        [self presentViewController:alertIncorrect animated:YES completion:nil];
+        
+        [EstablishPINViewController checkUser];
+        connCheckUser = [[NSURLConnection alloc] initWithRequest:requestUser delegate:self];
+        
+        /**[EstablishPINViewController validateOTP];
         
         connValidateOTP = [[NSURLConnection alloc] initWithRequest:requestVerify delegate:self];
         
@@ -112,7 +117,7 @@ UIActivityIndicatorView *indicator;
             NSLog(@"Connection Successful");
         } else {
             NSLog(@"Connection could not be made");
-        }
+        }*/
         
         
         
@@ -169,11 +174,9 @@ UIActivityIndicatorView *indicator;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
     NSLog(@"error message: %@", error);
-    [indicator stopAnimating];
-    UIAlertController * alertIncorrect = [UIAlertController
-                                          alertControllerWithTitle:@"Activation Error"
-                                          message:@"Please check your internet connection and try again"
-                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    alertIncorrect.title = @"Activation Error";
+    alertIncorrect.message = @"Please check your internet connection and try again";
     
     UIAlertAction* yesIncorrectButton = [UIAlertAction
                                          actionWithTitle:@"Close"
@@ -182,7 +185,6 @@ UIActivityIndicatorView *indicator;
                                              //Handle your yes please button action here
                                          }];
     [alertIncorrect addAction:yesIncorrectButton];
-    [self presentViewController:alertIncorrect animated:YES completion:nil];
     
     
 }
@@ -202,6 +204,7 @@ UIActivityIndicatorView *indicator;
             //if ([responseCode isEqualToString:@"000"]){
             if ([responseCode isEqualToString:@"111"]){
                 
+                alertIncorrect.message = @"Verifying User Details...";
                 [EstablishPINViewController checkUser];
                 connCheckUser = [[NSURLConnection alloc] initWithRequest:requestUser delegate:self];
                 if(connCheckUser) {
@@ -211,11 +214,10 @@ UIActivityIndicatorView *indicator;
                 }
                 
             }else{
-                [indicator stopAnimating];
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error validating OTP"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                
+                alertIncorrect.title = @"Error validating OTP";
+                alertIncorrect.message = @"Please try again";
+                
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
                                                      style:UIAlertActionStyleDefault
@@ -223,15 +225,12 @@ UIActivityIndicatorView *indicator;
                                                          //Handle your yes please button action here
                                                      }];
                 [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
+                
             }
         }else{
-            [indicator stopAnimating];
-            NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrect.title = @"Error Activating App";
+            alertIncorrect.message = @"Please contact the bank";
+            
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
                                                  style:UIAlertActionStyleDefault
@@ -239,7 +238,6 @@ UIActivityIndicatorView *indicator;
                                                      //Handle your yes please button action here
                                                  }];
             [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
         }
         
     }else if(connection==connCheckUser){
@@ -253,7 +251,7 @@ UIActivityIndicatorView *indicator;
             responseCode = [json valueForKey:@"ResponseCode"];
             NSLog(@"Received Code, %@", responseCode);
             if ([responseCode isEqualToString:@"000"]){
-                
+                alertIncorrect.message = @"Validating Status...";
                 [EstablishPINViewController checkIssuance];
                 connIssuance = [[NSURLConnection alloc] initWithRequest:requestIssuance delegate:self];
                 if(connActive) {
@@ -268,11 +266,9 @@ UIActivityIndicatorView *indicator;
                  [self performSegueWithIdentifier:@"otpTocreate" sender:self];
                 
             }else{
-                [indicator stopAnimating];
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error checking user state"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                
+                alertIncorrect.title = @"Error checking user state";
+                alertIncorrect.message = @"Please try again";
                 
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
@@ -281,15 +277,11 @@ UIActivityIndicatorView *indicator;
                                                          //Handle your yes please button action here
                                                      }];
                 [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
+                
             }
         }else{
-            [indicator stopAnimating];
-            NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrect.title = @"Error Activating App";
+            alertIncorrect.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -298,7 +290,6 @@ UIActivityIndicatorView *indicator;
                                                      //Handle your yes please button action here
                                                  }];
             [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
         }
         
     }else if(connection==connIssuance){
@@ -318,6 +309,7 @@ UIActivityIndicatorView *indicator;
             if (statusRetrieved){
                 
                 //Get Serial
+                 alertIncorrect.message = @"Activating token...";
                 [EstablishPINViewController getSerial];
                 connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
                 if(connSerial) {
@@ -328,6 +320,7 @@ UIActivityIndicatorView *indicator;
                 
             }else{
                 //Get Active Token
+                alertIncorrect.message = @"Validating token...";
                 [EstablishPINViewController checkActiveToken];
                 connActive = [[NSURLConnection alloc] initWithRequest:requestActive delegate:self];
                 if(connActive) {
@@ -338,10 +331,8 @@ UIActivityIndicatorView *indicator;
             }
         }else{
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrect.title = @"Error Activating App";
+            alertIncorrect.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -350,7 +341,6 @@ UIActivityIndicatorView *indicator;
                                                      //Handle your yes please button action here
                                                  }];
             [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
         }
         
     }else if(connection==connActive){
@@ -367,16 +357,23 @@ UIActivityIndicatorView *indicator;
                 
                 //Get Serial
                 
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"FirstToken Alert"
-                                                      message:@"Please note that existing token will be deactivated"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                alertIncorrect.message =@"Please note that existing token will be deactivated";
                 
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
                                                      style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * action) {
                                                          //Handle your yes please button action here
+                                                         //alertIncorrect.message = @"Activating token...";
+                                                         activeIssue = YES;
+                                                         alertIncorrect = [UIAlertController
+                                                                           alertControllerWithTitle:@"Activating App"
+                                                                           message:@"Activating token..."
+                                                                           preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                                                        
+                                                         [self presentViewController:alertIncorrect animated:YES completion:nil];
+                                                        // [self presentViewController:alertIncorrect animated:YES completion:nil];
                                                          [EstablishPINViewController getSerial];
                                                          connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
                                                          if(connSerial) {
@@ -396,12 +393,12 @@ UIActivityIndicatorView *indicator;
                 
                 [alertIncorrect addAction:yesIncorrectButton];
                 [alertIncorrect addAction:noIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
                 
                 
                 
             }else{
                 //Get Token Serial
+                alertIncorrect.message = @"Activating token...";
                 [EstablishPINViewController getSerial];
                 connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
                 if(connSerial) {
@@ -412,10 +409,8 @@ UIActivityIndicatorView *indicator;
             }
         }else{
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrect.title = @"Error Activating App";
+            alertIncorrect.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -424,10 +419,14 @@ UIActivityIndicatorView *indicator;
                                                      //Handle your yes please button action here
                                                  }];
             [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
         }
         
     }else if(connection==connSerial){
+        
+        if(activeIssue){
+            
+        }
+        
         NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
         NSLog(@"Received Response Conn, %@", responseText);
         //Parse Response
@@ -451,6 +450,7 @@ UIActivityIndicatorView *indicator;
                 BOOL checkSave = [SDKUtils saveIdentity:identity];
                 
                 if(checkSave){
+                    alertIncorrect.message=@"Completing Activation";
                     [EstablishPINViewController activateSoftToken];
                     connActivate = [[NSURLConnection alloc] initWithRequest:requestActivate delegate:self];
                     if(connActivate) {
@@ -461,10 +461,8 @@ UIActivityIndicatorView *indicator;
                 }else{
                     //Display Error Message
                     NSLog(@"Error Activating App. Please try again");
-                    UIAlertController * alertIncorrect = [UIAlertController
-                                                          alertControllerWithTitle:@"Error Activating App"
-                                                          message:@"Please try again"
-                                                          preferredStyle:UIAlertControllerStyleAlert];
+                    alertIncorrect.title = @"Error Activating App";
+                    alertIncorrect.message = @"Please try again";
                     
                     UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                          actionWithTitle:@"Okay"
@@ -473,7 +471,7 @@ UIActivityIndicatorView *indicator;
                                                              //Handle your yes please button action here
                                                          }];
                     [alertIncorrect addAction:yesIncorrectButton];
-                    [self presentViewController:alertIncorrect animated:YES completion:nil];
+                    
                 }
                 
                
@@ -482,10 +480,8 @@ UIActivityIndicatorView *indicator;
             }else{
                 //Display Error Message
                 NSLog(@"Error Activating App. Please try again");
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error Activating App"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                alertIncorrect.title = @"Error Activating App";
+                alertIncorrect.message = @"Please try again";
                 
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
@@ -494,15 +490,12 @@ UIActivityIndicatorView *indicator;
                                                          //Handle your yes please button action here
                                                      }];
                 [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
                 
             }
         }else{
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrect.title = @"Error Activating App";
+            alertIncorrect.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -511,7 +504,6 @@ UIActivityIndicatorView *indicator;
                                                      //Handle your yes please button action here
                                                  }];
             [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
         }
         
     }else if(connection==connActivate){
@@ -533,10 +525,8 @@ UIActivityIndicatorView *indicator;
             }else{
                 //Display Error Message
                 NSLog(@"Error Activating App. Please try again");
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error Activating App"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                alertIncorrect.title = @"Error Activating App";
+                alertIncorrect.message = @"Please try again";
                 
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
@@ -545,15 +535,12 @@ UIActivityIndicatorView *indicator;
                                                          //Handle your yes please button action here
                                                      }];
                 [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
                 
             }
         }else{
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrect.title = @"Error Activating App";
+            alertIncorrect.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -562,7 +549,6 @@ UIActivityIndicatorView *indicator;
                                                      //Handle your yes please button action here
                                                  }];
             [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
         }
         
     }else{
@@ -661,8 +647,8 @@ UIActivityIndicatorView *indicator;
 + (void) checkIssuance {
     
     
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
-    //NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", @"12321321" ];
+    //NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", @"12321321" ];
     NSLog(@"Post Request, %@", post);
     
     //Encode string

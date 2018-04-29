@@ -13,11 +13,11 @@
 + (NSData*)transformData:(NSData*)inputData operation:(CCOperation)operation withPassword:(NSString*)password
 {
     NSData* key = [self keyFromPassword:password];
-    NSData* iv = [self ivFromPassword:password];
+    //NSData* iv = [self ivFromPassword:password];
     NSMutableData* outputData = [NSMutableData dataWithLength:(inputData.length + kCCBlockSize3DES)];
     
     size_t outLength;
-    CCCryptorStatus result = CCCrypt(operation, kCCAlgorithm3DES, kCCOptionPKCS7Padding, key.bytes, key.length, iv.bytes, inputData.bytes, inputData.length, outputData.mutableBytes, outputData.length, &outLength);
+    CCCryptorStatus result = CCCrypt(operation, kCCAlgorithm3DES, kCCOptionPKCS7Padding, key.bytes, key.length, nil, inputData.bytes, inputData.length, outputData.mutableBytes, outputData.length, &outLength);
     
     if (result != kCCSuccess)
         return nil;

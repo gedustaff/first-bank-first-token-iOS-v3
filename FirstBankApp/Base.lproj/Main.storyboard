@@ -728,7 +728,7 @@
                                 </constraints>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i1G-UP-iPR">
                                 <rect key="frame" x="20" y="453" width="374" height="46"/>
@@ -737,7 +737,7 @@
                                 </constraints>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8Q-64-Dr2">
                                 <rect key="frame" x="91" y="561" width="233" height="48"/>
@@ -843,18 +843,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                             </textField>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dkK-So-MuW">
-                                <rect key="frame" x="132" y="299" width="150" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="HPG-8y-G7K"/>
-                                </constraints>
-                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cre-tR-zoI" firstAttribute="bottom" secondItem="YNk-zN-5lh" secondAttribute="top" id="0iU-3r-nUf"/>
                             <constraint firstItem="lFl-ZQ-kww" firstAttribute="top" secondItem="E3X-Ya-Qwh" secondAttribute="bottom" constant="24" id="11S-S5-UUV"/>
-                            <constraint firstItem="dkK-So-MuW" firstAttribute="centerX" secondItem="lFl-ZQ-kww" secondAttribute="centerX" id="4l1-JQ-8ch"/>
                             <constraint firstItem="cre-tR-zoI" firstAttribute="centerX" secondItem="kTK-nb-wGf" secondAttribute="centerX" id="5A9-kV-OLE"/>
                             <constraint firstItem="E3X-Ya-Qwh" firstAttribute="trailing" secondItem="lFl-ZQ-kww" secondAttribute="trailing" id="AoK-Y8-onQ"/>
                             <constraint firstItem="8Nz-2x-woY" firstAttribute="top" secondItem="8Xa-8f-E1a" secondAttribute="bottom" id="Bnc-9h-CN5"/>
@@ -872,7 +865,6 @@
                             <constraint firstItem="8Nz-2x-woY" firstAttribute="leading" secondItem="6hZ-pN-K8Y" secondAttribute="leadingMargin" constant="14" id="msF-K9-NVO"/>
                             <constraint firstItem="fkY-c2-9DU" firstAttribute="top" secondItem="kTK-nb-wGf" secondAttribute="bottom" constant="28" id="oD4-32-1PQ"/>
                             <constraint firstItem="E3X-Ya-Qwh" firstAttribute="leading" secondItem="lFl-ZQ-kww" secondAttribute="leading" id="pPs-Lm-4tW"/>
-                            <constraint firstItem="dkK-So-MuW" firstAttribute="top" secondItem="8Xa-8f-E1a" secondAttribute="bottom" constant="279" id="unN-cW-0Do"/>
                         </constraints>
                     </view>
                     <connections>
@@ -883,7 +875,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DOi-dC-UVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1283" y="194"/>
+            <point key="canvasLocation" x="1282.608695652174" y="192.39130434782609"/>
         </scene>
         <!--Add Identity View Controller-->
         <scene sceneID="VkR-xh-ovb">
@@ -1042,7 +1034,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Z87-CA-XPk"/>
-        <segue reference="zYA-oK-mJW"/>
+        <segue reference="xYP-ZP-Mgg"/>
         <segue reference="7gD-yv-ZBB"/>
         <segue reference="hp1-cp-Y6C"/>
     </inferredMetricsTieBreakers>

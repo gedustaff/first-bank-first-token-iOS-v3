@@ -11,6 +11,7 @@
 NSString * userId, *account_num, *identityCreated, *registration, *serialNumber, *activationCode, *phone_number, *full_name, *email;
 NSURLConnection *connCreateUser, *connGetSerial, *connActivateToken;
 NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
+UIAlertController * alertIncorrects;
 
 @interface CreateUserViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *fullName;
@@ -30,7 +31,8 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
     UIColor *color = [UIColor whiteColor];
     
     userId = userIDCode;
-    account_num = accountNumberCreate;
+    //account_num = accountNumberCreate;
+    account_num=@"88557";
     
     
     _fullName.attributedPlaceholder =
@@ -57,6 +59,10 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
     _emailAdress.layer.masksToBounds=YES;
     _emailAdress.layer.borderColor = [[CreateUserViewController colorFromHexString:@"#eaab00"] CGColor];
     _emailAdress.layer.borderWidth= 2.0f;
+    
+    self.fullName.delegate = self;
+    self.phoneNumber.delegate = self;
+    self.emailAdress.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,11 +85,23 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
     anim.repeatCount = 2.0f ;
     anim.duration = 0.07f ;
     
+    [self.fullName resignFirstResponder];
+    [self.phoneNumber resignFirstResponder];
+    [self.emailAdress resignFirstResponder];
+    
     full_name = self.fullName.text;
     phone_number = self.phoneNumber.text;
     email = self.emailAdress.text;
     
     if([_fullName hasText] && [_phoneNumber hasText] && [_emailAdress hasText]){
+        
+        alertIncorrects = [UIAlertController
+                          alertControllerWithTitle:@"Activating App"
+                          message:@"Creating User..."
+                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        [self presentViewController:alertIncorrects animated:YES completion:nil];
         
         //Carry out User Creation
         [CreateUserViewController createUser];
@@ -160,10 +178,8 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
     NSLog(@"error message: %@", error);
-    UIAlertController * alertIncorrect = [UIAlertController
-                                          alertControllerWithTitle:@"Activation Error"
-                                          message:@"Please check your internet connection and try again"
-                                          preferredStyle:UIAlertControllerStyleAlert];
+    alertIncorrects.title = @"Activation Error";
+    alertIncorrects.message = @"Please check your internet connection and try again";
     
     UIAlertAction* yesIncorrectButton = [UIAlertAction
                                          actionWithTitle:@"Close"
@@ -171,8 +187,7 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                                          handler:^(UIAlertAction * action) {
                                              //Handle your yes please button action here
                                          }];
-    [alertIncorrect addAction:yesIncorrectButton];
-    [self presentViewController:alertIncorrect animated:YES completion:nil];
+    [alertIncorrects addAction:yesIncorrectButton];
     
     
 }
@@ -187,9 +202,11 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
         NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         if ([json objectForKey:@"Created"]){
-            BOOL response = [json boolForKey:@"Created"];
+           // BOOL response = [json boolForKey:@"Created"];
+            BOOL response = [[json valueForKey:@"Created"] boolValue];
             NSLog(@"Received Code, %d", response);
             if (response){
+                alertIncorrects.message = @"Activating Token...";
                 [CreateUserViewController getSerial];
                 connGetSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
                 if(connGetSerial) {
@@ -199,25 +216,21 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                 }
                 
             }else{
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error Creating User"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                alertIncorrects.title = @"Error Creating User";
+                alertIncorrects.message = @"Please try again";
+                
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
                                                      style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * action) {
                                                          //Handle your yes please button action here
                                                      }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
+                [alertIncorrects addAction:yesIncorrectButton];
             }
         }else{
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrects.title = @"Error Activating App";
+            alertIncorrects.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -225,8 +238,7 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                                                  handler:^(UIAlertAction * action) {
                                                      //Handle your yes please button action here
                                                  }];
-            [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
+            [alertIncorrects addAction:yesIncorrectButton];
         }
     }else if (connection ==connGetSerial){
         NSString *responseText = [[NSString alloc] initWithData:responseDataCU encoding:NSUTF8StringEncoding];
@@ -251,6 +263,7 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                 BOOL checkSave = [SDKUtils saveIdentity:identityCreate];
                 
                 if(checkSave){
+                    alertIncorrects.message=@"Completing Activation";
                     [CreateUserViewController activateSoftToken];
                     connActivateToken = [[NSURLConnection alloc] initWithRequest:requestActivate delegate:self];
                     if(connActivateToken) {
@@ -261,10 +274,8 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                 }else{
                     //Display Error Message
                     NSLog(@"Error Activating App. Please try again");
-                    UIAlertController * alertIncorrect = [UIAlertController
-                                                          alertControllerWithTitle:@"Error Activating App"
-                                                          message:@"Please try again"
-                                                          preferredStyle:UIAlertControllerStyleAlert];
+                    alertIncorrects.title = @"Error activating app";
+                    alertIncorrects.message = @"Please try again";
                     
                     UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                          actionWithTitle:@"Okay"
@@ -272,8 +283,7 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                                                          handler:^(UIAlertAction * action) {
                                                              //Handle your yes please button action here
                                                          }];
-                    [alertIncorrect addAction:yesIncorrectButton];
-                    [self presentViewController:alertIncorrect animated:YES completion:nil];
+                    [alertIncorrects addAction:yesIncorrectButton];
                 }
                 
                 
@@ -282,10 +292,8 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
             }else{
                 //Display Error Message
                 NSLog(@"Error Activating App. Please try again");
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error Activating App"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                alertIncorrects.title = @"Error activating app";
+                alertIncorrects.message = @"Please try again";
                 
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
@@ -293,16 +301,13 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                                                      handler:^(UIAlertAction * action) {
                                                          //Handle your yes please button action here
                                                      }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
+                [alertIncorrects addAction:yesIncorrectButton];
                 
             }
         }else{
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrects.title = @"Error Activating App";
+            alertIncorrects.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -310,8 +315,7 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                                                  handler:^(UIAlertAction * action) {
                                                      //Handle your yes please button action here
                                                  }];
-            [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
+            [alertIncorrects addAction:yesIncorrectButton];
         }
         
     }else if (connection ==connActivateToken){
@@ -333,10 +337,8 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
             }else{
                 //Display Error Message
                 NSLog(@"Error Activating App. Please try again");
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error Activating App"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                alertIncorrects.title = @"Error activating app";
+                alertIncorrects.message = @"Please try again";
                 
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
@@ -344,16 +346,13 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                                                      handler:^(UIAlertAction * action) {
                                                          //Handle your yes please button action here
                                                      }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
+                [alertIncorrects addAction:yesIncorrectButton];
                 
             }
         }else{
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrects.title = @"Error Activating App";
+            alertIncorrects.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -361,8 +360,7 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
                                                  handler:^(UIAlertAction * action) {
                                                      //Handle your yes please button action here
                                                  }];
-            [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
+            [alertIncorrects addAction:yesIncorrectButton];
         }
         
     }else{
@@ -454,7 +452,7 @@ NSMutableURLRequest *requestUser, *requestSerial, *requestActivate;
 
 + (void) activateSoftToken {
     
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@&acc=%@&reg=%@&act=%@&ser=%@",@"6",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userId, serialNumber, activationCode, registration, account_num];
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@&acc=%@&reg=%@&act=%@&ser=%@",@"6",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userId, account_num, registration, activationCode, serialNumber];
     NSLog(@"Post Request, %@", post);
     
     //Encode string

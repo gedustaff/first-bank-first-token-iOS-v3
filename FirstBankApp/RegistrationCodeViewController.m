@@ -15,7 +15,8 @@
 NSString *userid, *account, *otp_reference;
 NSURLConnection *conn, *conn1, *conn2, *conn3;
 NSMutableURLRequest *requested, *requestOTP;
-UIActivityIndicatorView *indicators;
+UIAlertController * alertIncorrection;
+
 
 @interface RegistrationCodeViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *panCode;
@@ -28,12 +29,6 @@ UIActivityIndicatorView *indicators;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    indicators = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicators.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
-    indicators.center = self.view.center;
-    [self.view addSubview:indicators];
-    [indicators bringSubviewToFront:self.view];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
     
     responseData = [NSMutableData new];
     
@@ -132,6 +127,49 @@ UIActivityIndicatorView *indicators;
     [UIView commitAnimations];
 }
 
++ (NSData *)tripleDesEncryptString:(NSString *)input
+                               key:(NSString *)key
+                             error:(NSError **)error
+{
+    NSParameterAssert(input);
+    NSParameterAssert(key);
+    
+    NSData *inputData = [input dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
+    
+    size_t outLength;
+    
+    NSAssert(keyData.length == kCCKeySize3DES, @"the keyData is an invalid size");
+    
+    NSMutableData *outputData = [NSMutableData dataWithLength:(inputData.length  +  kCCBlockSize3DES)];
+    
+    CCCryptorStatus
+    result = CCCrypt(kCCEncrypt, // operation
+                     kCCAlgorithm3DES, // Algorithm
+                     kCCOptionPKCS7Padding | kCCOptionECBMode, // options
+                     keyData.bytes, // key
+                     keyData.length, // keylength
+                     nil,// iv
+                     inputData.bytes, // dataIn
+                     inputData.length, // dataInLength,
+                     outputData.mutableBytes, // dataOut
+                     outputData.length, // dataOutAvailable
+                     &outLength); // dataOutMoved
+    
+    if (result != kCCSuccess) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:@"com.your_domain.your_project_name.your_class_name."
+                                         code:result
+                                     userInfo:nil];
+        }
+        return nil;
+    }
+    [outputData setLength:outLength];
+    return outputData;
+}
+
+
+
 
 - (IBAction)submitPan:(id)sender {
     
@@ -149,28 +187,61 @@ UIActivityIndicatorView *indicators;
     
     NSString *pan = @"5399236573241351";
     NSString *pin =@"1234";
-    NSString *key = @"RXg0VDY3WXZmZCQhOTh5";
+    //NSString *key = @"RXg0VDY3WXZmZCQhOTh5";
+    NSString *key = @"RXg0VDY3WXZmZCQhOTh50000";
     NSData *panData = [pan dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
     NSData *pinData = [pin dataUsingEncoding:NSUTF8StringEncoding];
     
+    //NSString *encryptedString = [pan AES256EncryptWithKey:key];
+    //NSLog( @"Encrypted String: %@", encryptedString );
+    
+    //NSData *encrypted = [RegistrationCodeViewController tripleDesEncryptData:panData key:keyData error:nil];
+    //NSData *pinEncrpt = [RegistrationCodeViewController tripleDesEncryptData:pinData key:keyData error:nil];
+    
+    //NSString *encpan = [[NSString alloc] initWithData:encrypted encoding:NSUTF8StringEncoding];
+    //NSLog(@"responseDat String Encrypted, %@", encpan);
+    
+    //NSLog(@"encrypted data length: %lu", (unsigned long)encrypted.length);
+    
+    //NSData *encrypted = [TripleDES transformData:panData operation:kCCEncrypt withPassword:key];
+    NSData *encrypted = [RegistrationCodeViewController tripleDesEncryptString:pan key:key error:nil];
+    NSString *encpan = [[NSString alloc] initWithData:encrypted encoding:NSUTF8StringEncoding];
+    NSLog(@"responseDat String Encrypted, %@", encpan);
+    
+    
+    
+    
     if(retrievedPan.length==16 && retrievedPin.length==4 && [_panCode hasText] && [_pinCode hasText]){
-        [indicators startAnimating];
+        alertIncorrection = [UIAlertController
+                          alertControllerWithTitle:@"Activating App"
+                          message:@"Verifying Card Details..."
+                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        [self presentViewController:alertIncorrection animated:YES completion:nil];
     
-    NSData *data = [TripleDES transformData:panData operation:kCCEncrypt withPassword:key];
-    NSData *pinValue = [TripleDES transformData:pinData operation:kCCEncrypt withPassword:key];
+    //NSData *data = [TripleDES transformData:panData operation:kCCEncrypt withPassword:key];
+    //NSData *pinValue = [TripleDES transformData:pinData operation:kCCEncrypt withPassword:key];
     
-    NSLog(@"Data Encrypted, %@", data);
-    NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"Data String Encrypted, %@", responseData);
+  //  NSLog(@"Data Encrypted, %@", data);
+    //NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    //NSLog(@"Data String Encrypted, %@", responseData);
+        
+      //   NSLog(@"Request PAN %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     
     
     NSString *encpan = @"0/qt7xBjMq/OkvToHh3Y7A0WkVXxj9EW";
+        
+       
     NSString *enpin = @"igs6jt4xW1E=";
-    
+       
     //compose string to send
     
     //NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&fid=%@",@"9",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", @"168406579"];
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&pan=%@&pin=%@",@"3",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",encpan, enpin];
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&pac=%@&pic=%@",@"3",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",encpan, enpin];
+       // NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"4",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", @"FirstToken", userid];
+        
     
     NSLog(@"Post Request, %@", post);
     
@@ -178,8 +249,7 @@ UIActivityIndicatorView *indicators;
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
+    
     
     //Calculate Length of message
     NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
@@ -207,6 +277,8 @@ UIActivityIndicatorView *indicators;
     //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
     
     NSLog(@"Posted Request, %@", request.HTTPBody);
+        
+        NSLog(@"Request body %@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
     
     //Create URLConnection
      conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -360,12 +432,11 @@ UIActivityIndicatorView *indicators;
 
 // This method receives the error report in case of connection is not made to server.
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    //[alertIncorrection dismissViewControllerAnimated:YES completion:nil];
     
     NSLog(@"error message: %@", error);
-    UIAlertController * alertIncorrect = [UIAlertController
-                                          alertControllerWithTitle:@"Activation Error"
-                                          message:@"Please check your internet connection and try again"
-                                          preferredStyle:UIAlertControllerStyleAlert];
+    alertIncorrection.title = @"Activation Error";
+    alertIncorrection.message = @"Please check your internet connection and try again";
     
     UIAlertAction* yesIncorrectButton = [UIAlertAction
                                          actionWithTitle:@"Close"
@@ -373,8 +444,8 @@ UIActivityIndicatorView *indicators;
                                          handler:^(UIAlertAction * action) {
                                              //Handle your yes please button action here
                                          }];
-    [alertIncorrect addAction:yesIncorrectButton];
-    [self presentViewController:alertIncorrect animated:YES completion:nil];
+    [alertIncorrection addAction:yesIncorrectButton];
+   // [self presentViewController:alertIncorrection animated:YES completion:nil];
     
     
 }
@@ -385,7 +456,7 @@ UIActivityIndicatorView *indicators;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     
      NSLog(@"Finished Loading");
-    
+    //[self dismissViewControllerAnimated:YES completion:nil];
     if (connection ==conn){
         
         NSString *responseText = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
@@ -396,10 +467,11 @@ UIActivityIndicatorView *indicators;
         if ([json objectForKey:@"Cif_id"]){
             responseCode = [json valueForKey:@"ResponseCode"];
             NSLog(@"Received Code, %@", responseCode);
-            if ([responseCode isEqualToString:@"019"]){
+            if ([responseCode isEqualToString:@"00"]){
                 userid = [json valueForKey:@"Cif_id"];
                 //Test User ID
-                userid = @"101000526";
+                //userid = @"101000526";
+                alertIncorrection.message = @"Fetching Account Details...";
                 [RegistrationCodeViewController getAccount];
                 conn1 = [[NSURLConnection alloc] initWithRequest:requested delegate:self];
                 if(conn1) {
@@ -409,30 +481,22 @@ UIActivityIndicatorView *indicators;
                 }
                 
             }else{
-                [indicators stopAnimating];
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error verifying card details"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                alertIncorrection.title = @"Activation Error";
+                alertIncorrection.message = @"Error verifying card details. Please try again";
                 
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                     actionWithTitle:@"Okay"
+                                                     actionWithTitle:@"Close"
                                                      style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * action) {
                                                          //Handle your yes please button action here
                                                      }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
+                [alertIncorrection addAction:yesIncorrectButton];
             }
         }else{
-            [indicators stopAnimating];
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            
+            alertIncorrection.title = @"Error Activating App";
+            alertIncorrection.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -440,11 +504,11 @@ UIActivityIndicatorView *indicators;
                                                  handler:^(UIAlertAction * action) {
                                                      //Handle your yes please button action here
                                                  }];
-            [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
+            [alertIncorrection addAction:yesIncorrectButton];
         }
         
     }else if(connection == conn1){
+        //[self performSegueWithIdentifier:@"panTootp" sender:self];
         NSString *responseText = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSLog(@"Received Response Conn1, %@", responseText);
         //Parse Response
@@ -456,22 +520,35 @@ UIActivityIndicatorView *indicators;
             NSLog(@"Received Code Get Account, %@", responseCode);
             if ([responseCode isEqualToString:@"Success"]){
                 NSArray *account_numbers = [jsonAccount valueForKey:@"AccountNumbers"];
+                @try{
                 account = [account_numbers objectAtIndex:0];
-                NSLog(@"Received Account Number, %@", account);
-                [RegistrationCodeViewController sendOTP];
-                conn2 = [[NSURLConnection alloc] initWithRequest:requestOTP delegate:self];
-                if(conn2) {
-                    NSLog(@"Connection Successful send OTP");
-                } else {
-                    NSLog(@"Connection could not be made");
+                    NSLog(@"Received Account Number, %@", account);
+                    alertIncorrection.message = @"Sending OTP...";
+                    [RegistrationCodeViewController sendOTP];
+                    conn2 = [[NSURLConnection alloc] initWithRequest:requestOTP delegate:self];
+                    if(conn2) {
+                        NSLog(@"Connection Successful send OTP");
+                    } else {
+                        NSLog(@"Connection could not be made");
+                    }
+                }@catch(NSException *esc){
+                    
+                    alertIncorrection.title = @"Error fetching account number";
+                    alertIncorrection.message = @"Please try again";
+                    UIAlertAction* yesIncorrectButton = [UIAlertAction
+                                                         actionWithTitle:@"Okay"
+                                                         style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             //Handle your yes please button action here
+                                                         }];
+                    [alertIncorrection addAction:yesIncorrectButton];
+                    
                 }
+                
             }else{
-                [indicators stopAnimating];
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error fetching account number"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+                
+                alertIncorrection.title = @"Error fetching account number";
+                alertIncorrection.message = @"Please try again";
                 
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
@@ -479,18 +556,15 @@ UIActivityIndicatorView *indicators;
                                                      handler:^(UIAlertAction * action) {
                                                          //Handle your yes please button action here
                                                      }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
+                [alertIncorrection addAction:yesIncorrectButton];
+               
             }
             
         }else{
-            [indicators stopAnimating];
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
+          
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrection.title = @"Error Activating App";
+            alertIncorrection.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -498,12 +572,10 @@ UIActivityIndicatorView *indicators;
                                                  handler:^(UIAlertAction * action) {
                                                      //Handle your yes please button action here
                                                  }];
-            [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
+            [alertIncorrection addAction:yesIncorrectButton];
         }
         
     }else if (connection == conn2){
-        
         NSString *responseText = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSLog(@"Received Response Conn2, %@", responseText);
         //Parse Response
@@ -515,18 +587,13 @@ UIActivityIndicatorView *indicators;
             NSLog(@"Received Code Get Account, %@", responseCode);
             if ([responseCode isEqualToString:@"000"]){
                 otp_reference = [jsonOTP valueForKey:@"OTPReferenceNumber"];
-                //Perform Segue
-                [indicators stopAnimating];
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
+                
                 [self performSegueWithIdentifier:@"panTootp" sender:self];
                 
             }else{
-                [indicators stopAnimating];
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
-                UIAlertController * alertIncorrect = [UIAlertController
-                                                      alertControllerWithTitle:@"Error sending OTP"
-                                                      message:@"Please try again"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
+               
+                alertIncorrection.title = @"Error sending OTP";
+                alertIncorrection.message = @"Please try again";
                 
                 UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                      actionWithTitle:@"Okay"
@@ -534,18 +601,17 @@ UIActivityIndicatorView *indicators;
                                                      handler:^(UIAlertAction * action) {
                                                          //Handle your yes please button action here
                                                      }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                [self presentViewController:alertIncorrect animated:YES completion:nil];
+                [alertIncorrection addAction:yesIncorrectButton];
+                
+                
             }
             
         }else{
-            [indicators stopAnimating];
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = FALSE;
+          [alertIncorrection dismissViewControllerAnimated:YES completion:nil];
+           // [self dismissView]
             NSLog(@"Error Activating App. Please contact the bank");
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error Activating App"
-                                                  message:@"Please contact the bank"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrection.title = @"Error Activating App";
+            alertIncorrection.message = @"Please contact the bank";
             
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
@@ -553,8 +619,7 @@ UIActivityIndicatorView *indicators;
                                                  handler:^(UIAlertAction * action) {
                                                      //Handle your yes please button action here
                                                  }];
-            [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
+            [alertIncorrection addAction:yesIncorrectButton];
         }
         
     }

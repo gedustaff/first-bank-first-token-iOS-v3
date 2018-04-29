@@ -12,6 +12,7 @@ NSURLConnection *connValidateOTP;
 NSMutableURLRequest *requestVerify;
 NSString *otp, *reference;
 NSString *pin;
+UIAlertController * alertIncorrected;
 
 @interface ResetPINViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *otpValue;
@@ -93,6 +94,13 @@ NSString *pin;
     NSUInteger pinLength = [confirmPin length];
     
     if ([pin isEqualToString:confirmPin] && pinLength == 4 && otp.length==6) {
+        alertIncorrected = [UIAlertController
+                           alertControllerWithTitle:@"Activating App"
+                           message:@"Creating User..."
+                           preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        [self presentViewController:alertIncorrected animated:YES completion:nil];
         [ResetPINViewController validateOTP];
         connValidateOTP = [[NSURLConnection alloc] initWithRequest:requestVerify delegate:self];
         
@@ -144,10 +152,8 @@ NSString *pin;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
     NSLog(@"error message: %@", error);
-    UIAlertController * alertIncorrect = [UIAlertController
-                                          alertControllerWithTitle:@"Activation Error"
-                                          message:@"Please check your internet connection and try again"
-                                          preferredStyle:UIAlertControllerStyleAlert];
+    alertIncorrected.title = @"Activation Error";
+    alertIncorrected.message = @"Please check your internet connection and try again";
     
     UIAlertAction* yesIncorrectButton = [UIAlertAction
                                          actionWithTitle:@"Close"
@@ -155,8 +161,7 @@ NSString *pin;
                                          handler:^(UIAlertAction * action) {
                                              //Handle your yes please button action here
                                          }];
-    [alertIncorrect addAction:yesIncorrectButton];
-    [self presentViewController:alertIncorrect animated:YES completion:nil];
+    [alertIncorrected addAction:yesIncorrectButton];
     
     
 }
@@ -177,25 +182,21 @@ NSString *pin;
                 [self performSegueWithIdentifier:@"resetTorequest" sender:self];
             }
         }else{
-            UIAlertController * alertIncorrect = [UIAlertController
-                                                  alertControllerWithTitle:@"Error validating OTP"
-                                                  message:@"Please try again"
-                                                  preferredStyle:UIAlertControllerStyleAlert];
+            alertIncorrected.title = @"Error Validating OTP";
+            alertIncorrected.message = @"Please try again";
+            
             UIAlertAction* yesIncorrectButton = [UIAlertAction
                                                  actionWithTitle:@"Okay"
                                                  style:UIAlertActionStyleDefault
                                                  handler:^(UIAlertAction * action) {
                                                      //Handle your yes please button action here
                                                  }];
-            [alertIncorrect addAction:yesIncorrectButton];
-            [self presentViewController:alertIncorrect animated:YES completion:nil];
+            [alertIncorrected addAction:yesIncorrectButton];
         }
     }else{
         NSLog(@"Error Activating App. Please contact the bank");
-        UIAlertController * alertIncorrect = [UIAlertController
-                                              alertControllerWithTitle:@"Error Activating App"
-                                              message:@"Please contact the bank"
-                                              preferredStyle:UIAlertControllerStyleAlert];
+        alertIncorrected.title = @"Error Activating App";
+        alertIncorrected.message = @"Please contact the bank";
         
         UIAlertAction* yesIncorrectButton = [UIAlertAction
                                              actionWithTitle:@"Okay"
@@ -203,8 +204,7 @@ NSString *pin;
                                              handler:^(UIAlertAction * action) {
                                                  //Handle your yes please button action here
                                              }];
-        [alertIncorrect addAction:yesIncorrectButton];
-        [self presentViewController:alertIncorrect animated:YES completion:nil];
+        [alertIncorrected addAction:yesIncorrectButton];
     }
     
 }
