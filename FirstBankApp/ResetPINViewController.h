@@ -14,7 +14,7 @@
 @interface ResetPINViewController : UIViewController<UITextFieldDelegate>{
     
     ETIdentity *resetID;
-    NSString *ref;
+    NSString *ref, *userID, *accountNumber;
     NSMutableData *responseDataRP;
     
 }

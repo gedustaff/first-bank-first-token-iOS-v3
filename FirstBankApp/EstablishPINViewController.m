@@ -50,6 +50,10 @@ UIAlertController * alertIncorrect;
      initWithString:@"Confirm your token PIN"
      attributes:@{NSForegroundColorAttributeName:color}];
     
+    
+   
+    
+    
     _pinValue.layer.masksToBounds=YES;
     _pinValue.layer.borderColor = [[EstablishPINViewController colorFromHexString:@"#eaab00"] CGColor];
     _pinValue.layer.borderWidth= 2.0f;
@@ -202,7 +206,7 @@ UIAlertController * alertIncorrect;
             responseCode = [json valueForKey:@"ResponseCode"];
             NSLog(@"Received Code, %@", responseCode);
             //if ([responseCode isEqualToString:@"000"]){
-            if ([responseCode isEqualToString:@"111"]){
+            if ([responseCode isEqualToString:@"000"]){
                 
                 alertIncorrect.message = @"Verifying User Details...";
                 [EstablishPINViewController checkUser];

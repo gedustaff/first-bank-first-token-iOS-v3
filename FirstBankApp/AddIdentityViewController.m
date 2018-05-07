@@ -16,6 +16,10 @@ NSString *activationCode;
 
 @interface AddIdentityViewController ()
 @property (nonatomic, assign) BOOL checkSerial;
+@property (weak, nonatomic) IBOutlet UILabel *one;
+@property (weak, nonatomic) IBOutlet UILabel *two;
+@property (weak, nonatomic) IBOutlet UILabel *three;
+@property (weak, nonatomic) IBOutlet UILabel *four;
 
 @end
 
@@ -27,18 +31,75 @@ NSString *activationCode;
     [self performSegueWithIdentifier:@"introToCard" sender:self];
 }
 
++ (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1];
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    UIView *border = [UIView new];
+    border.backgroundColor = [AddIdentityViewController colorFromHexString:@"#eaab00"];
+    [border setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+    border.frame = CGRectMake(0, _one.frame.size.height - 1.0f, _one.frame.size.width, 1.0f);
+    [_one addSubview:border];
+    
+    UIView *border1 = [UIView new];
+    border1.backgroundColor = [AddIdentityViewController colorFromHexString:@"#eaab00"];
+    [border1 setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+    border1.frame = CGRectMake(0, _two.frame.size.height - 1.0f, _two.frame.size.width, 1.0f);
+    [_two addSubview:border1];
+    
+    UIView *border2 = [UIView new];
+    border2.backgroundColor = [AddIdentityViewController colorFromHexString:@"#eaab00"];
+    [border2 setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+    border2.frame = CGRectMake(0, _three.frame.size.height - 1.0f, _three.frame.size.width, 1.0f);
+    [_three addSubview:border2];
+    
+    UIView *border3 = [UIView new];
+    border3.backgroundColor = [AddIdentityViewController colorFromHexString:@"#eaab00"];
+    [border3 setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+    border3.frame = CGRectMake(0, _four.frame.size.height - 1.0f, _four.frame.size.width, 1.0f);
+    [_four addSubview:border3];
+    
+    
+    
+    
     if (![ETSoftTokenSDK isDeviceSecure]) {
         // Display a waring or error message to user.
         // Possibly quit the application.
         
-        UIAlertView *pinAlert = [[UIAlertView alloc] initWithTitle:@"Application Login Error " message:@"Your device is rooted \nIt is recommended that you do not continue \n Do you?" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
-        [pinAlert show];
         
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Application Login Error"
+                                     message:@"Your device is rooted \nIt is recommended that you do not continue \n Do you?"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:@"Yes"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        //Handle your yes please button action here
+                                    }];
+        
+        UIAlertAction* noButton = [UIAlertAction
+                                    actionWithTitle:@"No"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        //Handle your yes please button action here
+                                        exit(1);
+                                    }];
+        
+        [alert addAction:yesButton];
+        [alert addAction:noButton];
+        [self presentViewController:alert animated:YES completion:nil];
         
     }
     
@@ -106,13 +167,6 @@ NSString *activationCode;
 }
 
 
-+ (UIColor *)colorFromHexString:(NSString *)hexString {
-    unsigned rgbValue = 0;
-    NSScanner *scanner = [NSScanner scannerWithString:hexString];
-    [scanner setScanLocation:1]; // bypass '#' character
-    [scanner scanHexInt:&rgbValue];
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
-}
 
 + (BOOL) checkActivationNumber{
     

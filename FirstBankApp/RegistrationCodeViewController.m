@@ -11,8 +11,9 @@
 #import "EstablishPINViewController.h"
 #import "SDKUtils.h"
 #import "SecurityCodeViewController.h"
+#import <CommonCrypto/CommonDigest.h>
 
-NSString *userid, *account, *otp_reference;
+NSString *userid, *account, *otp_reference, *reusedCode;
 NSURLConnection *conn, *conn1, *conn2, *conn3;
 NSMutableURLRequest *requested, *requestOTP;
 UIAlertController * alertIncorrection;
@@ -25,10 +26,17 @@ UIAlertController * alertIncorrection;
 @end
 
 @implementation RegistrationCodeViewController
-@synthesize responseData, message, responseCode;
+@synthesize responseData, message, responseCode, codeReuse;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    reusedCode = codeReuse;
+    
+    if ([codeReuse isEqualToString: @"reset"]){
+        NSLog(@"Reset COde Resuse!!!!!!!!!!!!!!!");
+        
+    }
     
     responseData = [NSMutableData new];
     
@@ -59,6 +67,9 @@ UIAlertController * alertIncorrection;
     
     
 }
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -127,47 +138,104 @@ UIAlertController * alertIncorrection;
     [UIView commitAnimations];
 }
 
-+ (NSData *)tripleDesEncryptString:(NSString *)input
-                               key:(NSString *)key
-                             error:(NSError **)error
++ (NSData*)encryptData:(NSData*)inputData
 {
-    NSParameterAssert(input);
-    NSParameterAssert(key);
+    NSData * key = [@"RXg0VDY3WXZmZCQhRXg0VDY3" dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSData *inputData = [input dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableData* outputData = [NSMutableData dataWithLength:(inputData.length + kCCBlockSize3DES)];
     
     size_t outLength;
     
-    NSAssert(keyData.length == kCCKeySize3DES, @"the keyData is an invalid size");
+    CCCryptorStatus result = CCCrypt(kCCEncrypt,                // CCOperation op
+                                     kCCAlgorithm3DES,          // CCAlgorithm alg
+                                     kCCOptionPKCS7Padding,     // CCOptions options
+                                     key.bytes,                 // const void *key
+                                     key.length,                // size_t keyLength
+                                     nil,                       // const void *iv
+                                     inputData.bytes,           // const void *dataIn
+                                     inputData.length,          // size_t dataInLength
+                                     outputData.mutableBytes,   // void *dataOut
+                                     outputData.length,         // size_t dataOutAvailable
+                                     &outLength);               // size_t *dataOutMoved
     
-    NSMutableData *outputData = [NSMutableData dataWithLength:(inputData.length  +  kCCBlockSize3DES)];
-    
-    CCCryptorStatus
-    result = CCCrypt(kCCEncrypt, // operation
-                     kCCAlgorithm3DES, // Algorithm
-                     kCCOptionPKCS7Padding | kCCOptionECBMode, // options
-                     keyData.bytes, // key
-                     keyData.length, // keylength
-                     nil,// iv
-                     inputData.bytes, // dataIn
-                     inputData.length, // dataInLength,
-                     outputData.mutableBytes, // dataOut
-                     outputData.length, // dataOutAvailable
-                     &outLength); // dataOutMoved
-    
-    if (result != kCCSuccess) {
-        if (error != NULL) {
-            *error = [NSError errorWithDomain:@"com.your_domain.your_project_name.your_class_name."
-                                         code:result
-                                     userInfo:nil];
-        }
+    if (result != kCCSuccess)
         return nil;
-    }
+    
     [outputData setLength:outLength];
     return outputData;
+   // NSString * outputString = [outputData base64EncodingWithLineLength:0];
+    //return outputString;
 }
 
+
++ (NSString*) doCipher:(NSString*)plainText operation:(CCOperation)encryptOrDecrypt
+{
+    
+    const void *vplainText;
+    size_t plainTextBufferSize;
+    NSData *EncryptData = [[NSData alloc] initWithBase64EncodedString:plainText];
+    plainTextBufferSize = [EncryptData length];
+    vplainText = [EncryptData bytes];
+    
+    CCCryptorStatus ccStatus;
+    uint8_t *bufferPtr = NULL;
+    size_t bufferPtrSize = 0;
+    size_t movedBytes = 0;
+    
+    
+    uint8_t iv[kCCBlockSize3DES];
+    memset((void *) iv, 0x00, (size_t) sizeof(iv));
+    
+    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
+    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+    memset((void *)bufferPtr, 0x0, bufferPtrSize);
+    NSString *key = @"RXg0VDY3WXZmZCQhOTh5";
+    
+    NSData *testData = [self md5DataFromString:key];
+    const char *constSource = [testData bytes];
+    
+    unsigned char source[24];
+    memcpy(source, constSource, sizeof (source));
+    
+    for (int j = 0, k = 16; j < 8;) {
+        source[k++] = source[j++];
+    }
+    
+    ccStatus = CCCrypt(kCCEncrypt,
+                       kCCAlgorithm3DES,
+                       kCCAlgorithm3DES,
+                       source,
+                       kCCKeySize3DES,
+                       nil,
+                       vplainText,
+                       plainTextBufferSize,
+                       (void *)bufferPtr,
+                       bufferPtrSize,
+                       &movedBytes);
+    if (ccStatus == kCCSuccess) NSLog(@"SUCCESS");
+    else if (ccStatus == kCCParamError) return @"PARAM ERROR";
+    else if (ccStatus == kCCBufferTooSmall) return @"BUFFER TOO SMALL";
+    else if (ccStatus == kCCMemoryFailure) return @"MEMORY FAILURE";
+    else if (ccStatus == kCCAlignmentError) return @"ALIGNMENT";
+    else if (ccStatus == kCCDecodeError) return @"DECODE ERROR";
+    else if (ccStatus == kCCUnimplemented) return @"UNIMPLEMENTED";
+    
+    NSString *result;
+    NSLog(@"This is the Result:  %@ ", result);
+    NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
+    result = [myData base64EncodingWithLineLength:0];
+    NSLog(@"This is the Result:  %@ ", result);
+    return result;
+}
+
++ (NSData *)md5DataFromString:(NSString *)input
+{
+    const char *cStr = [input UTF8String];
+    unsigned char digest[16];
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    
+    return [NSData dataWithBytes:digest length:CC_MD5_DIGEST_LENGTH];
+}
 
 
 
@@ -185,33 +253,18 @@ UIAlertController * alertIncorrection;
     NSString *retrievedPan = self.panCode.text;
     NSString *retrievedPin = self.pinCode.text;
     
-    NSString *pan = @"5399236573241351";
-    NSString *pin =@"1234";
-    //NSString *key = @"RXg0VDY3WXZmZCQhOTh5";
-    NSString *key = @"RXg0VDY3WXZmZCQhOTh50000";
-    NSData *panData = [pan dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *pinData = [pin dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *tokenData = [retrievedPan dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *pinData = [retrievedPin dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *key = @"RXg0VDY3WXZmZCQhOTh5";
     
-    //NSString *encryptedString = [pan AES256EncryptWithKey:key];
-    //NSLog( @"Encrypted String: %@", encryptedString );
+    NSData *myser = [tokenData base64EncodedDataWithOptions:0];
+    NSString *sentPAN = [[NSString alloc] initWithData:myser encoding:NSUTF8StringEncoding];
+    NSLog(@"Answeroooooooo %@", myser);
     
-    //NSData *encrypted = [RegistrationCodeViewController tripleDesEncryptData:panData key:keyData error:nil];
-    //NSData *pinEncrpt = [RegistrationCodeViewController tripleDesEncryptData:pinData key:keyData error:nil];
-    
-    //NSString *encpan = [[NSString alloc] initWithData:encrypted encoding:NSUTF8StringEncoding];
-    //NSLog(@"responseDat String Encrypted, %@", encpan);
-    
-    //NSLog(@"encrypted data length: %lu", (unsigned long)encrypted.length);
-    
-    //NSData *encrypted = [TripleDES transformData:panData operation:kCCEncrypt withPassword:key];
-    NSData *encrypted = [RegistrationCodeViewController tripleDesEncryptString:pan key:key error:nil];
-    NSString *encpan = [[NSString alloc] initWithData:encrypted encoding:NSUTF8StringEncoding];
-    NSLog(@"responseDat String Encrypted, %@", encpan);
-    
-    
-    
-    
+    NSData *mypin = [pinData base64EncodedDataWithOptions:0];
+    NSString *sentPIN = [[NSString alloc] initWithData:mypin encoding:NSUTF8StringEncoding];
+    NSLog(@"Answeroooooooo %@", sentPIN);
+  
     if(retrievedPan.length==16 && retrievedPin.length==4 && [_panCode hasText] && [_pinCode hasText]){
         alertIncorrection = [UIAlertController
                           alertControllerWithTitle:@"Activating App"
@@ -229,17 +282,16 @@ UIAlertController * alertIncorrection;
     //NSLog(@"Data String Encrypted, %@", responseData);
         
       //   NSLog(@"Request PAN %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    
-    
-    NSString *encpan = @"0/qt7xBjMq/OkvToHh3Y7A0WkVXxj9EW";
         
-       
-    NSString *enpin = @"igs6jt4xW1E=";
-       
+        //setup crypto objects
+        NSString *token = @"5399236573241351";
+        NSData *servicesData = [token dataUsingEncoding:NSUTF8StringEncoding];
+
+        
     //compose string to send
     
     //NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&fid=%@",@"9",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", @"168406579"];
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&pac=%@&pic=%@",@"3",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",encpan, enpin];
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&pac=%@&pic=%@&versnn=%s",@"3",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",sentPAN, sentPIN, "1"];
        // NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"4",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", @"FirstToken", userid];
         
     
@@ -325,6 +377,9 @@ UIAlertController * alertIncorrection;
 
    // [self performSegueWithIdentifier:@"panTootp" sender:self];
 }
+
+
+
 
 
 
@@ -586,9 +641,22 @@ UIAlertController * alertIncorrection;
             responseCode = [jsonOTP valueForKey:@"ResponseCode"];
             NSLog(@"Received Code Get Account, %@", responseCode);
             if ([responseCode isEqualToString:@"000"]){
+                
                 otp_reference = [jsonOTP valueForKey:@"OTPReferenceNumber"];
                 
-                [self performSegueWithIdentifier:@"panTootp" sender:self];
+                if ([codeReuse isEqualToString: @"reset"]){
+                    [self performSegueWithIdentifier:@"numberToreset" sender:self];
+                    
+                }else if([codeReuse isEqualToString:@"deactivate"]){
+                    [self performSegueWithIdentifier:@"cardTodeac" sender:self];
+                    
+                }else{
+                    [self performSegueWithIdentifier:@"panTootp" sender:self];
+                    
+                }
+                
+                
+                
                 
             }else{
                
@@ -652,6 +720,13 @@ UIAlertController * alertIncorrection;
         vcSett.otpReference = otp_reference;
         vcSett.userID = userid;
         vcSett.accountNumber = account;
+    }else if ([[segue identifier] isEqualToString:@"numberToreset"]) {
+        ResetPINViewController *rpVC = [segue destinationViewController];
+        rpVC.ref = otp_reference;
+    }else if ([[segue identifier] isEqualToString:@"cardTodeac"]) {
+        DeactivateViewController *rpVC = [segue destinationViewController];
+        rpVC.ref = otp_reference;
+        rpVC.userID = userid;
     }
     
    

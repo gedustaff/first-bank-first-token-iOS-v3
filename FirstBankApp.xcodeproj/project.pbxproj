@@ -23,6 +23,10 @@
 		077A57A91ADC12C7004DB946 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 077A57A81ADC12C7004DB946 /* SettingsViewController.m */; };
 		07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07C0AAA81AC0484D002F4EEB /* Settings.bundle */; };
 		07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C8EE461BED2DE4006B91FA /* Images-2.xcassets */; };
+		3C022107209691E7007BF0CF /* DeactivateConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */; };
+		3C02210A2096956B007BF0CF /* DeactivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0221092096956B007BF0CF /* DeactivateViewController.m */; };
+		3C02210D209732A7007BF0CF /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02210C209732A7007BF0CF /* NSData+Base64.m */; };
+		3C022111209748DF007BF0CF /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C022110209748DF007BF0CF /* NSString+MD5.m */; };
 		3C3B8F78208DC98500A9777F /* TripleDES.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B8F77208DC98500A9777F /* TripleDES.m */; };
 		3C3B8F7B208E0A4200A9777F /* URLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B8F7A208E0A4200A9777F /* URLConnection.m */; };
 		3C55124C20861C6B0054A089 /* CreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C55124B20861C6B0054A089 /* CreateUserViewController.m */; };
@@ -64,6 +68,15 @@
 		07C0AAA81AC0484D002F4EEB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		07C75E921A48531000B97714 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		07C8EE461BED2DE4006B91FA /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		3C022105209691E7007BF0CF /* DeactivateConfirmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DeactivateConfirmViewController.h; path = FirstBankApp/DeactivateConfirmViewController.h; sourceTree = "<group>"; };
+		3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DeactivateConfirmViewController.m; path = FirstBankApp/DeactivateConfirmViewController.m; sourceTree = "<group>"; };
+		3C0221082096956B007BF0CF /* DeactivateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeactivateViewController.h; sourceTree = "<group>"; };
+		3C0221092096956B007BF0CF /* DeactivateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeactivateViewController.m; sourceTree = "<group>"; };
+		3C02210B209732A7007BF0CF /* NSData+Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		3C02210C209732A7007BF0CF /* NSData+Base64.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		3C02210E209732E9007BF0CF /* MGTwitterEngineGlobalHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGTwitterEngineGlobalHeader.h; sourceTree = "<group>"; };
+		3C02210F209748DF007BF0CF /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		3C022110209748DF007BF0CF /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		3C3B8F76208DC98500A9777F /* TripleDES.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripleDES.h; sourceTree = "<group>"; };
 		3C3B8F77208DC98500A9777F /* TripleDES.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripleDES.m; sourceTree = "<group>"; };
 		3C3B8F79208E0A4200A9777F /* URLConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLConnection.h; sourceTree = "<group>"; };
@@ -95,6 +108,8 @@
 		07088A701A4031C20010E3B8 = {
 			isa = PBXGroup;
 			children = (
+				3C022105209691E7007BF0CF /* DeactivateConfirmViewController.h */,
+				3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */,
 				3CB5AB2F2080C47C00578CB7 /* libEntrustIGMobileSDK.a */,
 				07C75E921A48531000B97714 /* Security.framework */,
 				07088A7B1A4031C20010E3B8 /* FirstBankApp */,
@@ -122,6 +137,8 @@
 				075D11EF1A66703B00BC9D78 /* AppBlockViewController.h */,
 				075D11F01A66703B00BC9D78 /* AppBlockViewController.m */,
 				07088A861A4031C20010E3B8 /* Main.storyboard */,
+				3C0221082096956B007BF0CF /* DeactivateViewController.h */,
+				3C0221092096956B007BF0CF /* DeactivateViewController.m */,
 				3C55124A20861C6B0054A089 /* CreateUserViewController.h */,
 				3C55124B20861C6B0054A089 /* CreateUserViewController.m */,
 				07C0AAA81AC0484D002F4EEB /* Settings.bundle */,
@@ -144,6 +161,11 @@
 				07088AA91A4062160010E3B8 /* EstablishPINViewController.m */,
 				07088AAB1A4062330010E3B8 /* RegistrationCodeViewController.h */,
 				07088AAC1A4062330010E3B8 /* RegistrationCodeViewController.m */,
+				3C02210F209748DF007BF0CF /* NSString+MD5.h */,
+				3C022110209748DF007BF0CF /* NSString+MD5.m */,
+				3C02210E209732E9007BF0CF /* MGTwitterEngineGlobalHeader.h */,
+				3C02210B209732A7007BF0CF /* NSData+Base64.h */,
+				3C02210C209732A7007BF0CF /* NSData+Base64.m */,
 				07088AAE1A4071390010E3B8 /* SecurityCodeViewController.h */,
 				07088AAF1A4071390010E3B8 /* SecurityCodeViewController.m */,
 				077A57A71ADC12C7004DB946 /* SettingsViewController.h */,
@@ -220,7 +242,8 @@
 				TargetAttributes = {
 					07088A781A4031C20010E3B8 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 4MFRETC4QY;
+						DevelopmentTeam = ZTY5WK69GP;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -270,13 +293,17 @@
 				07088A821A4031C20010E3B8 /* AppDelegate.m in Sources */,
 				3C55124C20861C6B0054A089 /* CreateUserViewController.m in Sources */,
 				075D11F41A67A30100BC9D78 /* ResetPINViewController.m in Sources */,
+				3C022111209748DF007BF0CF /* NSString+MD5.m in Sources */,
 				07088A7F1A4031C20010E3B8 /* main.m in Sources */,
+				3C022107209691E7007BF0CF /* DeactivateConfirmViewController.m in Sources */,
 				075D11F11A66703B00BC9D78 /* AppBlockViewController.m in Sources */,
 				3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */,
 				077A57A91ADC12C7004DB946 /* SettingsViewController.m in Sources */,
 				07088AB01A4071390010E3B8 /* SecurityCodeViewController.m in Sources */,
 				3C3B8F78208DC98500A9777F /* TripleDES.m in Sources */,
 				07088AAA1A4062160010E3B8 /* EstablishPINViewController.m in Sources */,
+				3C02210A2096956B007BF0CF /* DeactivateViewController.m in Sources */,
+				3C02210D209732A7007BF0CF /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,8 +413,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZTY5WK69GP;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -398,12 +428,14 @@
 					"-objC",
 					"-fobjc-arc",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gedutechnologies.firstbank.FirstToken.test;
 				PRODUCT_NAME = FirstToken;
-				PROVISIONING_PROFILE = "8a3c60a3-7341-4a60-b7ee-51bd5d863ef5";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/include";
 				VALID_ARCHS = "";
-				"VALID_ARCHS[sdk=*]" = arm64;
+				"VALID_ARCHS[sdk=*]" = "arm64 armv7s armv7";
 			};
 			name = Debug;
 		};
@@ -415,8 +447,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZTY5WK69GP;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -427,11 +462,13 @@
 					"-objC",
 					"-fobjc-arc",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gedutechnologies.firstbank.FirstToken.test;
 				PRODUCT_NAME = FirstToken;
-				PROVISIONING_PROFILE = "8a3c60a3-7341-4a60-b7ee-51bd5d863ef5";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/include";
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Release;
 		};

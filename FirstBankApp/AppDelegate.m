@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "AddIdentityViewController.h"
 #import "PINRequestViewController.h"
+#import "RegistrationCodeViewController.h"
 #import "SDKUtils.h"
 BOOL isRegistered = NO;
 
@@ -66,10 +67,20 @@ BOOL isRegistered = NO;
     if (isRegistered)
     {
         if (lockStateValue==nil) {
+            
             self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"pinReq"];
             return YES;
         } else {
-            self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"appBlock"];
+            
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            RegistrationCodeViewController *ivc = [storyboard instantiateViewControllerWithIdentifier:@"cardNum"];
+            ivc.codeReuse = @"reset";
+            self.window.rootViewController = ivc;
+            
+            
+            
+           // self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"cardNum"];
             return YES;
         }
         

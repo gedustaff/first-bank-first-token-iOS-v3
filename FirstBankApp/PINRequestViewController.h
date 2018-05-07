@@ -12,6 +12,7 @@
 #import "ETSoftTokenSDK.h"
 #import "SecurityCodeViewController.h"
 #import "SettingsViewController.h"
+#import "RegistrationCodeViewController.h"
 
 @interface PINRequestViewController : UIViewController<UITextFieldDelegate>{
     ETIdentity *retrievedID;
