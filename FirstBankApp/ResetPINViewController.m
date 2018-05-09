@@ -26,6 +26,8 @@ UIAlertController * alertIncorrected;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    responseDataRP = [NSMutableData new];
     self.otpValue.delegate = self;
     self.pinOne.delegate = self;
     self.pinTwo.delegate = self;
@@ -71,13 +73,7 @@ UIAlertController * alertIncorrected;
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 - (IBAction)submitReset:(id)sender {
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-- (IBAction)resetPIN:(id)sender {
+    
     [self.otpValue resignFirstResponder];
     [self.pinOne resignFirstResponder];
     [self.pinTwo resignFirstResponder];
@@ -95,9 +91,9 @@ UIAlertController * alertIncorrected;
     
     if ([pin isEqualToString:confirmPin] && pinLength == 4 && otp.length==6) {
         alertIncorrected = [UIAlertController
-                           alertControllerWithTitle:@"Activating App"
-                           message:@"Creating User..."
-                           preferredStyle:UIAlertControllerStyleAlert];
+                            alertControllerWithTitle:@"FirstToken Alert"
+                            message:@"Unlocking App..."
+                            preferredStyle:UIAlertControllerStyleAlert];
         
         
         [self presentViewController:alertIncorrected animated:YES completion:nil];
@@ -133,6 +129,14 @@ UIAlertController * alertIncorrected;
         [self presentViewController:alert animated:YES completion:nil];
     }
     
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+- (IBAction)resetPIN:(id)sender {
+   
 }
 
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -177,7 +181,7 @@ UIAlertController * alertIncorrected;
         NSString *responseCode = [json valueForKey:@"ResponseCode"];
         NSLog(@"Received Code, %@", responseCode);
         if ([responseCode isEqualToString:@"000"]){
-            if([SDKUtils deletePIN]){
+            if([SDKUtils deleteLockState] && [SDKUtils deletePIN]){
                 [SDKUtils savePIN:pin];
                 [self performSegueWithIdentifier:@"resetTorequest" sender:self];
             }
