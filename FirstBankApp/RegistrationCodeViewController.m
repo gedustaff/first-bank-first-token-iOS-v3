@@ -88,7 +88,7 @@ UIAlertController * alertIncorrection;
         
         BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
         
-        return newLength <= 16 || returnKey;
+        return newLength <= 19 || returnKey;
     }else{
         NSUInteger oldLength = [textField.text length];
         NSUInteger replacementLength = [string length];

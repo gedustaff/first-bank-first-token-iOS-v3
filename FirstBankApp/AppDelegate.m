@@ -80,6 +80,8 @@ BOOL isRegistered = NO;
             
             
             
+            
+            
            // self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"cardNum"];
             return YES;
         }
@@ -91,7 +93,9 @@ BOOL isRegistered = NO;
         NSString *message = @"test message";
         NSLog( @"Here is a test message: '%@'", message );
         
+        
        self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"addID"];
+        
         
         return YES;
         

@@ -181,8 +181,9 @@ UIAlertController * alertIncorrected;
         NSString *responseCode = [json valueForKey:@"ResponseCode"];
         NSLog(@"Received Code, %@", responseCode);
         if ([responseCode isEqualToString:@"000"]){
-            if([SDKUtils deleteLockState] && [SDKUtils deletePIN]){
+            if([SDKUtils deletePIN]){
                 [SDKUtils savePIN:pin];
+                BOOL bla = [SDKUtils deleteLockState];
                 [self performSegueWithIdentifier:@"resetTorequest" sender:self];
             }
         }else{

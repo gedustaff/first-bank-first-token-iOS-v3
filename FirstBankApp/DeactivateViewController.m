@@ -23,12 +23,31 @@ UIAlertController *alertController;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    responseDataDC = [NSMutableData new];
+    reference = ref;
     user = userID;
     ETIdentity *et = [SDKUtils loadIdentity];
     serialNum = et.serialNumber;
     
+    UIColor *color = [UIColor whiteColor];
+    _deactivateOTP.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Enter OTP"
+     attributes:@{NSForegroundColorAttributeName:color}];
+    
+    _deactivateOTP.layer.masksToBounds=YES;
+    _deactivateOTP.layer.borderColor = [[DeactivateViewController colorFromHexString:@"#eaab00"] CGColor];
+    _deactivateOTP.layer.borderWidth= 2.0f;
+    
     self.deactivateOTP.delegate = self;
+}
+
++ (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,7 +100,7 @@ UIAlertController *alertController;
             responseCode = [json valueForKey:@"ResponseCode"];
             NSLog(@"Received Code, %@", responseCode);
             //if ([responseCode isEqualToString:@"000"]){
-            if ([responseCode isEqualToString:@"111"]){
+            if ([responseCode isEqualToString:@"000"]){
                 
                 alertController.message = @"Deactivating Token...";
                 [DeactivateViewController deactivate];
@@ -294,7 +313,7 @@ UIAlertController *alertController;
     
     //Set URL
     //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestDeactivate setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/validateOTP.php"]];
+    [requestDeactivate setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/deleteToken.php"]];
     
     //set HTTP Method
     [requestDeactivate setHTTPMethod:@"POST"];
