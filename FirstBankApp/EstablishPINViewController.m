@@ -2,7 +2,6 @@
 //  EstablishPINViewController.m
 //  FirstBankApp
 //
-//  Created by Gedu Technologies on 12/16/14.
 //  Copyright (c) 2014 Gedu Technologies. All rights reserved.
 //
 
@@ -11,9 +10,9 @@
 
 BOOL isCreated = NO;
 BOOL activeIssue = NO;
-NSString *submittedOTP, *submitPIN, *submitConfirm, *ref, *responseCode, *userIdentity, *account, *serial, *activation, *registration, *serialNumber, *pinCode, *activationCode;
-NSURLConnection *connValidateOTP, *connCheckUser, *connIssuance, *connActive, *connSerial, *connActivate;
-NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActive, *requestSerial, *requestActivate;
+NSString *submittedOTP, *submitPIN, *submitConfirm, *ref, *responseCode, *userIdentity, *account, *serial, *activation, *registration, *establishSerialNumber, *pinCode, *activationCode, *phone;
+NSURLConnection *connValidateOTP, *connCheckUser, *connIssuance, *connActive, *connSerial, *connConsent, *connActivate;
+NSMutableURLRequest *requestVerify, *requestUser, *requestIssuance, *requestActive, *requestSerial, *requestConsent, *requestActivate;
 UIAlertController * alertIncorrect;
 @interface EstablishPINViewController ()
 
@@ -25,7 +24,7 @@ UIAlertController * alertIncorrect;
 @end
 
 @implementation EstablishPINViewController
-@synthesize otpReference, responseDataEP, userID, accountNumber, identity;
+@synthesize otpReference, responseDataEP, userID, phoneNumber, accountNumber, identity;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,6 +39,7 @@ UIAlertController * alertIncorrect;
     ref = otpReference;
     userIdentity = userID;
     account = accountNumber;
+    phone = phoneNumber;
     
     _pinValue.attributedPlaceholder =
     [[NSAttributedString alloc]
@@ -110,55 +110,45 @@ UIAlertController * alertIncorrect;
         
         [self presentViewController:alertIncorrect animated:YES completion:nil];
         
-        [EstablishPINViewController checkUser];
-        connCheckUser = [[NSURLConnection alloc] initWithRequest:requestUser delegate:self];
+      //  [EstablishPINViewController checkUser];
+      //  connCheckUser = [[NSURLConnection alloc] initWithRequest:requestUser delegate:self];
         
-        /**[EstablishPINViewController validateOTP];
+        [EstablishPINViewController validateOTP];
         
         connValidateOTP = [[NSURLConnection alloc] initWithRequest:requestVerify delegate:self];
         
-        if(connValidateOTP) {
-            NSLog(@"Connection Successful");
-        } else {
-            NSLog(@"Connection could not be made");
-        }*/
-        
-        
-        
-    }else if(![_pinValue hasText]){
-        [ _pinValue.layer addAnimation:anim forKey:nil ];
-    }else if (![_pinConfirm hasText]){
-        [ _pinConfirm.layer addAnimation:anim forKey:nil ];
-    }else if (![_enteredOTP hasText]){
-        [ _enteredOTP.layer addAnimation:anim forKey:nil ];
-    }else{
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Incorrect Input"
-                                     message:@"Please verify and try again"
-                                     preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* yesButton = [UIAlertAction
-                                    actionWithTitle:@"Okay"
-                                    style:UIAlertActionStyleDefault
-                                    handler:^(UIAlertAction * action) {
-                                        //Handle your yes please button action here
-                                    }];
-        
-        [alert addAction:yesButton];
-        [self presentViewController:alert animated:YES completion:nil];
+    }else {
+        [self handleInvalidInputWithAnimation:anim];
     }
-    
-    
-  //  if (submittedOTP.)
-    
-    
- //   if (isCreated){
-   // [self performSegueWithIdentifier:@"otpToactive" sender:self];
-   // }else{
-    //    [self performSegueWithIdentifier:@"otpTocreate" sender:self];
-   // }
+
     
 }
+
+-(void)handleInvalidInputWithAnimation: (CAKeyframeAnimation *)anim {
+    if(![_pinValue hasText]){
+       [ _pinValue.layer addAnimation:anim forKey:nil ];
+   }else if (![_pinConfirm hasText]){
+       [ _pinConfirm.layer addAnimation:anim forKey:nil ];
+   }else if (![_enteredOTP hasText]){
+       [ _enteredOTP.layer addAnimation:anim forKey:nil ];
+   }else{
+       UIAlertController * alert = [UIAlertController
+                                    alertControllerWithTitle:@"Incorrect Input"
+                                    message:@"Please verify and try again"
+                                    preferredStyle:UIAlertControllerStyleAlert];
+       
+       UIAlertAction* yesButton = [UIAlertAction
+                                   actionWithTitle:@"Okay"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       //Handle your yes please button action here
+                                   }];
+       
+       [alert addAction:yesButton];
+       [self presentViewController:alert animated:YES completion:nil];
+   }
+}
+
 
 
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -170,418 +160,235 @@ UIAlertController * alertIncorrect;
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data{
     
     [responseDataEP appendData: data];
-    NSLog(@"recieved data @push %@", data);
     
 }
 
 // This method receives the error report in case of connection is not made to server.
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
-    NSLog(@"error message: %@", error);
-    
-    alertIncorrect.title = @"Activation Error";
-    alertIncorrect.message = @"Please check your internet connection and try again";
-    
-    UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                         actionWithTitle:@"Close"
-                                         style:UIAlertActionStyleDefault
-                                         handler:^(UIAlertAction * action) {
-                                             //Handle your yes please button action here
-                                         }];
-    [alertIncorrect addAction:yesIncorrectButton];
+    [self showAlertWithTitle:@"Activation Error" message:@"Please check your internet connection and try again"];
     
     
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-    NSLog(@"Finished Loading");
-    
-    if (connection ==connValidateOTP){
-        NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
-        NSLog(@"Received Response COnn, %@", responseText);
-        //Parse Response
-        NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        if ([json objectForKey:@"OTPReferenceNumber"]){
-            responseCode = [json valueForKey:@"ResponseCode"];
-            NSLog(@"Received Code, %@", responseCode);
-            //if ([responseCode isEqualToString:@"000"]){
-            if ([responseCode isEqualToString:@"000"]){
-                
-                alertIncorrect.message = @"Verifying User Details...";
-                [EstablishPINViewController checkUser];
-                connCheckUser = [[NSURLConnection alloc] initWithRequest:requestUser delegate:self];
-                if(connCheckUser) {
-                    NSLog(@"Connection Successful Get Account");
-                } else {
-                    NSLog(@"Connection could not be made");
-                }
-                
-            }else{
-                
-                alertIncorrect.title = @"Error validating OTP";
-                alertIncorrect.message = @"Please try again";
-                
-                UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                     actionWithTitle:@"Okay"
-                                                     style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * action) {
-                                                         //Handle your yes please button action here
-                                                     }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                
-            }
-        }else{
-            alertIncorrect.title = @"Error Activating App";
-            alertIncorrect.message = @"Please contact the bank";
-            
-            UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                 actionWithTitle:@"Okay"
-                                                 style:UIAlertActionStyleDefault
-                                                 handler:^(UIAlertAction * action) {
-                                                     //Handle your yes please button action here
-                                                 }];
-            [alertIncorrect addAction:yesIncorrectButton];
-        }
-        
-    }else if(connection==connCheckUser){
-        
-        NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
-        NSLog(@"Received Response COnn, %@", responseText);
-        //Parse Response
-        NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        if ([json objectForKey:@"ResponseCode"]){
-            responseCode = [json valueForKey:@"ResponseCode"];
-            NSLog(@"Received Code, %@", responseCode);
-            if ([responseCode isEqualToString:@"000"]){
-                alertIncorrect.message = @"Validating Status...";
-                [EstablishPINViewController checkIssuance];
-                connIssuance = [[NSURLConnection alloc] initWithRequest:requestIssuance delegate:self];
-                if(connActive) {
-                    NSLog(@"Connection Successful Check Issuance");
-                } else {
-                    NSLog(@"Connection could not be made");
-                }
-                
-            }else if([responseCode isEqualToString:@"1001"]){
-                NSLog(@"User does not exist creating user");
-                pinCode = submitPIN;
-                 [self performSegueWithIdentifier:@"otpTocreate" sender:self];
-                
-            }else{
-                
-                alertIncorrect.title = @"Error checking user state";
-                alertIncorrect.message = @"Please try again";
-                
-                UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                     actionWithTitle:@"Okay"
-                                                     style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * action) {
-                                                         //Handle your yes please button action here
-                                                     }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                
-            }
-        }else{
-            alertIncorrect.title = @"Error Activating App";
-            alertIncorrect.message = @"Please contact the bank";
-            
-            UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                 actionWithTitle:@"Okay"
-                                                 style:UIAlertActionStyleDefault
-                                                 handler:^(UIAlertAction * action) {
-                                                     //Handle your yes please button action here
-                                                 }];
-            [alertIncorrect addAction:yesIncorrectButton];
-        }
-        
-    }else if(connection==connIssuance){
-        
-        NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
-        NSLog(@"Received Response COnn, %@", responseText);
-        //Parse Response
-        NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        if ([json objectForKey:@"Status"]){
-            NSLog(@"1");
-            
-            BOOL statusRetrieved = [[json valueForKey:@"Status"] boolValue];
-            //NSString *statusRetrieved = [json valueForKey:@"Status"];
-            NSLog(@"Received Code, %d", statusRetrieved);
-            NSLog(@"2");
-            if (statusRetrieved){
-                
-                //Get Serial
-                 alertIncorrect.message = @"Activating token...";
-                [EstablishPINViewController getSerial];
-                connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
-                if(connSerial) {
-                    NSLog(@"Connection Successful Get Serial");
-                } else {
-                    NSLog(@"Connection could not be made");
-                }
-                
-            }else{
-                //Get Active Token
-                alertIncorrect.message = @"Validating token...";
-                [EstablishPINViewController checkActiveToken];
-                connActive = [[NSURLConnection alloc] initWithRequest:requestActive delegate:self];
-                if(connActive) {
-                    NSLog(@"Connection Successful Active Token");
-                } else {
-                    NSLog(@"Connection could not be made");
-                }
-            }
-        }else{
-            NSLog(@"Error Activating App. Please contact the bank");
-            alertIncorrect.title = @"Error Activating App";
-            alertIncorrect.message = @"Please contact the bank";
-            
-            UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                 actionWithTitle:@"Okay"
-                                                 style:UIAlertActionStyleDefault
-                                                 handler:^(UIAlertAction * action) {
-                                                     //Handle your yes please button action here
-                                                 }];
-            [alertIncorrect addAction:yesIncorrectButton];
-        }
-        
-    }else if(connection==connActive){
-        
-        NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
-        NSLog(@"Received Response COnn, %@", responseText);
-        //Parse Response
-        NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        if ([json objectForKey:@"Status"]){
-            BOOL statusRetrieved = [[json valueForKey:@"Status"] boolValue];
-            NSLog(@"Received Code, %d", statusRetrieved);
-            if (statusRetrieved){
-                
-                //Get Serial
-                
-                alertIncorrect.message =@"Please note that existing token will be deactivated";
-                
-                UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                     actionWithTitle:@"Okay"
-                                                     style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * action) {
-                                                         //Handle your yes please button action here
-                                                         //alertIncorrect.message = @"Activating token...";
-                                                         activeIssue = YES;
-                                                         alertIncorrect = [UIAlertController
-                                                                           alertControllerWithTitle:@"Activating App"
-                                                                           message:@"Activating token..."
-                                                                           preferredStyle:UIAlertControllerStyleAlert];
-                                                         
-                                                        
-                                                         [self presentViewController:alertIncorrect animated:YES completion:nil];
-                                                        // [self presentViewController:alertIncorrect animated:YES completion:nil];
-                                                         [EstablishPINViewController getSerial];
-                                                         connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
-                                                         if(connSerial) {
-                                                             NSLog(@"Connection Successful Get Serial");
-                                                         } else {
-                                                             NSLog(@"Connection could not be made");
-                                                         }
-                                                     }];
-                UIAlertAction* noIncorrectButton = [UIAlertAction
-                                                     actionWithTitle:@"Cancel Activation"
-                                                     style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * action) {
-                                                         //Handle your yes please button action here
-                                                         exit(0);
-                                                         
-                                                     }];
-                
-                [alertIncorrect addAction:yesIncorrectButton];
-                [alertIncorrect addAction:noIncorrectButton];
-                
-                
-                
-            }else{
-                //Get Token Serial
-                alertIncorrect.message = @"Activating token...";
-                [EstablishPINViewController getSerial];
-                connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
-                if(connSerial) {
-                    NSLog(@"Connection Successful Get Serial");
-                } else {
-                    NSLog(@"Connection could not be made");
-                }
-            }
-        }else{
-            NSLog(@"Error Activating App. Please contact the bank");
-            alertIncorrect.title = @"Error Activating App";
-            alertIncorrect.message = @"Please contact the bank";
-            
-            UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                 actionWithTitle:@"Okay"
-                                                 style:UIAlertActionStyleDefault
-                                                 handler:^(UIAlertAction * action) {
-                                                     //Handle your yes please button action here
-                                                 }];
-            [alertIncorrect addAction:yesIncorrectButton];
-        }
-        
-    }else if(connection==connSerial){
-        
-        if(activeIssue){
-            
-        }
-        
-        NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
-        NSLog(@"Received Response Conn, %@", responseText);
-        //Parse Response
-        NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        if ([json objectForKey:@"Message"]){
-            NSString *messageReceived = [json valueForKey:@"Message"];
-            NSLog(@"Received Code, %@", messageReceived);
-            if ([messageReceived isEqualToString:@"SUCCESS" ]){
-                serialNumber = [json valueForKey:@"SerialNumber"];
-                activationCode = [json valueForKey:@"ActivationCode"];
-                NSLog(@"Received Serial and ActivationCode, %@,%@", serialNumber,activationCode);
-                identity = [ETIdentityProvider generate:nil
-                                           serialNumber:serialNumber
-                                         activationCode:activationCode];
-                 NSLog(@"Created Identity, %@",identity);
-                
-                registration = identity.registrationCode;
-                NSLog(@"Created Registration Code, %@",registration);
-                
-                BOOL checkSave = [SDKUtils saveIdentity:identity];
-                
-                if(checkSave){
-                    alertIncorrect.message=@"Completing Activation";
-                    [EstablishPINViewController activateSoftToken];
-                    connActivate = [[NSURLConnection alloc] initWithRequest:requestActivate delegate:self];
-                    if(connActivate) {
-                        NSLog(@"Connection Successful Activate Token");
-                    } else {
-                        NSLog(@"Connection could not be made");
-                    }
-                }else{
-                    //Display Error Message
-                    NSLog(@"Error Activating App. Please try again");
-                    alertIncorrect.title = @"Error Activating App";
-                    alertIncorrect.message = @"Please try again";
-                    
-                    UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                         actionWithTitle:@"Okay"
-                                                         style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * action) {
-                                                             //Handle your yes please button action here
-                                                         }];
-                    [alertIncorrect addAction:yesIncorrectButton];
-                    
-                }
-                
-               
-                
-                
-            }else{
-                //Display Error Message
-                NSLog(@"Error Activating App. Please try again");
-                alertIncorrect.title = @"Error Activating App";
-                alertIncorrect.message = @"Please try again";
-                
-                UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                     actionWithTitle:@"Okay"
-                                                     style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * action) {
-                                                         //Handle your yes please button action here
-                                                     }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                
-            }
-        }else{
-            NSLog(@"Error Activating App. Please contact the bank");
-            alertIncorrect.title = @"Error Activating App";
-            alertIncorrect.message = @"Please contact the bank";
-            
-            UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                 actionWithTitle:@"Okay"
-                                                 style:UIAlertActionStyleDefault
-                                                 handler:^(UIAlertAction * action) {
-                                                     //Handle your yes please button action here
-                                                 }];
-            [alertIncorrect addAction:yesIncorrectButton];
-        }
-        
-    }else if(connection==connActivate){
-        
-        NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
-        NSLog(@"Received Response Conn, %@", responseText);
-        //Parse Response
-        NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        if ([json objectForKey:@"Message"]){
-            NSString *messageReceived = [json valueForKey:@"Message"];
-            NSLog(@"Received Code, %@", messageReceived);
-            if ([messageReceived isEqualToString:@"Successful" ]){
-                BOOL checkStorePIN = [SDKUtils savePIN:submitPIN];
-                if (checkStorePIN){
-                    [self performSegueWithIdentifier:@"otpToactive" sender:self];
-                }
-                
-            }else{
-                //Display Error Message
-                NSLog(@"Error Activating App. Please try again");
-                alertIncorrect.title = @"Error Activating App";
-                alertIncorrect.message = @"Please try again";
-                
-                UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                     actionWithTitle:@"Okay"
-                                                     style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * action) {
-                                                         //Handle your yes please button action here
-                                                     }];
-                [alertIncorrect addAction:yesIncorrectButton];
-                
-            }
-        }else{
-            NSLog(@"Error Activating App. Please contact the bank");
-            alertIncorrect.title = @"Error Activating App";
-            alertIncorrect.message = @"Please contact the bank";
-            
-            UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                 actionWithTitle:@"Okay"
-                                                 style:UIAlertActionStyleDefault
-                                                 handler:^(UIAlertAction * action) {
-                                                     //Handle your yes please button action here
-                                                 }];
-            [alertIncorrect addAction:yesIncorrectButton];
-        }
-        
-    }else{
+    if (connection == connValidateOTP) {
+        [self handleValidateOTPResponse];
+    } else if (connection == connCheckUser) {
+        [self handleCheckUserResponse];
+    } else if (connection == connIssuance) {
+        [self handleIssuanceResponse];
+    } else if (connection == connActive) {
+        [self handleActiveTokenResponse];
+    } else if (connection == connSerial) {
+        [self handleSerialResponse];
+    } else if (connection == connConsent) {
+        [self handleConsentResponse];
+    } else if (connection == connActivate) {
+        [self handleActivateResponse];
+    } else {
         NSLog(@"Critical Application Error");
     }
 }
 
+- (void)handleValidateOTPResponse {
+    NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
+    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+
+    if ([json objectForKey:@"OTPReferenceNumber"]) {
+        responseCode = [json valueForKey:@"ResponseCode"];
+
+        if ([responseCode isEqualToString:@"000"]) {
+            alertIncorrect.message = @"Verifying User Details...";
+            [EstablishPINViewController checkUser];
+            connCheckUser = [[NSURLConnection alloc] initWithRequest:requestUser delegate:self];
+        } else {
+            [self showAlertWithTitle:@"Error validating OTP" message:@"Please try again"];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error Activating App" message:@"Please contact the bank"];
+    }
+}
+
+- (void)handleCheckUserResponse {
+    NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
+    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+
+    if ([json objectForKey:@"ResponseCode"]) {
+        responseCode = [json valueForKey:@"ResponseCode"];
+
+        if ([responseCode isEqualToString:@"000"]) {
+            alertIncorrect.message = @"Validating Status...";
+            [EstablishPINViewController checkIssuance];
+            connIssuance = [[NSURLConnection alloc] initWithRequest:requestIssuance delegate:self];
+        } else if ([responseCode isEqualToString:@"1001"]) {
+            pinCode = submitPIN;
+            [self performSegueWithIdentifier:@"otpTocreate" sender:self];
+        } else {
+            [self showAlertWithTitle:@"Error checking user state" message:@"Please try again"];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error Activating App" message:@"Please contact the bank"];
+    }
+}
+
+- (void)handleIssuanceResponse {
+    NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
+    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+
+    if ([json objectForKey:@"Status"]) {
+        BOOL statusRetrieved = [[json valueForKey:@"Status"] boolValue];
+        if (statusRetrieved) {
+            alertIncorrect.message = @"Activating token...";
+            [EstablishPINViewController getSerial];
+            connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
+        } else {
+            alertIncorrect.message = @"Validating token...";
+            [EstablishPINViewController checkActiveToken];
+            connActive = [[NSURLConnection alloc] initWithRequest:requestActive delegate:self];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error Activating App" message:@"Please contact the bank"];
+    }
+}
+
+- (void)handleActiveTokenResponse {
+    NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
+    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+
+    if ([json objectForKey:@"Status"]) {
+        BOOL statusRetrieved = [[json valueForKey:@"Status"] boolValue];
+
+        if (statusRetrieved) {
+            alertIncorrect.message = @"Please note that existing token will be deactivated";
+            [self showAlertForActiveToken];
+        } else {
+            alertIncorrect.message = @"Activating token...";
+            [EstablishPINViewController getSerial];
+            connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error Activating App" message:@"Please contact the bank"];
+    }
+}
+
+- (void)handleSerialResponse {
+    NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
+    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+
+    if ([json objectForKey:@"Message"]) {
+        NSString *messageReceived = [json valueForKey:@"Message"];
+
+        if ([messageReceived isEqualToString:@"SUCCESS"]) {
+            establishSerialNumber = [json valueForKey:@"SerialNumber"];
+            activationCode = [json valueForKey:@"ActivationCode"];
+            identity = [ETIdentityProvider generate:nil serialNumber:establishSerialNumber activationCode:activationCode];
+
+            registration = identity.registrationCode;
+
+            BOOL checkSave = [SDKUtils saveIdentity:identity];
+
+            if (checkSave) {
+                alertIncorrect.message = @"Completing Activation";
+                [EstablishPINViewController sendConsent];
+                connConsent = [[NSURLConnection alloc] initWithRequest:requestConsent delegate:self];
+
+                [EstablishPINViewController activateSoftToken];
+                connActivate = [[NSURLConnection alloc] initWithRequest:requestActivate delegate:self];
+            } else {
+                [self showAlertWithTitle:@"Error Activating App" message:@"Please try again"];
+            }
+        } else {
+            [self showAlertWithTitle:@"Error Activating App" message:@"Please try again"];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error Activating App" message:@"Please contact the bank"];
+    }
+}
+
+- (void)handleConsentResponse {
+    NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
+    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+}
+
+- (void)handleActivateResponse {
+    NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
+    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+
+    if ([json objectForKey:@"Message"]) {
+        NSString *messageReceived = [json valueForKey:@"Message"];
+
+        if ([messageReceived isEqualToString:@"Successful"]) {
+            BOOL checkStorePIN = [SDKUtils savePIN:submitPIN];
+            if (checkStorePIN) {
+                [self dismissAlertIfNeeded];
+                [self performSegueWithIdentifier:@"otpToactive" sender:self];
+            }
+        } else {
+            [self showAlertWithTitle:@"Error Activating App" message:@"Please try again"];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error Activating App" message:@"Please contact the bank"];
+    }
+}
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self dismissAlertIfNeeded];
+    alertIncorrect = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+    [alertIncorrect addAction:yesButton];
+    [self presentViewController:alertIncorrect animated:YES completion:nil];
+}
+
+- (void)showAlertForActiveToken {
+    UIAlertAction *yesIncorrectButton = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        activeIssue = YES;
+        alertIncorrect = [UIAlertController alertControllerWithTitle:@"Activating App" message:@"Activating token..." preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertIncorrect animated:YES completion:nil];
+        [EstablishPINViewController getSerial];
+        connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
+    }];
+    UIAlertAction *noIncorrectButton = [UIAlertAction actionWithTitle:@"Cancel Activation" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        exit(0);
+    }];
+
+    [alertIncorrect addAction:yesIncorrectButton];
+    [alertIncorrect addAction:noIncorrectButton];
+}
+
+- (void)dismissAlertIfNeeded {
+    if (alertIncorrect) {
+        [alertIncorrect dismissViewControllerAnimated:YES completion:nil];
+        alertIncorrect = nil;
+    }
+}
+
+
+
 + (void) validateOTP {
-    
-    
     NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&one=%@&ref=%@",@"2",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", submittedOTP,ref ];
-    NSLog(@"Post Request, %@", post);
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
     
     //Calculate Length of message
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     //Create URL Request
     requestVerify = [[NSMutableURLRequest alloc] init];
     
     //Set URL
     //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestVerify setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/validateOTP.php"]];
+    [requestVerify setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/validateOTP.php"]];
     
     //set HTTP Method
     [requestVerify setHTTPMethod:@"POST"];
@@ -595,37 +402,26 @@ UIAlertController * alertIncorrect;
     //set Body
     [requestVerify setHTTPBody:postData];
     
-    NSLog(@"Final Request Structure, %@", requestVerify);
-    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Posted Request, %@", requestVerify.HTTPBody);
-    
-    
-    
 }
 
 + (void) checkUser {
     
     
     NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&fid=%@",@"9",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", userIdentity ];
-    NSLog(@"Post Request, %@", post);
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
     
     //Calculate Length of message
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     //Create URL Request
     requestUser = [[NSMutableURLRequest alloc] init];
     
     //Set URL
-    //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestUser setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
+    [requestUser setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/checkUser.php"]];
     
     //set HTTP Method
     [requestUser setHTTPMethod:@"POST"];
@@ -639,38 +435,24 @@ UIAlertController * alertIncorrect;
     //set Body
     [requestUser setHTTPBody:postData];
     
-    NSLog(@"Final Request Structure, %@", requestUser);
-    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Posted Request, %@", requestUser.HTTPBody);
-    
-    
-    
 }
 
 + (void) checkIssuance {
-    
-    
-    //NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
+
     NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", @"12321321" ];
-    NSLog(@"Post Request, %@", post);
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
     
     //Calculate Length of message
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     //Create URL Request
     requestIssuance = [[NSMutableURLRequest alloc] init];
     
-    //Set URL
-    //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestIssuance setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkIssuance.php"]];
+    [requestIssuance setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/checkIssuance.php"]];
     
     //set HTTP Method
     [requestIssuance setHTTPMethod:@"POST"];
@@ -684,36 +466,26 @@ UIAlertController * alertIncorrect;
     //set Body
     [requestIssuance setHTTPBody:postData];
     
-    NSLog(@"Final Request Structure, %@", requestIssuance);
-    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Posted Request, %@", requestIssuance.HTTPBody);
-    
-    
     
 }
 
 + (void) checkActiveToken {
     
     NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"10",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
-    NSLog(@"Post Request, %@", post);
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
     
     //Calculate Length of message
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     //Create URL Request
     requestActive = [[NSMutableURLRequest alloc] init];
     
     //Set URL
-    //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestActive setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkActive.php"]];
+    [requestActive setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/checkActive.php"]];
     
     //set HTTP Method
     [requestActive setHTTPMethod:@"POST"];
@@ -727,34 +499,26 @@ UIAlertController * alertIncorrect;
     //set Body
     [requestActive setHTTPBody:postData];
     
-    NSLog(@"Final Request Structure, %@", requestActive);
-    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Posted Request, %@", requestActive.HTTPBody);
     
 }
 
 + (void) getSerial {
     
     NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"5",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
-    NSLog(@"Post Request, %@", post);
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
     
     //Calculate Length of message
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     //Create URL Request
     requestSerial = [[NSMutableURLRequest alloc] init];
     
     //Set URL
-    //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestSerial setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/getSerial.php"]];
+    [requestSerial setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/getSerial.php"]];
     
     //set HTTP Method
     [requestSerial setHTTPMethod:@"POST"];
@@ -768,34 +532,72 @@ UIAlertController * alertIncorrect;
     //set Body
     [requestSerial setHTTPBody:postData];
     
-    NSLog(@"Final Request Structure, %@", requestSerial);
-    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
+}
+
++ (NSString *)generateRandomStringWithLength:(NSInteger)length {
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    NSMutableString *randomString = [NSMutableString stringWithCapacity:length];
+
+    for (NSInteger i = 0; i < length; i++) {
+        [randomString appendFormat:@"%C", [letters characterAtIndex:arc4random_uniform((uint32_t)[letters length])]];
+    }
+
+    return randomString;
+}
+
+
++ (void) sendConsent {
     
-    NSLog(@"Posted Request, %@", requestSerial.HTTPBody);
+    NSString *randomID = [self generateRandomStringWithLength:10];
+    
+    NSString *post = [NSString stringWithFormat:@"&con=%@&acc=%@&fid=%@&phone=%@&user=%@&ref=%@&channel=%@&purpose=%@&app=%@&id=%@",@YES,account,userIdentity,phone,userIdentity,randomID,@"FirstTokeniOS", @"FirstTokenEnrollment", @"iO05255J5KkmnirnrrRh72", @"FirstToken"];
+    //Encode string
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    
+    NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+    
+    //Calculate Length of message
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
+    
+    //Create URL Request
+    requestConsent = [[NSMutableURLRequest alloc] init];
+    
+    //Set URL
+    
+    [requestConsent setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/sendConsent.php"]];
+  
+    
+    //set HTTP Method
+    [requestConsent setHTTPMethod:@"POST"];
+    
+    //set HTTP Header
+    [requestConsent setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    //set Encoded header
+    [requestConsent setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    //set Body
+    [requestConsent setHTTPBody:postData];
     
 }
 
 + (void) activateSoftToken {
     
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@&acc=%@&reg=%@&act=%@&ser=%@",@"6",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity, account, registration, activationCode, serialNumber];
-    NSLog(@"Post Request, %@", post);
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@&acc=%@&reg=%@&act=%@&ser=%@",@"6",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity, account, registration, activationCode, establishSerialNumber];
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
-    
     //Calculate Length of message
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     //Create URL Request
     requestActivate = [[NSMutableURLRequest alloc] init];
     
     //Set URL
-    //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestActivate setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/activateSoft.php"]];
+
+    [requestActivate setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/activateSoft.php"]];
     
     //set HTTP Method
     [requestActivate setHTTPMethod:@"POST"];
@@ -809,10 +611,6 @@ UIAlertController * alertIncorrect;
     //set Body
     [requestActivate setHTTPBody:postData];
     
-    NSLog(@"Final Request Structure, %@", requestActivate);
-    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Posted Request, %@", requestActivate.HTTPBody);
     
 }
 
@@ -830,28 +628,16 @@ UIAlertController * alertIncorrect;
 
 - (BOOL)textField:(UITextField *) textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    if(textField == _enteredOTP){
-    
     NSUInteger oldLength = [textField.text length];
     NSUInteger replacementLength = [string length];
     NSUInteger rangeLength = range.length;
-    
     NSUInteger newLength = oldLength - rangeLength + replacementLength;
-    
     BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
     
+    if(textField == _enteredOTP){
     return newLength <= 6 || returnKey;
     }else{
-        NSUInteger oldLength = [textField.text length];
-        NSUInteger replacementLength = [string length];
-        NSUInteger rangeLength = range.length;
-        
-        NSUInteger newLength = oldLength - rangeLength + replacementLength;
-        
-        BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
-        
         return newLength <= 4 || returnKey;
-        
     }
 }
 
@@ -873,7 +659,7 @@ UIAlertController * alertIncorrect;
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [self animateTextField:textField up:NO];
-    [self resignFirstResponder];
+
 }
 
 -(void)animateTextField:(UITextField*)textField up:(BOOL)up

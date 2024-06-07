@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SDKUtils.h"
-#import "ETIdentity.h"
-#import "ETSoftTokenSDK.h"
+#import <EntrustIGMobile/ETIdentity.h>
+#import <EntrustIGMobile/ETSoftTokenSDK.h>
 #import "SecurityCodeViewController.h"
 #import "SettingsViewController.h"
 #import "RegistrationCodeViewController.h"

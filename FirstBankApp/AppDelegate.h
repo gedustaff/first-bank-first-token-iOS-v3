@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ETIdentity.h"
+#import <EntrustIGMobile/ETIdentity.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
     
     ETIdentity *loadingID;

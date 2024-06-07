@@ -35,11 +35,11 @@ NSInteger timerems = 2;
      attributes:@{NSForegroundColorAttributeName:color}];
     _confirmPIN.attributedPlaceholder =
     [[NSAttributedString alloc]
-     initWithString:@"Enter New PIN"
+     initWithString:@"Confirm New PIN"
      attributes:@{NSForegroundColorAttributeName:color}];
     _freshPIN.attributedPlaceholder =
     [[NSAttributedString alloc]
-     initWithString:@"Confirm New PIN"
+     initWithString:@"Enter New PIN"
      attributes:@{NSForegroundColorAttributeName:color}];
     
     //Set Border Colour as Gold colour
@@ -55,6 +55,11 @@ NSInteger timerems = 2;
     _freshPIN.layer.masksToBounds=YES;
     _freshPIN.layer.borderColor = [[AppBlockViewController colorFromHexString:@"#eaab00"] CGColor];
     _freshPIN.layer.borderWidth= 2.0f;
+    
+    //Set delegates
+    _oldPIN.delegate = self;
+    _confirmPIN.delegate = self;
+    _freshPIN.delegate = self;
     
     //Fetch Identity Value
     retreivedPIN = [SDKUtils retrievePIN];
@@ -219,19 +224,10 @@ NSInteger timerems = 2;
     [UIView commitAnimations];
 }
 
-/**
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
-    if ([[segue identifier] isEqualToString:@"resetTosec"]) {
-        ResetPINViewController *rpvc = [segue destinationViewController];
-        rpvc.resetID = self.blockRetrievedID;
-    }
+- (IBAction)acceptButtonTapped:(UIButton *)sender {
 }
-**/
 
+- (IBAction)declineButtonTapped:(UIButton *)sender {
+}
 @end

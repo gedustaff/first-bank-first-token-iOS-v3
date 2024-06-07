@@ -1,8 +1,6 @@
 //
 //  SecurityCodeViewController.m
 //  FirstBankApp
-//
-//  Created by Gedu Technologies on 12/16/14.
 //  Copyright (c) 2014 Gedu Technologies. All rights reserved.
 //
 
@@ -37,9 +35,6 @@ NSInteger timingout;
     [_showOTP setText:OTP];
     [self countdownTimer];
     timeRemaining = 30;
-    
-    
-    // Do any additional setup after loading the view.
 }
 
 -(void) viewDidDisappear:(BOOL)animated {
@@ -56,7 +51,6 @@ NSInteger timingout;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-   // [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
 }
 
@@ -89,15 +83,12 @@ NSInteger timingout;
 - (void)updateCounter:(NSTimer *)theTimer {
     if(timeRemaining > 0 ){
         timeRemaining -- ;
-        //timingout = timeRemaining;
-        
         _showTimer.text = [NSString stringWithFormat:@"%lds", (long)timeRemaining];
         
     }else if (timeRemaining == 0){
         
         [self.timer invalidate];
         self.timer=nil;
-        //[self dismissViewControllerAnimated:YES completion:nil];
         [self performSegueWithIdentifier:@"SecToReq" sender:self];
         
     }

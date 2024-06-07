@@ -8,9 +8,9 @@
 
 #import "ResetPINViewController.h"
 #import "SecurityCodeViewController.h"
-NSURLConnection *connValidateOTP;
-NSMutableURLRequest *requestVerify;
-NSString *otp, *reference;
+NSURLConnection *connResetValidateOTP;
+NSMutableURLRequest *requestResetVerify;
+NSString *otp, *resetReference;
 NSString *pin;
 UIAlertController * alertIncorrected;
 
@@ -31,7 +31,7 @@ UIAlertController * alertIncorrected;
     self.otpValue.delegate = self;
     self.pinOne.delegate = self;
     self.pinTwo.delegate = self;
-    reference = ref;
+    resetReference = ref;
     UIColor *color = [UIColor whiteColor];
     
     // Set Placeholder Colour as White
@@ -98,13 +98,7 @@ UIAlertController * alertIncorrected;
         
         [self presentViewController:alertIncorrected animated:YES completion:nil];
         [ResetPINViewController validateOTP];
-        connValidateOTP = [[NSURLConnection alloc] initWithRequest:requestVerify delegate:self];
-        
-        if(connValidateOTP) {
-            NSLog(@"Connection Successful");
-        } else {
-            NSLog(@"Connection could not be made");
-        }
+        connResetValidateOTP = [[NSURLConnection alloc] initWithRequest:requestResetVerify delegate:self];
         
     }else if(![_otpValue hasText]){
         [ _otpValue.layer addAnimation:anim forKey:nil ];
@@ -113,20 +107,7 @@ UIAlertController * alertIncorrected;
     }else if (![_pinTwo hasText]){
         [ _pinTwo.layer addAnimation:anim forKey:nil ];
     } else {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Incorrect Input"
-                                     message:@"Please verify and try again"
-                                     preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* yesButton = [UIAlertAction
-                                    actionWithTitle:@"Okay"
-                                    style:UIAlertActionStyleDefault
-                                    handler:^(UIAlertAction * action) {
-                                        //Handle your yes please button action here
-                                    }];
-        
-        [alert addAction:yesButton];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self showAlertWithTitle:@"Incorrect Input" message:@"Please verify and try again"];
     }
     
 }
@@ -148,14 +129,12 @@ UIAlertController * alertIncorrected;
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data{
     
     [responseDataRP appendData: data];
-    NSLog(@"recieved data @push %@", data);
     
 }
 
 // This method receives the error report in case of connection is not made to server.
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
-    NSLog(@"error message: %@", error);
     alertIncorrected.title = @"Activation Error";
     alertIncorrected.message = @"Please check your internet connection and try again";
     
@@ -173,43 +152,22 @@ UIAlertController * alertIncorrected;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     
     NSString *responseText = [[NSString alloc] initWithData:responseDataRP encoding:NSUTF8StringEncoding];
-    NSLog(@"Received Response COnn, %@", responseText);
     //Parse Response
     NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
     id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     if ([json objectForKey:@"OTPReferenceNumber"]){
         NSString *responseCode = [json valueForKey:@"ResponseCode"];
-        NSLog(@"Received Code, %@", responseCode);
         if ([responseCode isEqualToString:@"000"]){
             if([SDKUtils deletePIN]){
                 [SDKUtils savePIN:pin];
-                BOOL bla = [SDKUtils deleteLockState];
-                [self performSegueWithIdentifier:@"resetTorequest" sender:self];
+                [self dismissAlertAndPerformSegue:@"resetTosec"];
             }
         }else{
-            alertIncorrected.title = @"Error Validating OTP";
-            alertIncorrected.message = @"Please try again";
-            
-            UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                                 actionWithTitle:@"Okay"
-                                                 style:UIAlertActionStyleDefault
-                                                 handler:^(UIAlertAction * action) {
-                                                     //Handle your yes please button action here
-                                                 }];
-            [alertIncorrected addAction:yesIncorrectButton];
+            [self showAlertWithTitle:@"Error Validating OTP" message:@"Please try again"];
         }
     }else{
-        NSLog(@"Error Activating App. Please contact the bank");
-        alertIncorrected.title = @"Error Activating App";
-        alertIncorrected.message = @"Please contact the bank";
-        
-        UIAlertAction* yesIncorrectButton = [UIAlertAction
-                                             actionWithTitle:@"Okay"
-                                             style:UIAlertActionStyleDefault
-                                             handler:^(UIAlertAction * action) {
-                                                 //Handle your yes please button action here
-                                             }];
-        [alertIncorrected addAction:yesIncorrectButton];
+        [self dismissAlertIfNeeded];
+        [self showAlertWithTitle:@"Error Activating App" message:@"Please contact the bank"];
     }
     
 }
@@ -232,43 +190,33 @@ UIAlertController * alertIncorrected;
 + (void) validateOTP {
     
     
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&one=%@&ref=%@",@"2",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", otp,reference ];
-    NSLog(@"Post Request, %@", post);
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&one=%@&ref=%@",@"2",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", otp,resetReference ];
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
     
     //Calculate Length of message
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     //Create URL Request
-    requestVerify = [[NSMutableURLRequest alloc] init];
+    requestResetVerify = [[NSMutableURLRequest alloc] init];
     
     //Set URL
-    //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestVerify setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/validateOTP.php"]];
+  
+    [requestResetVerify setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/validateOTP.php"]];
     
     //set HTTP Method
-    [requestVerify setHTTPMethod:@"POST"];
+    [requestResetVerify setHTTPMethod:@"POST"];
     
     //set HTTP Header
-    [requestVerify setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [requestResetVerify setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     //set Encoded header
-    [requestVerify setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [requestResetVerify setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     //set Body
-    [requestVerify setHTTPBody:postData];
-    
-    NSLog(@"Final Request Structure, %@", requestVerify);
-    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Posted Request, %@", requestVerify.HTTPBody);
-    
-    
+    [requestResetVerify setHTTPBody:postData];
     
 }
 
@@ -317,6 +265,30 @@ UIAlertController * alertIncorrected;
 {
     [self animateTextField:textField up:NO];
     [self resignFirstResponder];
+}
+
+- (void)dismissAlertIfNeeded {
+    if (alertIncorrected) {
+        [alertIncorrected dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self dismissAlertIfNeeded];
+    alertIncorrected = [UIAlertController alertControllerWithTitle:title
+                                                            message:message
+                                                     preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Okay"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    [alertIncorrected addAction:okAction];
+    [self presentViewController:alertIncorrected animated:YES completion:nil];
+}
+
+
+- (void)dismissAlertAndPerformSegue:(NSString *)segueIdentifier {
+    [self dismissAlertIfNeeded];
+    [self performSegueWithIdentifier:segueIdentifier sender:self];
 }
 
 

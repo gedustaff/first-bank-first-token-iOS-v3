@@ -2,7 +2,6 @@
 //  TripleDES.m
 //  FirstBankApp
 //
-//  Created by Dapsonco on 23/04/2018.
 //  Copyright © 2018 Gedu Technologies. All rights reserved.
 //
 
@@ -13,7 +12,6 @@
 + (NSData*)transformData:(NSData*)inputData operation:(CCOperation)operation withPassword:(NSString*)password
     {
         NSData* key = [self keyFromPassword:password];
-        //NSData* iv = [self ivFromPassword:password];
         NSMutableData* outputData = [NSMutableData dataWithLength:(inputData.length + kCCBlockSize3DES)];
         
         size_t outLength;

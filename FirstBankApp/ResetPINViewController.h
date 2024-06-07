@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SDKUtils.h"
-#import "ETIdentity.h"
+#import <EntrustIGMobile/ETIdentity.h>
 
 
 @interface ResetPINViewController : UIViewController<UITextFieldDelegate>{

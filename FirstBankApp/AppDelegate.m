@@ -34,20 +34,10 @@ BOOL isRegistered = NO;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    NSString *message = @"test message";
-    NSLog( @"Here is a test message: '%@'", message );
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowOffset = CGSizeMake(0.0, 1.0);
     shadow.shadowColor = [UIColor whiteColor];
     
-    
-    /**[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
-     setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:color,
-       NSShadowAttributeName:shadow,
-       NSFontAttributeName:[UIFont boldSystemFontOfSize:13]
-       }
-     forState:UIControlStateNormal];**/
     
     loadingID = [SDKUtils loadIdentity];
     lockStateValue = [SDKUtils fetchLockState];
@@ -57,11 +47,6 @@ BOOL isRegistered = NO;
     else{
         isRegistered = YES;
     }
-    
-   /*
-    NSString *storyboardId = isRegistered ? @"PINRequestViewController" : @"AddIdentityViewController";
-    
-    self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:storyboardId];*/
     
     
     if (isRegistered)
@@ -78,11 +63,6 @@ BOOL isRegistered = NO;
             ivc.codeReuse = @"reset";
             self.window.rootViewController = ivc;
             
-            
-            
-            
-            
-           // self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"cardNum"];
             return YES;
         }
         
@@ -90,10 +70,7 @@ BOOL isRegistered = NO;
     }
     else
     {
-        NSString *message = @"test message";
-        NSLog( @"Here is a test message: '%@'", message );
-        
-        
+    
        self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"addID"];
         
         

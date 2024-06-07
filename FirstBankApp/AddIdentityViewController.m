@@ -2,14 +2,15 @@
 //  AddIdentityViewController.m
 //  FirstBankApp
 //
-//  Created by Gedu Technologies on 12/16/14.
 //  Copyright (c) 2014 Gedu Technologies. All rights reserved.
 //
 
 #import "AddIdentityViewController.h"
+#import "RegistrationCodeViewController.h"
+#import "TermsViewController.h"
 
-NSString *serialNumber;
-NSString *activationCode;
+NSString *identitySerialNumber;
+NSString *addActivationCode;
 
 #define MAXLENGTH1 10
 #define MAXLENGTH2 16
@@ -27,8 +28,7 @@ NSString *activationCode;
 @implementation AddIdentityViewController
 @synthesize identity;
 - (IBAction)sendIntro:(id)sender {
-    
-    [self performSegueWithIdentifier:@"introToCard" sender:self];
+    [self performSegueWithIdentifier:@"showTermsAndConditions" sender:self];
 }
 
 + (UIColor *)colorFromHexString:(NSString *)hexString {
@@ -108,10 +108,6 @@ NSString *activationCode;
     NSDictionary *size = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Arial" size:15.0], NSFontAttributeName, mycolor, NSForegroundColorAttributeName, nil];
     self.navigationController.navigationBar.titleTextAttributes = size;
     
-    //Custom Keyboard
-    
-    //[super viewDidLoad];
-    
     
 }
 
@@ -138,13 +134,6 @@ NSString *activationCode;
 }
 
 
-
-
-
-
-
-
-
 + (BOOL) checkSerialNumber{
     
     
@@ -152,21 +141,26 @@ NSString *activationCode;
     
     
     @try {
-        
+        NSError *error = nil;
         [ETIdentityProvider
-         validateSerialNumber:serialNumber];
-        checkSerialNum = YES;
+         validateSerialNumber:identitySerialNumber error:&error];
+        if (error != nil) {
+            
+            NSLog(@"Error: %@",[error localizedDescription]);
+        } else{
+            checkSerialNum = YES;
+        }
+        
     }
     @catch (NSException * e) {
         checkSerialNum = NO;
         UIAlertView *serialAlert = [[UIAlertView alloc] initWithTitle:@"Application Activation Error " message:@"The serial number was entered incorrectly. Check the number and try again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
         [serialAlert show];
+   
     }
     
     return checkSerialNum;
 }
-
-
 
 + (BOOL) checkActivationNumber{
     
@@ -174,15 +168,21 @@ NSString *activationCode;
     
     
     @try {
-        
+        NSError *error = nil;
         [ETIdentityProvider
-         validateActivationCode:activationCode];
-        checkAccNum = YES;
+         validateActivationCode:addActivationCode error:&error];
+        if (error != nil) {
+            
+            NSLog(@"Error: %@",[error localizedDescription]);
+        } else{
+            checkAccNum = YES;
+        }
     }
     @catch (NSException * e) {
         checkAccNum = NO;
         UIAlertView *activationAlert = [[UIAlertView alloc] initWithTitle:@"Application Activation Error " message:@"The activation number was entered incorrectly. Check the number and try again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
         [activationAlert show];
+        
     }
     
     return checkAccNum;

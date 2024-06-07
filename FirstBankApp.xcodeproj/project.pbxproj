@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,7 +20,6 @@
 		075D11EE1A5EC9F500BC9D78 /* PINRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D11ED1A5EC9F500BC9D78 /* PINRequestViewController.m */; };
 		075D11F11A66703B00BC9D78 /* AppBlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D11F01A66703B00BC9D78 /* AppBlockViewController.m */; };
 		075D11F41A67A30100BC9D78 /* ResetPINViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D11F31A67A30100BC9D78 /* ResetPINViewController.m */; };
-		077A57A91ADC12C7004DB946 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 077A57A81ADC12C7004DB946 /* SettingsViewController.m */; };
 		07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07C0AAA81AC0484D002F4EEB /* Settings.bundle */; };
 		07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C8EE461BED2DE4006B91FA /* Images-2.xcassets */; };
 		3C022107209691E7007BF0CF /* DeactivateConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */; };
@@ -30,11 +29,28 @@
 		3C3B8F78208DC98500A9777F /* TripleDES.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B8F77208DC98500A9777F /* TripleDES.m */; };
 		3C3B8F7B208E0A4200A9777F /* URLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B8F7A208E0A4200A9777F /* URLConnection.m */; };
 		3C55124C20861C6B0054A089 /* CreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C55124B20861C6B0054A089 /* CreateUserViewController.m */; };
-		3C5DBCFE2084BE2000F144E0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5DBCFD2084BE2000F144E0 /* libz.tbd */; };
-		3C5DBCFF2084C2CC00F144E0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C75E921A48531000B97714 /* Security.framework */; };
-		3CB5AB322080CB8300578CB7 /* libEntrustIGMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB5AB312080CB8200578CB7 /* libEntrustIGMobileSDK.a */; };
 		3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE38E3920860CE20098B44C /* ActivatedViewController.m */; };
+		6F7571102C069691004BCCBA /* EntrustIGMobile.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F75710E2C06960E004BCCBA /* EntrustIGMobile.xcframework */; };
+		6F7571112C069691004BCCBA /* EntrustIGMobile.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F75710E2C06960E004BCCBA /* EntrustIGMobile.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1CEE6132B93F29700F419B1 /* TermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CEE6122B93F29700F419B1 /* TermsViewController.m */; };
+		B1CEE6182B9F878700F419B1 /* fbnnewcert_new.der in Resources */ = {isa = PBXBuildFile; fileRef = B1CEE6172B9F878700F419B1 /* fbnnewcert_new.der */; };
+		B1FAE4BD2B8E9AE100DE0879 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FAE4BC2B8E9AE100DE0879 /* Security.framework */; };
+		B1FAE4BF2B8E9AEF00DE0879 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FAE4BE2B8E9AEF00DE0879 /* libz.tbd */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B1FAE4B52B8E98CF00DE0879 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6F7571112C069691004BCCBA /* EntrustIGMobile.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		07088A791A4031C20010E3B8 /* FirstToken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstToken.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,10 +79,7 @@
 		075D11F01A66703B00BC9D78 /* AppBlockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppBlockViewController.m; sourceTree = "<group>"; };
 		075D11F21A67A30100BC9D78 /* ResetPINViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPINViewController.h; sourceTree = "<group>"; };
 		075D11F31A67A30100BC9D78 /* ResetPINViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPINViewController.m; sourceTree = "<group>"; };
-		077A57A71ADC12C7004DB946 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		077A57A81ADC12C7004DB946 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		07C0AAA81AC0484D002F4EEB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		07C75E921A48531000B97714 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		07C8EE461BED2DE4006B91FA /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		3C022105209691E7007BF0CF /* DeactivateConfirmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DeactivateConfirmViewController.h; path = FirstBankApp/DeactivateConfirmViewController.h; sourceTree = "<group>"; };
 		3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DeactivateConfirmViewController.m; path = FirstBankApp/DeactivateConfirmViewController.m; sourceTree = "<group>"; };
@@ -74,7 +87,6 @@
 		3C0221092096956B007BF0CF /* DeactivateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeactivateViewController.m; sourceTree = "<group>"; };
 		3C02210B209732A7007BF0CF /* NSData+Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		3C02210C209732A7007BF0CF /* NSData+Base64.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		3C02210E209732E9007BF0CF /* MGTwitterEngineGlobalHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGTwitterEngineGlobalHeader.h; sourceTree = "<group>"; };
 		3C02210F209748DF007BF0CF /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		3C022110209748DF007BF0CF /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		3C3B8F76208DC98500A9777F /* TripleDES.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripleDES.h; sourceTree = "<group>"; };
@@ -83,12 +95,14 @@
 		3C3B8F7A208E0A4200A9777F /* URLConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLConnection.m; sourceTree = "<group>"; };
 		3C55124A20861C6B0054A089 /* CreateUserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateUserViewController.h; sourceTree = "<group>"; };
 		3C55124B20861C6B0054A089 /* CreateUserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateUserViewController.m; sourceTree = "<group>"; };
-		3C5DBCFD2084BE2000F144E0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		3CB5AB2D2080B68400578CB7 /* libEntrustIGMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEntrustIGMobileSDK.a; path = "../../../../../SDK/SDK/iOS/IGMobileSDK-2/MacOSX_iOS/lib_iOS/Debug/libEntrustIGMobileSDK.a"; sourceTree = "<group>"; };
-		3CB5AB2F2080C47C00578CB7 /* libEntrustIGMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEntrustIGMobileSDK.a; path = "../../../../../SDK/SDK/iOS/IGMobileSDK-2/MacOSX_iOS/lib_iOS/Release/libEntrustIGMobileSDK.a"; sourceTree = "<group>"; };
-		3CB5AB312080CB8200578CB7 /* libEntrustIGMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEntrustIGMobileSDK.a; path = "../../../../../IGMobileSDK-2/MacOSX_iOS/lib_iOS/Release/libEntrustIGMobileSDK.a"; sourceTree = "<group>"; };
 		3CE38E3820860CE20098B44C /* ActivatedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivatedViewController.h; sourceTree = "<group>"; };
 		3CE38E3920860CE20098B44C /* ActivatedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivatedViewController.m; sourceTree = "<group>"; };
+		6F75710E2C06960E004BCCBA /* EntrustIGMobile.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = EntrustIGMobile.xcframework; path = ../IGMobileSDK/MacOSX_iOS/lib_XCFramework/Debug/EntrustIGMobile.xcframework; sourceTree = "<group>"; };
+		B1CEE6112B93F29700F419B1 /* TermsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TermsViewController.h; sourceTree = "<group>"; };
+		B1CEE6122B93F29700F419B1 /* TermsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TermsViewController.m; sourceTree = "<group>"; };
+		B1CEE6172B9F878700F419B1 /* fbnnewcert_new.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = fbnnewcert_new.der; sourceTree = "<group>"; };
+		B1FAE4BC2B8E9AE100DE0879 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B1FAE4BE2B8E9AEF00DE0879 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,9 +110,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C5DBCFF2084C2CC00F144E0 /* Security.framework in Frameworks */,
-				3CB5AB322080CB8300578CB7 /* libEntrustIGMobileSDK.a in Frameworks */,
-				3C5DBCFE2084BE2000F144E0 /* libz.tbd in Frameworks */,
+				B1FAE4BF2B8E9AEF00DE0879 /* libz.tbd in Frameworks */,
+				B1FAE4BD2B8E9AE100DE0879 /* Security.framework in Frameworks */,
+				6F7571102C069691004BCCBA /* EntrustIGMobile.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,10 +122,9 @@
 		07088A701A4031C20010E3B8 = {
 			isa = PBXGroup;
 			children = (
+				B1CEE6142B9F77DF00F419B1 /* Certificates */,
 				3C022105209691E7007BF0CF /* DeactivateConfirmViewController.h */,
 				3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */,
-				3CB5AB2F2080C47C00578CB7 /* libEntrustIGMobileSDK.a */,
-				07C75E921A48531000B97714 /* Security.framework */,
 				07088A7B1A4031C20010E3B8 /* FirstBankApp */,
 				07088A951A4031C20010E3B8 /* FirstBankAppTests */,
 				07088A7A1A4031C20010E3B8 /* Products */,
@@ -163,14 +176,13 @@
 				07088AAC1A4062330010E3B8 /* RegistrationCodeViewController.m */,
 				3C02210F209748DF007BF0CF /* NSString+MD5.h */,
 				3C022110209748DF007BF0CF /* NSString+MD5.m */,
-				3C02210E209732E9007BF0CF /* MGTwitterEngineGlobalHeader.h */,
 				3C02210B209732A7007BF0CF /* NSData+Base64.h */,
 				3C02210C209732A7007BF0CF /* NSData+Base64.m */,
 				07088AAE1A4071390010E3B8 /* SecurityCodeViewController.h */,
 				07088AAF1A4071390010E3B8 /* SecurityCodeViewController.m */,
-				077A57A71ADC12C7004DB946 /* SettingsViewController.h */,
-				077A57A81ADC12C7004DB946 /* SettingsViewController.m */,
 				07C8EE461BED2DE4006B91FA /* Images-2.xcassets */,
+				B1CEE6112B93F29700F419B1 /* TermsViewController.h */,
+				B1CEE6122B93F29700F419B1 /* TermsViewController.m */,
 			);
 			path = FirstBankApp;
 			sourceTree = "<group>";
@@ -204,11 +216,19 @@
 		3CB5AB2C2080B68400578CB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3C5DBCFD2084BE2000F144E0 /* libz.tbd */,
-				3CB5AB312080CB8200578CB7 /* libEntrustIGMobileSDK.a */,
-				3CB5AB2D2080B68400578CB7 /* libEntrustIGMobileSDK.a */,
+				6F75710E2C06960E004BCCBA /* EntrustIGMobile.xcframework */,
+				B1FAE4BE2B8E9AEF00DE0879 /* libz.tbd */,
+				B1FAE4BC2B8E9AE100DE0879 /* Security.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B1CEE6142B9F77DF00F419B1 /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				B1CEE6172B9F878700F419B1 /* fbnnewcert_new.der */,
+			);
+			path = Certificates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +241,7 @@
 				07088A751A4031C20010E3B8 /* Sources */,
 				07088A761A4031C20010E3B8 /* Frameworks */,
 				07088A771A4031C20010E3B8 /* Resources */,
+				B1FAE4B52B8E98CF00DE0879 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -237,19 +258,18 @@
 		07088A711A4031C20010E3B8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = "Gedu Technologies";
 				TargetAttributes = {
 					07088A781A4031C20010E3B8 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = NUGGV6Q5X4;
-						ProvisioningStyle = Manual;
 					};
 				};
 			};
 			buildConfigurationList = 07088A741A4031C20010E3B8 /* Build configuration list for PBXProject "FirstBankApp" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -272,6 +292,7 @@
 			files = (
 				07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */,
 				07088A881A4031C20010E3B8 /* Main.storyboard in Resources */,
+				B1CEE6182B9F878700F419B1 /* fbnnewcert_new.der in Resources */,
 				07088A8D1A4031C20010E3B8 /* LaunchScreen.xib in Resources */,
 				07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */,
 				07088A8A1A4031C20010E3B8 /* Images.xcassets in Resources */,
@@ -295,10 +316,10 @@
 				075D11F41A67A30100BC9D78 /* ResetPINViewController.m in Sources */,
 				3C022111209748DF007BF0CF /* NSString+MD5.m in Sources */,
 				07088A7F1A4031C20010E3B8 /* main.m in Sources */,
+				B1CEE6132B93F29700F419B1 /* TermsViewController.m in Sources */,
 				3C022107209691E7007BF0CF /* DeactivateConfirmViewController.m in Sources */,
 				075D11F11A66703B00BC9D78 /* AppBlockViewController.m in Sources */,
 				3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */,
-				077A57A91ADC12C7004DB946 /* SettingsViewController.m in Sources */,
 				07088AB01A4071390010E3B8 /* SecurityCodeViewController.m in Sources */,
 				3C3B8F78208DC98500A9777F /* TripleDES.m in Sources */,
 				07088AAA1A4062160010E3B8 /* EstablishPINViewController.m in Sources */,
@@ -333,24 +354,39 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -363,8 +399,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -374,32 +411,47 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				NEW_SETTING = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -411,29 +463,30 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = NUGGV6Q5X4;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "/Users/olatejua/Downloads/IGMobileSDK/MacOSX_iOS/lib_XCFramework/$(CONFIGURATION)";
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
+					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-objC",
 					"-fobjc-arc",
+					"-v",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gedutechnologies.firstbank.FirstToken;
 				PRODUCT_NAME = FirstToken;
-				PROVISIONING_PROFILE = "c9776d57-62c4-4b65-8fc8-f1bd27b126aa";
-				PROVISIONING_PROFILE_SPECIFIER = "FirstToken Dev";
+				PROVISIONING_PROFILE = "2f460e09-9154-41eb-89b8-1a7a39e8d864";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/include";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "";
 				"VALID_ARCHS[sdk=*]" = "arm64 armv7s armv7";
 			};
@@ -445,29 +498,30 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = NUGGV6Q5X4;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "/Users/olatejua/Downloads/IGMobileSDK/MacOSX_iOS/lib_XCFramework/$(CONFIGURATION)";
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/lib_iOS/$(CONFIGURATION)",
+					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-objC",
 					"-fobjc-arc",
+					"-v",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gedutechnologies.firstbank.FirstToken;
 				PRODUCT_NAME = FirstToken;
 				PROVISIONING_PROFILE = "c9776d57-62c4-4b65-8fc8-f1bd27b126aa";
-				PROVISIONING_PROFILE_SPECIFIER = "FirstToken Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "/Users/dapsonco/Documents/IGMobileSDK-2/MacOSX_iOS/include";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Release;

@@ -2,15 +2,14 @@
 //  AddIdentityViewController.h
 //  FirstBankApp
 //
-//  Created by Gedu Technologies on 12/16/14.
 //  Copyright (c) 2014 Gedu Technologies. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "ETIdentity.h"
+#import <EntrustIGMobile/ETIdentity.h>
 #import "EstablishPINViewController.h"
-#import "ETIdentityProvider.h"
-#import "ETSoftTokenSDK.h"
+#import <EntrustIGMobile/ETIdentityProvider.h>
+#import <EntrustIGMobile/ETSoftTokenSDK.h>
 
 @interface AddIdentityViewController : UIViewController<UITextFieldDelegate>{
     ETIdentity *identity;

@@ -2,15 +2,14 @@
 //  DeactivateViewController.m
 //  FirstBankApp
 //
-//  Created by Dapsonco on 30/04/2018.
 //  Copyright © 2018 Gedu Technologies. All rights reserved.
 //
 
 #import "DeactivateViewController.h"
 
-NSURLConnection *connValidateOTP, *connDeactivate;
-NSMutableURLRequest *requestVerify, *requestDeactivate;
-NSString *otp, *reference, *serialNum, *user;
+NSURLConnection *connDeactivateValidateOTP, *connDeactivate;
+NSMutableURLRequest *requestDeactivateVerify, *requestDeactivate;
+NSString *deactivateUserOtp, *reference, *serialNum, *user;
 UIAlertController *alertController;
 
 @interface DeactivateViewController ()
@@ -64,14 +63,12 @@ UIAlertController *alertController;
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data{
     
     [responseDataDC appendData: data];
-    NSLog(@"recieved data @push %@", data);
     
 }
 
 // This method receives the error report in case of connection is not made to server.
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
-    NSLog(@"error message: %@", error);
     alertController.title = @"Activation Error";
     alertController.message = @"Please check your internet connection and try again";
     
@@ -87,30 +84,20 @@ UIAlertController *alertController;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-    
-    NSLog(@"Finished Loading");
 
-    if (connection ==connValidateOTP){
+    if (connection ==connDeactivateValidateOTP){
         NSString *responseText = [[NSString alloc] initWithData:responseDataDC encoding:NSUTF8StringEncoding];
-        NSLog(@"Received Response Conn, %@", responseText);
         //Parse Response
         NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         if ([json objectForKey:@"OTPReferenceNumber"]){
             responseCode = [json valueForKey:@"ResponseCode"];
-            NSLog(@"Received Code, %@", responseCode);
-            //if ([responseCode isEqualToString:@"000"]){
             if ([responseCode isEqualToString:@"000"]){
                 
                 alertController.message = @"Deactivating Token...";
                 [DeactivateViewController deactivate];
                 connDeactivate = [[NSURLConnection alloc] initWithRequest:requestDeactivate delegate:self];
-                if(connDeactivate) {
-                    NSLog(@"Connection Successful");
-                } else {
-                    NSLog(@"Connection could not be made");
-                }
-                
+              
             }else{
                 
                 alertController.title = @"Error validating OTP";
@@ -141,15 +128,12 @@ UIAlertController *alertController;
     }else if(connection == connDeactivate){
         
     NSString *responseText = [[NSString alloc] initWithData:responseDataDC encoding:NSUTF8StringEncoding];
-    NSLog(@"Received Response Conn1, %@", responseText);
     //Parse Response
     NSData *dataAccount = [responseText dataUsingEncoding:NSUTF8StringEncoding];
     id jsonAccount = [NSJSONSerialization JSONObjectWithData:dataAccount options:0 error:nil];
         
         if ([jsonAccount objectForKey:@"Status"]){
             BOOL statusRetrieved = [[jsonAccount valueForKey:@"Status"] boolValue];
-            NSLog(@"Received Code, %@", responseCode);
-            //if ([responseCode isEqualToString:@"000"]){
             if (statusRetrieved){
                 [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
                 
@@ -199,9 +183,9 @@ UIAlertController *alertController;
 
 - (IBAction)submitDeac:(id)sender {
     
-    otp = self.deactivateOTP.text;
+    deactivateUserOtp = self.deactivateOTP.text;
     [self.deactivateOTP resignFirstResponder];
-    if(otp.length==6){
+    if(deactivateUserOtp.length==6){
         alertController = [UIAlertController
                            alertControllerWithTitle:@"Deactivating App"
                            message:@"Validating OTP..."
@@ -210,13 +194,7 @@ UIAlertController *alertController;
         [self presentViewController:alertController animated:YES completion:nil];
         
         [DeactivateViewController validateOTP];
-        connValidateOTP = [[NSURLConnection alloc] initWithRequest:requestVerify delegate:self];
-        
-        if(connValidateOTP) {
-            NSLog(@"Connection Successful");
-        } else {
-            NSLog(@"Connection could not be made");
-        }
+        connDeactivateValidateOTP = [[NSURLConnection alloc] initWithRequest:requestDeactivateVerify delegate:self];
         
     }
     
@@ -254,42 +232,32 @@ UIAlertController *alertController;
 
 + (void) validateOTP {
     
-    
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&one=%@&ref=%@",@"2",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", otp,reference ];
-    NSLog(@"Post Request, %@", post);
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&one=%@&ref=%@",@"2",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", deactivateUserOtp,reference ];
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
     
     //Calculate Length of message
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     //Create URL Request
-    requestVerify = [[NSMutableURLRequest alloc] init];
+    requestDeactivateVerify = [[NSMutableURLRequest alloc] init];
     
     //Set URL
-    //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestVerify setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/validateOTP.php"]];
+    [requestDeactivateVerify setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/validateOTP.php"]];
     
     //set HTTP Method
-    [requestVerify setHTTPMethod:@"POST"];
+    [requestDeactivateVerify setHTTPMethod:@"POST"];
     
     //set HTTP Header
-    [requestVerify setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [requestDeactivateVerify setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     //set Encoded header
-    [requestVerify setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [requestDeactivateVerify setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     //set Body
-    [requestVerify setHTTPBody:postData];
-    
-    NSLog(@"Final Request Structure, %@", requestVerify);
-    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Posted Request, %@", requestVerify.HTTPBody);
+    [requestDeactivateVerify setHTTPBody:postData];
     
 }
 
@@ -297,23 +265,19 @@ UIAlertController *alertController;
     
     
     NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@&ser=%@",@"7",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", @"FirstToken",user,serialNum];
-    NSLog(@"Post Request, %@", post);
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    NSLog(@"Final Posted Data , %@", posted);
-    NSLog(@"Final Post Data , %@", postData);
     
     //Calculate Length of message
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     //Create URL Request
     requestDeactivate = [[NSMutableURLRequest alloc] init];
     
     //Set URL
-    //[request setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/checkUser.php"]];
-    [requestDeactivate setURL:[NSURL URLWithString:@"https://firsttokendev.firstbanknigeria.com/middleware/deleteToken.php"]];
+    [requestDeactivate setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/deleteToken.php"]];
     
     //set HTTP Method
     [requestDeactivate setHTTPMethod:@"POST"];
@@ -327,22 +291,7 @@ UIAlertController *alertController;
     //set Body
     [requestDeactivate setHTTPBody:postData];
     
-    NSLog(@"Final Request Structure, %@", requestDeactivate);
-    //NSString *postedRequest = [[NSString alloc] initWithData:request encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Posted Request, %@", requestDeactivate.HTTPBody);
     
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

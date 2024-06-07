@@ -188,18 +188,12 @@ int counter;
         
         UIAlertView *pinAlert = [[UIAlertView alloc] initWithTitle:@"Application Login Error " message:@"Your device is rooted \nIt is recommended that you do not continue \n Do you?" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
         [pinAlert show];
-
-        
+    
     }
     
     
     // Do any additional setup after loading the view.
     retrievedID = [SDKUtils loadIdentity];
-    
-    
-    
-    
-    
     
 }
 
