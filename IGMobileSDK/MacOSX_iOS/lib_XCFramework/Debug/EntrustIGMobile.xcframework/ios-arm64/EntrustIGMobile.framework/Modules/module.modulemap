@@ -1,0 +1,6 @@
+framework module EntrustIGMobile {
+  umbrella header "EntrustIGMobile.h"
+
+  export *
+  module * { export * }
+}

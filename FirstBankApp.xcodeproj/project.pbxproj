@@ -22,6 +22,20 @@
 		075D11F41A67A30100BC9D78 /* ResetPINViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D11F31A67A30100BC9D78 /* ResetPINViewController.m */; };
 		07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07C0AAA81AC0484D002F4EEB /* Settings.bundle */; };
 		07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C8EE461BED2DE4006B91FA /* Images-2.xcassets */; };
+		1205A5542E2E95D400C87E74 /* ActivationProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1205A5532E2E95D400C87E74 /* ActivationProcessViewController.m */; };
+		122B5F932E3391780095C41D /* BVNDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 122B5F922E3391780095C41D /* BVNDetails.m */; };
+		12451E402E2FE2A500017F6A /* LineDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12451E3F2E2FE2A500017F6A /* LineDrawingView.m */; };
+		1252D6A42E6F81710057EF20 /* SmileIDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1252D6A32E6F81710057EF20 /* SmileIDWrapper.swift */; };
+		1275A1B52E3BA5F800267ED7 /* smile_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 1275A1B42E3BA5F800267ED7 /* smile_config.json */; };
+		127AFA772E55C8570046F8B0 /* SmileIDDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 127AFA762E55C8570046F8B0 /* SmileIDDelegate.m */; };
+		127AFA7E2E55D2A30046F8B0 /* AESHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 127AFA7D2E55D2A30046F8B0 /* AESHelper.m */; };
+		12B0ADC02DD613D000323F73 /* EntrustIGMobile.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B0ADBF2DD613D000323F73 /* EntrustIGMobile.xcframework */; };
+		12CF007B2E6F2D3A00FA2117 /* BridgeSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CF007A2E6F2D3A00FA2117 /* BridgeSwift.swift */; };
+		12D446682E154AC000378EEF /* OptionsOnboardigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12D446672E154AC000378EEF /* OptionsOnboardigViewController.xib */; };
+		12D446692E154AC000378EEF /* OptionsOnboardigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D446662E154AC000378EEF /* OptionsOnboardigViewController.m */; };
+		12D631382E42450C009A9D4E /* SmileID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D631372E42450C009A9D4E /* SmileID.framework */; };
+		12D8DCC02E32709600086C09 /* AccountValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D8DCBF2E32709600086C09 /* AccountValidationViewController.m */; };
+		12DF114B2E6093E3002024FA /* AESHelperSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF114A2E6093E3002024FA /* AESHelperSwift.swift */; };
 		3C022107209691E7007BF0CF /* DeactivateConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */; };
 		3C02210A2096956B007BF0CF /* DeactivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0221092096956B007BF0CF /* DeactivateViewController.m */; };
 		3C02210D209732A7007BF0CF /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02210C209732A7007BF0CF /* NSData+Base64.m */; };
@@ -30,8 +44,7 @@
 		3C3B8F7B208E0A4200A9777F /* URLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B8F7A208E0A4200A9777F /* URLConnection.m */; };
 		3C55124C20861C6B0054A089 /* CreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C55124B20861C6B0054A089 /* CreateUserViewController.m */; };
 		3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE38E3920860CE20098B44C /* ActivatedViewController.m */; };
-		6F7571102C069691004BCCBA /* EntrustIGMobile.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F75710E2C06960E004BCCBA /* EntrustIGMobile.xcframework */; };
-		6F7571112C069691004BCCBA /* EntrustIGMobile.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F75710E2C06960E004BCCBA /* EntrustIGMobile.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65537AB2258747252FD23B3F /* Pods_FirstBankApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64EB2C51294AFA8BF9A82A5F /* Pods_FirstBankApp.framework */; };
 		B1CEE6132B93F29700F419B1 /* TermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CEE6122B93F29700F419B1 /* TermsViewController.m */; };
 		B1CEE6182B9F878700F419B1 /* fbnnewcert_new.der in Resources */ = {isa = PBXBuildFile; fileRef = B1CEE6172B9F878700F419B1 /* fbnnewcert_new.der */; };
 		B1FAE4BD2B8E9AE100DE0879 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FAE4BC2B8E9AE100DE0879 /* Security.framework */; };
@@ -45,7 +58,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6F7571112C069691004BCCBA /* EntrustIGMobile.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,7 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		07088A791A4031C20010E3B8 /* FirstToken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstToken.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07088A791A4031C20010E3B8 /* FirstBankApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstBankApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07088A7D1A4031C20010E3B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07088A7E1A4031C20010E3B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		07088A801A4031C20010E3B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +93,30 @@
 		075D11F31A67A30100BC9D78 /* ResetPINViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPINViewController.m; sourceTree = "<group>"; };
 		07C0AAA81AC0484D002F4EEB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		07C8EE461BED2DE4006B91FA /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		1205A5522E2E95D400C87E74 /* ActivationProcessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivationProcessViewController.h; sourceTree = "<group>"; };
+		1205A5532E2E95D400C87E74 /* ActivationProcessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivationProcessViewController.m; sourceTree = "<group>"; };
+		122B5F912E3391780095C41D /* BVNDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BVNDetails.h; sourceTree = "<group>"; };
+		122B5F922E3391780095C41D /* BVNDetails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BVNDetails.m; sourceTree = "<group>"; };
+		12451E3E2E2FE2A500017F6A /* LineDrawingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineDrawingView.h; sourceTree = "<group>"; };
+		12451E3F2E2FE2A500017F6A /* LineDrawingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LineDrawingView.m; sourceTree = "<group>"; };
+		1252D6A32E6F81710057EF20 /* SmileIDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileIDWrapper.swift; sourceTree = "<group>"; };
+		1275A1B42E3BA5F800267ED7 /* smile_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = smile_config.json; sourceTree = "<group>"; };
+		127AFA752E55C8570046F8B0 /* SmileIDDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmileIDDelegate.h; sourceTree = "<group>"; };
+		127AFA762E55C8570046F8B0 /* SmileIDDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmileIDDelegate.m; sourceTree = "<group>"; };
+		127AFA7C2E55D2A30046F8B0 /* AESHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AESHelper.h; sourceTree = "<group>"; };
+		127AFA7D2E55D2A30046F8B0 /* AESHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AESHelper.m; sourceTree = "<group>"; };
+		12B0ADBF2DD613D000323F73 /* EntrustIGMobile.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = EntrustIGMobile.xcframework; sourceTree = "<group>"; };
+		12B0ADC32DD6210A00323F73 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		12B0ADC42DD6216000323F73 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		12B751BF2E6F31DA0011CE93 /* FirstBankApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstBankApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		12CF007A2E6F2D3A00FA2117 /* BridgeSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSwift.swift; sourceTree = "<group>"; };
+		12D446652E154AC000378EEF /* OptionsOnboardigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionsOnboardigViewController.h; sourceTree = "<group>"; };
+		12D446662E154AC000378EEF /* OptionsOnboardigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptionsOnboardigViewController.m; sourceTree = "<group>"; };
+		12D446672E154AC000378EEF /* OptionsOnboardigViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionsOnboardigViewController.xib; sourceTree = "<group>"; };
+		12D631372E42450C009A9D4E /* SmileID.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SmileID.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		12D8DCBE2E32709600086C09 /* AccountValidationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountValidationViewController.h; sourceTree = "<group>"; };
+		12D8DCBF2E32709600086C09 /* AccountValidationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountValidationViewController.m; sourceTree = "<group>"; };
+		12DF114A2E6093E3002024FA /* AESHelperSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESHelperSwift.swift; sourceTree = "<group>"; };
 		3C022105209691E7007BF0CF /* DeactivateConfirmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DeactivateConfirmViewController.h; path = FirstBankApp/DeactivateConfirmViewController.h; sourceTree = "<group>"; };
 		3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DeactivateConfirmViewController.m; path = FirstBankApp/DeactivateConfirmViewController.m; sourceTree = "<group>"; };
 		3C0221082096956B007BF0CF /* DeactivateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeactivateViewController.h; sourceTree = "<group>"; };
@@ -97,7 +133,9 @@
 		3C55124B20861C6B0054A089 /* CreateUserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateUserViewController.m; sourceTree = "<group>"; };
 		3CE38E3820860CE20098B44C /* ActivatedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivatedViewController.h; sourceTree = "<group>"; };
 		3CE38E3920860CE20098B44C /* ActivatedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivatedViewController.m; sourceTree = "<group>"; };
-		6F75710E2C06960E004BCCBA /* EntrustIGMobile.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = EntrustIGMobile.xcframework; path = ../IGMobileSDK/MacOSX_iOS/lib_XCFramework/Debug/EntrustIGMobile.xcframework; sourceTree = "<group>"; };
+		3FBD00606DE2BC7E12018622 /* Pods-FirstBankApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstBankApp.debug.xcconfig"; path = "Target Support Files/Pods-FirstBankApp/Pods-FirstBankApp.debug.xcconfig"; sourceTree = "<group>"; };
+		49C1FB1FA4491542CFC33B4D /* Pods-FirstBankApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstBankApp.release.xcconfig"; path = "Target Support Files/Pods-FirstBankApp/Pods-FirstBankApp.release.xcconfig"; sourceTree = "<group>"; };
+		64EB2C51294AFA8BF9A82A5F /* Pods_FirstBankApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstBankApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1CEE6112B93F29700F419B1 /* TermsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TermsViewController.h; sourceTree = "<group>"; };
 		B1CEE6122B93F29700F419B1 /* TermsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TermsViewController.m; sourceTree = "<group>"; };
 		B1CEE6172B9F878700F419B1 /* fbnnewcert_new.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = fbnnewcert_new.der; sourceTree = "<group>"; };
@@ -110,9 +148,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12D631382E42450C009A9D4E /* SmileID.framework in Frameworks */,
 				B1FAE4BF2B8E9AEF00DE0879 /* libz.tbd in Frameworks */,
 				B1FAE4BD2B8E9AE100DE0879 /* Security.framework in Frameworks */,
-				6F7571102C069691004BCCBA /* EntrustIGMobile.xcframework in Frameworks */,
+				12B0ADC02DD613D000323F73 /* EntrustIGMobile.xcframework in Frameworks */,
+				65537AB2258747252FD23B3F /* Pods_FirstBankApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +162,7 @@
 		07088A701A4031C20010E3B8 = {
 			isa = PBXGroup;
 			children = (
+				12DF114A2E6093E3002024FA /* AESHelperSwift.swift */,
 				B1CEE6142B9F77DF00F419B1 /* Certificates */,
 				3C022105209691E7007BF0CF /* DeactivateConfirmViewController.h */,
 				3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */,
@@ -129,13 +170,14 @@
 				07088A951A4031C20010E3B8 /* FirstBankAppTests */,
 				07088A7A1A4031C20010E3B8 /* Products */,
 				3CB5AB2C2080B68400578CB7 /* Frameworks */,
+				85635A129A569AF153AD9D01 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		07088A7A1A4031C20010E3B8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				07088A791A4031C20010E3B8 /* FirstToken.app */,
+				07088A791A4031C20010E3B8 /* FirstBankApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,14 +185,26 @@
 		07088A7B1A4031C20010E3B8 /* FirstBankApp */ = {
 			isa = PBXGroup;
 			children = (
+				12D446622E1548F600378EEF /* OptionsOnboardingFeature */,
+				12B0ADC42DD6216000323F73 /* SettingsViewController.m */,
+				12B0ADC32DD6210A00323F73 /* SettingsViewController.h */,
 				3CE38E3820860CE20098B44C /* ActivatedViewController.h */,
 				3CE38E3920860CE20098B44C /* ActivatedViewController.m */,
+				127AFA752E55C8570046F8B0 /* SmileIDDelegate.h */,
+				127AFA7C2E55D2A30046F8B0 /* AESHelper.h */,
+				127AFA7D2E55D2A30046F8B0 /* AESHelper.m */,
+				127AFA762E55C8570046F8B0 /* SmileIDDelegate.m */,
 				07088A801A4031C20010E3B8 /* AppDelegate.h */,
 				07088A811A4031C20010E3B8 /* AppDelegate.m */,
 				075D11EF1A66703B00BC9D78 /* AppBlockViewController.h */,
 				075D11F01A66703B00BC9D78 /* AppBlockViewController.m */,
 				07088A861A4031C20010E3B8 /* Main.storyboard */,
+				12451E3E2E2FE2A500017F6A /* LineDrawingView.h */,
+				12451E3F2E2FE2A500017F6A /* LineDrawingView.m */,
+				1205A5522E2E95D400C87E74 /* ActivationProcessViewController.h */,
+				1205A5532E2E95D400C87E74 /* ActivationProcessViewController.m */,
 				3C0221082096956B007BF0CF /* DeactivateViewController.h */,
+				1275A1B42E3BA5F800267ED7 /* smile_config.json */,
 				3C0221092096956B007BF0CF /* DeactivateViewController.m */,
 				3C55124A20861C6B0054A089 /* CreateUserViewController.h */,
 				3C55124B20861C6B0054A089 /* CreateUserViewController.m */,
@@ -183,6 +237,13 @@
 				07C8EE461BED2DE4006B91FA /* Images-2.xcassets */,
 				B1CEE6112B93F29700F419B1 /* TermsViewController.h */,
 				B1CEE6122B93F29700F419B1 /* TermsViewController.m */,
+				12D8DCBE2E32709600086C09 /* AccountValidationViewController.h */,
+				12D8DCBF2E32709600086C09 /* AccountValidationViewController.m */,
+				122B5F912E3391780095C41D /* BVNDetails.h */,
+				122B5F922E3391780095C41D /* BVNDetails.m */,
+				12CF007A2E6F2D3A00FA2117 /* BridgeSwift.swift */,
+				12B751BF2E6F31DA0011CE93 /* FirstBankApp-Bridging-Header.h */,
+				1252D6A32E6F81710057EF20 /* SmileIDWrapper.swift */,
 			);
 			path = FirstBankApp;
 			sourceTree = "<group>";
@@ -213,14 +274,35 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		12D446622E1548F600378EEF /* OptionsOnboardingFeature */ = {
+			isa = PBXGroup;
+			children = (
+				12D446652E154AC000378EEF /* OptionsOnboardigViewController.h */,
+				12D446662E154AC000378EEF /* OptionsOnboardigViewController.m */,
+				12D446672E154AC000378EEF /* OptionsOnboardigViewController.xib */,
+			);
+			path = OptionsOnboardingFeature;
+			sourceTree = "<group>";
+		};
 		3CB5AB2C2080B68400578CB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F75710E2C06960E004BCCBA /* EntrustIGMobile.xcframework */,
+				12D631372E42450C009A9D4E /* SmileID.framework */,
+				12B0ADBF2DD613D000323F73 /* EntrustIGMobile.xcframework */,
 				B1FAE4BE2B8E9AEF00DE0879 /* libz.tbd */,
 				B1FAE4BC2B8E9AE100DE0879 /* Security.framework */,
+				64EB2C51294AFA8BF9A82A5F /* Pods_FirstBankApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		85635A129A569AF153AD9D01 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3FBD00606DE2BC7E12018622 /* Pods-FirstBankApp.debug.xcconfig */,
+				49C1FB1FA4491542CFC33B4D /* Pods-FirstBankApp.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		B1CEE6142B9F77DF00F419B1 /* Certificates */ = {
@@ -238,6 +320,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 07088A9C1A4031C20010E3B8 /* Build configuration list for PBXNativeTarget "FirstBankApp" */;
 			buildPhases = (
+				E616948DD811EC605FCDB7DF /* [CP] Check Pods Manifest.lock */,
 				07088A751A4031C20010E3B8 /* Sources */,
 				07088A761A4031C20010E3B8 /* Frameworks */,
 				07088A771A4031C20010E3B8 /* Resources */,
@@ -249,7 +332,7 @@
 			);
 			name = FirstBankApp;
 			productName = FirstBankApp;
-			productReference = 07088A791A4031C20010E3B8 /* FirstToken.app */;
+			productReference = 07088A791A4031C20010E3B8 /* FirstBankApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -264,6 +347,7 @@
 				TargetAttributes = {
 					07088A781A4031C20010E3B8 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 1640;
 					};
 				};
 			};
@@ -276,6 +360,9 @@
 				Base,
 			);
 			mainGroup = 07088A701A4031C20010E3B8;
+			packageReferences = (
+				1252D6A22E6F80C80057EF20 /* XCRemoteSwiftPackageReference "ios" */,
+			);
 			productRefGroup = 07088A7A1A4031C20010E3B8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -290,9 +377,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1275A1B52E3BA5F800267ED7 /* smile_config.json in Resources */,
 				07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */,
 				07088A881A4031C20010E3B8 /* Main.storyboard in Resources */,
 				B1CEE6182B9F878700F419B1 /* fbnnewcert_new.der in Resources */,
+				12D446682E154AC000378EEF /* OptionsOnboardigViewController.xib in Resources */,
 				07088A8D1A4031C20010E3B8 /* LaunchScreen.xib in Resources */,
 				07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */,
 				07088A8A1A4031C20010E3B8 /* Images.xcassets in Resources */,
@@ -300,6 +389,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E616948DD811EC605FCDB7DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirstBankApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		07088A751A4031C20010E3B8 /* Sources */ = {
@@ -309,16 +423,26 @@
 				3C3B8F7B208E0A4200A9777F /* URLConnection.m in Sources */,
 				075D11EB1A5C05E300BC9D78 /* SDKUtils.m in Sources */,
 				07088AAD1A4062330010E3B8 /* RegistrationCodeViewController.m in Sources */,
+				122B5F932E3391780095C41D /* BVNDetails.m in Sources */,
+				127AFA7E2E55D2A30046F8B0 /* AESHelper.m in Sources */,
+				127AFA772E55C8570046F8B0 /* SmileIDDelegate.m in Sources */,
 				075D11EE1A5EC9F500BC9D78 /* PINRequestViewController.m in Sources */,
 				07088AA71A4061E30010E3B8 /* AddIdentityViewController.m in Sources */,
+				1252D6A42E6F81710057EF20 /* SmileIDWrapper.swift in Sources */,
 				07088A821A4031C20010E3B8 /* AppDelegate.m in Sources */,
+				12D446692E154AC000378EEF /* OptionsOnboardigViewController.m in Sources */,
+				12DF114B2E6093E3002024FA /* AESHelperSwift.swift in Sources */,
 				3C55124C20861C6B0054A089 /* CreateUserViewController.m in Sources */,
+				1205A5542E2E95D400C87E74 /* ActivationProcessViewController.m in Sources */,
 				075D11F41A67A30100BC9D78 /* ResetPINViewController.m in Sources */,
+				12CF007B2E6F2D3A00FA2117 /* BridgeSwift.swift in Sources */,
 				3C022111209748DF007BF0CF /* NSString+MD5.m in Sources */,
 				07088A7F1A4031C20010E3B8 /* main.m in Sources */,
 				B1CEE6132B93F29700F419B1 /* TermsViewController.m in Sources */,
+				12451E402E2FE2A500017F6A /* LineDrawingView.m in Sources */,
 				3C022107209691E7007BF0CF /* DeactivateConfirmViewController.m in Sources */,
 				075D11F11A66703B00BC9D78 /* AppBlockViewController.m in Sources */,
+				12D8DCC02E32709600086C09 /* AccountValidationViewController.m in Sources */,
 				3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */,
 				07088AB01A4071390010E3B8 /* SecurityCodeViewController.m in Sources */,
 				3C3B8F78208DC98500A9777F /* TripleDES.m in Sources */,
@@ -399,7 +523,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
@@ -449,7 +573,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				NEW_SETTING = "";
 				SDKROOT = iphoneos;
@@ -459,32 +583,55 @@
 		};
 		07088A9D1A4031C20010E3B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FBD00606DE2BC7E12018622 /* Pods-FirstBankApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)\n";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "/Users/olatejua/Downloads/IGMobileSDK/MacOSX_iOS/lib_XCFramework/$(CONFIGURATION)";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FingerprintJS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SmileID\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\"",
+					"\"${PODS_ROOT}/SmileIDSecurity\"",
+					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/SmileIDSecurity\"",
+					"\"$(PODS_ROOT)\"",
+					"/Users/adekolaadedamola/Downloads/IGMobileSDK/MacOSX_iOS/lib_XCFramework/$(CONFIGURATION)/**",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-objC",
 					"-fobjc-arc",
 					"-v",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gedutechnologies.firstbank.FirstToken;
-				PRODUCT_NAME = FirstToken;
+				PRODUCT_NAME = FirstBankApp;
 				PROVISIONING_PROFILE = "2f460e09-9154-41eb-89b8-1a7a39e8d864";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FirstBankApp/FirstBankApp-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "";
@@ -494,32 +641,53 @@
 		};
 		07088A9E1A4031C20010E3B8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49C1FB1FA4491542CFC33B4D /* Pods-FirstBankApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)\n";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "/Users/olatejua/Downloads/IGMobileSDK/MacOSX_iOS/lib_XCFramework/$(CONFIGURATION)";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/SmileIDSecurity\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FingerprintJS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SmileID\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\"",
+					"\"${PODS_ROOT}/SmileIDSecurity\"",
+					"/Users/adekolaadedamola/Downloads/IGMobileSDK/MacOSX_iOS/lib_XCFramework/$(CONFIGURATION)",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirstBankApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-objC",
 					"-fobjc-arc",
 					"-v",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gedutechnologies.firstbank.FirstToken;
-				PRODUCT_NAME = FirstToken;
+				PRODUCT_NAME = FirstBankApp;
 				PROVISIONING_PROFILE = "c9776d57-62c4-4b65-8fc8-f1bd27b126aa";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FirstBankApp/FirstBankApp-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7s armv7";
@@ -548,6 +716,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1252D6A22E6F80C80057EF20 /* XCRemoteSwiftPackageReference "ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/smileidentity/ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 07088A711A4031C20010E3B8 /* Project object */;
 }

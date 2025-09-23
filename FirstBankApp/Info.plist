@@ -22,6 +22,13 @@
 	<string>1.2.2.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera to take photos for identity verification.
+</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We use Face ID for secure biometric identity verification.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>We need access to your photo library to save verification photos</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen.xib</string>
 	<key>UIMainStoryboardFile</key>
@@ -37,5 +44,10 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+<string>We need camera access to take your selfie for verification.</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>SmileID requires access to save and read ID images.</string>
+
 </dict>
 </plist>

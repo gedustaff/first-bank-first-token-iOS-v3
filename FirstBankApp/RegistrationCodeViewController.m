@@ -29,6 +29,7 @@ UIAlertController * alertIncorrection;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.modalPresentationStyle = UIModalPresentationFullScreen;
+    self.navigationItem.hidesBackButton = YES;
     
     reusedCode = codeReuse;
     
@@ -67,6 +68,7 @@ UIAlertController * alertIncorrection;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (BOOL)textField:(UITextField *) textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

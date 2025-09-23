@@ -43,6 +43,7 @@ NSString *addActivationCode;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.navigationItem.hidesBackButton = YES;
     
     
     UIView *border = [UIView new];
