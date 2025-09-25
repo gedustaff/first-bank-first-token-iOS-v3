@@ -74,9 +74,10 @@ BOOL isRegistered = NO;
     
     // ✅ SmileID v11.1.0 setup
     // Use your credentials from SmileID dashboard
-    [SmileID setPartnerID:@"YOUR_PARTNER_ID"];
-    [SmileID setAPIKey:@"YOUR_API_KEY"];
-    [SmileID setEnvironment:SmileIDEnvironmentSandbox]; // or SmileIDEnvironmentProduction
+// or SmileIDEnvironmentProduction
+    // Get path of local smile_config.json
+    // --- SmileID v11.1.0 setup ---
+
 
     return YES;
 }

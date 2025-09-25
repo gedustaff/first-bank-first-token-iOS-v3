@@ -9,7 +9,6 @@
 #ifndef FirstBankApp_Bridging_Header_h
 #define FirstBankApp_Bridging_Header_h
 
-// #import <SmileID/SmileID.h>
-
 
 #endif /* FirstBankApp_Bridging_Header_h */
+
