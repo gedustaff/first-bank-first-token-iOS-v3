@@ -28,22 +28,13 @@
 		1275A1B52E3BA5F800267ED7 /* smile_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 1275A1B42E3BA5F800267ED7 /* smile_config.json */; };
 		127AFA772E55C8570046F8B0 /* SmileIDDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 127AFA762E55C8570046F8B0 /* SmileIDDelegate.m */; };
 		127AFA7E2E55D2A30046F8B0 /* AESHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 127AFA7D2E55D2A30046F8B0 /* AESHelper.m */; };
-		128E9B9F2E847167004548BE /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9B9E2E847167004548BE /* SmileIDAnalytics */; };
-		128E9BA12E847167004548BE /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA02E847167004548BE /* SmileIDCamera */; };
-		128E9BA32E847167004548BE /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA22E847167004548BE /* SmileIDML */; };
-		128E9BA52E847167004548BE /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA42E847167004548BE /* SmileIDNavigation */; };
-		128E9BA72E8476E7004548BE /* SmileID in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA62E8476E7004548BE /* SmileID */; };
-		128E9BA92E8476E7004548BE /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA82E8476E7004548BE /* SmileIDAnalytics */; };
-		128E9BAB2E8476E7004548BE /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BAA2E8476E7004548BE /* SmileIDCamera */; };
-		128E9BAD2E8476E7004548BE /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BAC2E8476E7004548BE /* SmileIDML */; };
-		128E9BAF2E8476E7004548BE /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BAE2E8476E7004548BE /* SmileIDNavigation */; };
+		128CC0882E86E6590025AA9C /* SmileID in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC0872E86E6590025AA9C /* SmileID */; };
+		128CC08A2E86E6590025AA9C /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC0892E86E6590025AA9C /* SmileIDAnalytics */; };
+		128CC08C2E86E6590025AA9C /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC08B2E86E6590025AA9C /* SmileIDCamera */; };
+		128CC08E2E86E6590025AA9C /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC08D2E86E6590025AA9C /* SmileIDML */; };
+		128CC0902E86E6590025AA9C /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC08F2E86E6590025AA9C /* SmileIDNavigation */; };
 		12B0ADC02DD613D000323F73 /* EntrustIGMobile.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B0ADBF2DD613D000323F73 /* EntrustIGMobile.xcframework */; };
 		12CF007B2E6F2D3A00FA2117 /* BridgeSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CF007A2E6F2D3A00FA2117 /* BridgeSwift.swift */; };
-		12D2F15A2E846303003E036B /* SmileID in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F1592E846303003E036B /* SmileID */; };
-		12D2F15C2E846303003E036B /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F15B2E846303003E036B /* SmileIDAnalytics */; };
-		12D2F15E2E846303003E036B /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F15D2E846303003E036B /* SmileIDCamera */; };
-		12D2F1602E846303003E036B /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F15F2E846303003E036B /* SmileIDML */; };
-		12D2F1622E846303003E036B /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F1612E846303003E036B /* SmileIDNavigation */; };
 		12D446682E154AC000378EEF /* OptionsOnboardigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12D446672E154AC000378EEF /* OptionsOnboardigViewController.xib */; };
 		12D446692E154AC000378EEF /* OptionsOnboardigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D446662E154AC000378EEF /* OptionsOnboardigViewController.m */; };
 		12D8DCC02E32709600086C09 /* AccountValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D8DCBF2E32709600086C09 /* AccountValidationViewController.m */; };
@@ -154,23 +145,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12D2F1622E846303003E036B /* SmileIDNavigation in Frameworks */,
-				128E9BA92E8476E7004548BE /* SmileIDAnalytics in Frameworks */,
+				128CC0902E86E6590025AA9C /* SmileIDNavigation in Frameworks */,
 				B1FAE4BF2B8E9AEF00DE0879 /* libz.tbd in Frameworks */,
-				128E9BAB2E8476E7004548BE /* SmileIDCamera in Frameworks */,
-				128E9BA32E847167004548BE /* SmileIDML in Frameworks */,
-				128E9BAF2E8476E7004548BE /* SmileIDNavigation in Frameworks */,
 				B1FAE4BD2B8E9AE100DE0879 /* Security.framework in Frameworks */,
-				128E9BA52E847167004548BE /* SmileIDNavigation in Frameworks */,
-				128E9BA12E847167004548BE /* SmileIDCamera in Frameworks */,
-				128E9B9F2E847167004548BE /* SmileIDAnalytics in Frameworks */,
-				128E9BAD2E8476E7004548BE /* SmileIDML in Frameworks */,
-				12D2F15A2E846303003E036B /* SmileID in Frameworks */,
-				128E9BA72E8476E7004548BE /* SmileID in Frameworks */,
-				12D2F15E2E846303003E036B /* SmileIDCamera in Frameworks */,
+				128CC0882E86E6590025AA9C /* SmileID in Frameworks */,
+				128CC08C2E86E6590025AA9C /* SmileIDCamera in Frameworks */,
 				12B0ADC02DD613D000323F73 /* EntrustIGMobile.xcframework in Frameworks */,
-				12D2F1602E846303003E036B /* SmileIDML in Frameworks */,
-				12D2F15C2E846303003E036B /* SmileIDAnalytics in Frameworks */,
+				128CC08E2E86E6590025AA9C /* SmileIDML in Frameworks */,
+				128CC08A2E86E6590025AA9C /* SmileIDAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,59 +668,23 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		128E9B9E2E847167004548BE /* SmileIDAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDAnalytics;
-		};
-		128E9BA02E847167004548BE /* SmileIDCamera */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDCamera;
-		};
-		128E9BA22E847167004548BE /* SmileIDML */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDML;
-		};
-		128E9BA42E847167004548BE /* SmileIDNavigation */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDNavigation;
-		};
-		128E9BA62E8476E7004548BE /* SmileID */ = {
+		128CC0872E86E6590025AA9C /* SmileID */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileID;
 		};
-		128E9BA82E8476E7004548BE /* SmileIDAnalytics */ = {
+		128CC0892E86E6590025AA9C /* SmileIDAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileIDAnalytics;
 		};
-		128E9BAA2E8476E7004548BE /* SmileIDCamera */ = {
+		128CC08B2E86E6590025AA9C /* SmileIDCamera */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileIDCamera;
 		};
-		128E9BAC2E8476E7004548BE /* SmileIDML */ = {
+		128CC08D2E86E6590025AA9C /* SmileIDML */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileIDML;
 		};
-		128E9BAE2E8476E7004548BE /* SmileIDNavigation */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDNavigation;
-		};
-		12D2F1592E846303003E036B /* SmileID */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileID;
-		};
-		12D2F15B2E846303003E036B /* SmileIDAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDAnalytics;
-		};
-		12D2F15D2E846303003E036B /* SmileIDCamera */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDCamera;
-		};
-		12D2F15F2E846303003E036B /* SmileIDML */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDML;
-		};
-		12D2F1612E846303003E036B /* SmileIDNavigation */ = {
+		128CC08F2E86E6590025AA9C /* SmileIDNavigation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileIDNavigation;
 		};
