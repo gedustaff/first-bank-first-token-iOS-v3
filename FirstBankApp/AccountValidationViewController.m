@@ -299,8 +299,6 @@ static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
 
-    // Extract necessary parameters from 'details' dictionary for getBVNDetails.php
-    // Assuming getBVNDetails.php expects 'bvn', 'requestId', and 'countryId'
     NSString *bvnValue = details[@"bvn"];
     
     if (!self.passedData) {
@@ -312,11 +310,6 @@ static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
         self.passedData[@"accountNumber"]=details[@"AccountNumber"];
     
  
-    
-//    NSString *requestIdValue = details[@"RequestId"]; // Assuming RequestId is present in details
-//    NSString *countryIdValue = @"01"; // Assuming countryId remains constant or is also in details
-
-    // Construct the new body dictionary for getBVNDetails.php
     NSDictionary *body = @{
         @"bvn": bvnValue,    };
 
@@ -324,7 +317,6 @@ static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:body options:0 error:&jsonError];
 
     if (jsonError || !jsonData) {
-        // Ensure UI dismissal and alert presentation are on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             [loadingAlert dismissViewControllerAnimated:YES completion:^{
                 NSString *errorMessage = jsonError ? jsonError.localizedDescription : @"Unknown error encoding BVN details.";

@@ -23,31 +23,46 @@
 		07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07C0AAA81AC0484D002F4EEB /* Settings.bundle */; };
 		07C8EE471BED2DE4006B91FA /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C8EE461BED2DE4006B91FA /* Images-2.xcassets */; };
 		1205A5542E2E95D400C87E74 /* ActivationProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1205A5532E2E95D400C87E74 /* ActivationProcessViewController.m */; };
+		1206BE1F2E93E8D700FCCEE9 /* CorporateEnrollmentViewController .m in Sources */ = {isa = PBXBuildFile; fileRef = 1206BE1E2E93E8D700FCCEE9 /* CorporateEnrollmentViewController .m */; };
 		122B5F932E3391780095C41D /* BVNDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 122B5F922E3391780095C41D /* BVNDetails.m */; };
 		12451E402E2FE2A500017F6A /* LineDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12451E3F2E2FE2A500017F6A /* LineDrawingView.m */; };
 		1275A1B52E3BA5F800267ED7 /* smile_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 1275A1B42E3BA5F800267ED7 /* smile_config.json */; };
 		127AFA772E55C8570046F8B0 /* SmileIDDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 127AFA762E55C8570046F8B0 /* SmileIDDelegate.m */; };
 		127AFA7E2E55D2A30046F8B0 /* AESHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 127AFA7D2E55D2A30046F8B0 /* AESHelper.m */; };
-		128E9B9F2E847167004548BE /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9B9E2E847167004548BE /* SmileIDAnalytics */; };
-		128E9BA12E847167004548BE /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA02E847167004548BE /* SmileIDCamera */; };
-		128E9BA32E847167004548BE /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA22E847167004548BE /* SmileIDML */; };
-		128E9BA52E847167004548BE /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA42E847167004548BE /* SmileIDNavigation */; };
-		128E9BA72E8476E7004548BE /* SmileID in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA62E8476E7004548BE /* SmileID */; };
-		128E9BA92E8476E7004548BE /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BA82E8476E7004548BE /* SmileIDAnalytics */; };
-		128E9BAB2E8476E7004548BE /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BAA2E8476E7004548BE /* SmileIDCamera */; };
-		128E9BAD2E8476E7004548BE /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BAC2E8476E7004548BE /* SmileIDML */; };
-		128E9BAF2E8476E7004548BE /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 128E9BAE2E8476E7004548BE /* SmileIDNavigation */; };
+		127B80542EBA35A400B60A9B /* ResetPinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B80532EBA35A400B60A9B /* ResetPinVC.m */; };
+		127B80572EBA390A00B60A9B /* DeactivateTokenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B80562EBA390A00B60A9B /* DeactivateTokenVC.m */; };
+		127B805D2EBE37B700B60A9B /* EntrustUtilityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B805C2EBE37B700B60A9B /* EntrustUtilityVC.m */; };
+		128CC0882E86E6590025AA9C /* SmileID in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC0872E86E6590025AA9C /* SmileID */; };
+		128CC08A2E86E6590025AA9C /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC0892E86E6590025AA9C /* SmileIDAnalytics */; };
+		128CC08C2E86E6590025AA9C /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC08B2E86E6590025AA9C /* SmileIDCamera */; };
+		128CC08E2E86E6590025AA9C /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC08D2E86E6590025AA9C /* SmileIDML */; };
+		128CC0902E86E6590025AA9C /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC08F2E86E6590025AA9C /* SmileIDNavigation */; };
+		128DF7A12EAF91A9004393C4 /* SuccessPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DF7A02EAF91A9004393C4 /* SuccessPopupViewController.m */; };
+		12A3638B2EB22B7C00D9027D /* CompanyProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12A3638A2EB22B7C00D9027D /* CompanyProfileCell.m */; };
+		12A3638E2EB22D4900D9027D /* ProfilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12A3638D2EB22D4900D9027D /* ProfilesViewController.m */; };
+		12A363912EB26C4300D9027D /* EnterPinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12A363902EB26C4200D9027D /* EnterPinViewController.m */; };
+		12A363942EB2733800D9027D /* SoftTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12A363932EB2733800D9027D /* SoftTokenViewController.m */; };
+		12A363972EB2793B00D9027D /* TempGetOtp.m in Sources */ = {isa = PBXBuildFile; fileRef = 12A363962EB2793B00D9027D /* TempGetOtp.m */; };
 		12B0ADC02DD613D000323F73 /* EntrustIGMobile.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B0ADBF2DD613D000323F73 /* EntrustIGMobile.xcframework */; };
+		12C546052EB0EBFD00CF935C /* PinSetUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C546042EB0EBFD00CF935C /* PinSetUp.m */; };
 		12CF007B2E6F2D3A00FA2117 /* BridgeSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CF007A2E6F2D3A00FA2117 /* BridgeSwift.swift */; };
-		12D2F15A2E846303003E036B /* SmileID in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F1592E846303003E036B /* SmileID */; };
-		12D2F15C2E846303003E036B /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F15B2E846303003E036B /* SmileIDAnalytics */; };
-		12D2F15E2E846303003E036B /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F15D2E846303003E036B /* SmileIDCamera */; };
-		12D2F1602E846303003E036B /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F15F2E846303003E036B /* SmileIDML */; };
-		12D2F1622E846303003E036B /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 12D2F1612E846303003E036B /* SmileIDNavigation */; };
 		12D446682E154AC000378EEF /* OptionsOnboardigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12D446672E154AC000378EEF /* OptionsOnboardigViewController.xib */; };
 		12D446692E154AC000378EEF /* OptionsOnboardigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D446662E154AC000378EEF /* OptionsOnboardigViewController.m */; };
 		12D8DCC02E32709600086C09 /* AccountValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D8DCBF2E32709600086C09 /* AccountValidationViewController.m */; };
 		12DF114B2E6093E3002024FA /* AESHelperSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF114A2E6093E3002024FA /* AESHelperSwift.swift */; };
+		12EAA3C72EC3426A0033BFBF /* KeychainUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EAA3C62EC3426A0033BFBF /* KeychainUtility.m */; };
+		12EAA3CA2EC345830033BFBF /* ProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EAA3C92EC345830033BFBF /* ProfileManager.m */; };
+		12F1DFBA2EB8F3FB00647653 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F1DFB92EB8F3FB00647653 /* SettingsVC.m */; };
+		12F1DFBD2EB908AF00647653 /* EneterOldPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F1DFBC2EB908AF00647653 /* EneterOldPin.m */; };
+		12F1DFC02EB91E0C00647653 /* EneterNewPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F1DFBF2EB91E0C00647653 /* EneterNewPin.m */; };
+		12F1DFC32EB91E2600647653 /* EneterReconfirmPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F1DFC22EB91E2600647653 /* EneterReconfirmPin.m */; };
+		12F8094A2E969746002A07AE /* EnrollmentInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F809492E969746002A07AE /* EnrollmentInfoView.m */; };
+		12F8094D2E96A796002A07AE /* InstructionCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8094C2E96A796002A07AE /* InstructionCardView.m */; };
+		12F809502E96BCC4002A07AE /* InfoCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8094F2E96BCC4002A07AE /* InfoCardView.m */; };
+		12F809532E96CCCF002A07AE /* AccountConfirmationVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F809522E96CCCF002A07AE /* AccountConfirmationVCViewController.m */; };
+		12F809592E96D084002A07AE /* OTPInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F809582E96D084002A07AE /* OTPInputView.m */; };
+		12F8095C2E96D241002A07AE /* OTPVerificationVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8095B2E96D241002A07AE /* OTPVerificationVCViewController.m */; };
+		12F8095F2E96D588002A07AE /* StatusPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8095E2E96D588002A07AE /* StatusPopupViewController.m */; };
 		3C022107209691E7007BF0CF /* DeactivateConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */; };
 		3C02210A2096956B007BF0CF /* DeactivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0221092096956B007BF0CF /* DeactivateViewController.m */; };
 		3C02210D209732A7007BF0CF /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02210C209732A7007BF0CF /* NSData+Base64.m */; };
@@ -106,6 +121,8 @@
 		07C8EE461BED2DE4006B91FA /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		1205A5522E2E95D400C87E74 /* ActivationProcessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivationProcessViewController.h; sourceTree = "<group>"; };
 		1205A5532E2E95D400C87E74 /* ActivationProcessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivationProcessViewController.m; sourceTree = "<group>"; };
+		1206BE1D2E93E8D700FCCEE9 /* CorporateEnrollmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CorporateEnrollmentViewController.h; sourceTree = "<group>"; };
+		1206BE1E2E93E8D700FCCEE9 /* CorporateEnrollmentViewController .m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CorporateEnrollmentViewController .m"; sourceTree = "<group>"; };
 		122B5F912E3391780095C41D /* BVNDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BVNDetails.h; sourceTree = "<group>"; };
 		122B5F922E3391780095C41D /* BVNDetails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BVNDetails.m; sourceTree = "<group>"; };
 		12451E3E2E2FE2A500017F6A /* LineDrawingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineDrawingView.h; sourceTree = "<group>"; };
@@ -115,10 +132,30 @@
 		127AFA762E55C8570046F8B0 /* SmileIDDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmileIDDelegate.m; sourceTree = "<group>"; };
 		127AFA7C2E55D2A30046F8B0 /* AESHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AESHelper.h; sourceTree = "<group>"; };
 		127AFA7D2E55D2A30046F8B0 /* AESHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AESHelper.m; sourceTree = "<group>"; };
+		127B80522EBA35A400B60A9B /* ResetPinVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPinVC.h; sourceTree = "<group>"; };
+		127B80532EBA35A400B60A9B /* ResetPinVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPinVC.m; sourceTree = "<group>"; };
+		127B80552EBA390A00B60A9B /* DeactivateTokenVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeactivateTokenVC.h; sourceTree = "<group>"; };
+		127B80562EBA390A00B60A9B /* DeactivateTokenVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeactivateTokenVC.m; sourceTree = "<group>"; };
+		127B805B2EBE37B700B60A9B /* EntrustUtilityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntrustUtilityVC.h; sourceTree = "<group>"; };
+		127B805C2EBE37B700B60A9B /* EntrustUtilityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntrustUtilityVC.m; sourceTree = "<group>"; };
+		128DF79F2EAF91A9004393C4 /* SuccessPopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuccessPopupViewController.h; sourceTree = "<group>"; };
+		128DF7A02EAF91A9004393C4 /* SuccessPopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuccessPopupViewController.m; sourceTree = "<group>"; };
+		12A363892EB22B7C00D9027D /* CompanyProfileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyProfileCell.h; sourceTree = "<group>"; };
+		12A3638A2EB22B7C00D9027D /* CompanyProfileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyProfileCell.m; sourceTree = "<group>"; };
+		12A3638C2EB22D4900D9027D /* ProfilesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilesViewController.h; sourceTree = "<group>"; };
+		12A3638D2EB22D4900D9027D /* ProfilesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfilesViewController.m; sourceTree = "<group>"; };
+		12A3638F2EB26C4200D9027D /* EnterPinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterPinViewController.h; sourceTree = "<group>"; };
+		12A363902EB26C4200D9027D /* EnterPinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterPinViewController.m; sourceTree = "<group>"; };
+		12A363922EB2733800D9027D /* SoftTokenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoftTokenViewController.h; sourceTree = "<group>"; };
+		12A363932EB2733800D9027D /* SoftTokenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoftTokenViewController.m; sourceTree = "<group>"; };
+		12A363952EB2793B00D9027D /* TempGetOtp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TempGetOtp.h; sourceTree = "<group>"; };
+		12A363962EB2793B00D9027D /* TempGetOtp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TempGetOtp.m; sourceTree = "<group>"; };
 		12B0ADBF2DD613D000323F73 /* EntrustIGMobile.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = EntrustIGMobile.xcframework; sourceTree = "<group>"; };
 		12B0ADC32DD6210A00323F73 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		12B0ADC42DD6216000323F73 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		12B751BF2E6F31DA0011CE93 /* FirstBankApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstBankApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		12C546032EB0EBFD00CF935C /* PinSetUp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PinSetUp.h; sourceTree = "<group>"; };
+		12C546042EB0EBFD00CF935C /* PinSetUp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PinSetUp.m; sourceTree = "<group>"; };
 		12CF007A2E6F2D3A00FA2117 /* BridgeSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSwift.swift; sourceTree = "<group>"; };
 		12D446652E154AC000378EEF /* OptionsOnboardigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionsOnboardigViewController.h; sourceTree = "<group>"; };
 		12D446662E154AC000378EEF /* OptionsOnboardigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptionsOnboardigViewController.m; sourceTree = "<group>"; };
@@ -126,6 +163,32 @@
 		12D8DCBE2E32709600086C09 /* AccountValidationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountValidationViewController.h; sourceTree = "<group>"; };
 		12D8DCBF2E32709600086C09 /* AccountValidationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountValidationViewController.m; sourceTree = "<group>"; };
 		12DF114A2E6093E3002024FA /* AESHelperSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESHelperSwift.swift; sourceTree = "<group>"; };
+		12EAA3C52EC3426A0033BFBF /* KeychainUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeychainUtility.h; sourceTree = "<group>"; };
+		12EAA3C62EC3426A0033BFBF /* KeychainUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeychainUtility.m; sourceTree = "<group>"; };
+		12EAA3C82EC345830033BFBF /* ProfileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileManager.h; sourceTree = "<group>"; };
+		12EAA3C92EC345830033BFBF /* ProfileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileManager.m; sourceTree = "<group>"; };
+		12F1DFB82EB8F3FB00647653 /* SettingsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
+		12F1DFB92EB8F3FB00647653 /* SettingsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
+		12F1DFBB2EB908AF00647653 /* EneterOldPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EneterOldPin.h; sourceTree = "<group>"; };
+		12F1DFBC2EB908AF00647653 /* EneterOldPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EneterOldPin.m; sourceTree = "<group>"; };
+		12F1DFBE2EB91E0C00647653 /* EneterNewPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EneterNewPin.h; sourceTree = "<group>"; };
+		12F1DFBF2EB91E0C00647653 /* EneterNewPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EneterNewPin.m; sourceTree = "<group>"; };
+		12F1DFC12EB91E2600647653 /* EneterReconfirmPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EneterReconfirmPin.h; sourceTree = "<group>"; };
+		12F1DFC22EB91E2600647653 /* EneterReconfirmPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EneterReconfirmPin.m; sourceTree = "<group>"; };
+		12F809482E969746002A07AE /* EnrollmentInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnrollmentInfoView.h; sourceTree = "<group>"; };
+		12F809492E969746002A07AE /* EnrollmentInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnrollmentInfoView.m; sourceTree = "<group>"; };
+		12F8094B2E96A796002A07AE /* InstructionCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstructionCardView.h; sourceTree = "<group>"; };
+		12F8094C2E96A796002A07AE /* InstructionCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstructionCardView.m; sourceTree = "<group>"; };
+		12F8094E2E96BCC4002A07AE /* InfoCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoCardView.h; sourceTree = "<group>"; };
+		12F8094F2E96BCC4002A07AE /* InfoCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoCardView.m; sourceTree = "<group>"; };
+		12F809512E96CCCF002A07AE /* AccountConfirmationVCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountConfirmationVCViewController.h; sourceTree = "<group>"; };
+		12F809522E96CCCF002A07AE /* AccountConfirmationVCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountConfirmationVCViewController.m; sourceTree = "<group>"; };
+		12F809572E96D084002A07AE /* OTPInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPInputView.h; sourceTree = "<group>"; };
+		12F809582E96D084002A07AE /* OTPInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPInputView.m; sourceTree = "<group>"; };
+		12F8095A2E96D241002A07AE /* OTPVerificationVCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPVerificationVCViewController.h; sourceTree = "<group>"; };
+		12F8095B2E96D241002A07AE /* OTPVerificationVCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPVerificationVCViewController.m; sourceTree = "<group>"; };
+		12F8095D2E96D588002A07AE /* StatusPopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatusPopupViewController.h; sourceTree = "<group>"; };
+		12F8095E2E96D588002A07AE /* StatusPopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatusPopupViewController.m; sourceTree = "<group>"; };
 		3C022105209691E7007BF0CF /* DeactivateConfirmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DeactivateConfirmViewController.h; path = FirstBankApp/DeactivateConfirmViewController.h; sourceTree = "<group>"; };
 		3C022106209691E7007BF0CF /* DeactivateConfirmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DeactivateConfirmViewController.m; path = FirstBankApp/DeactivateConfirmViewController.m; sourceTree = "<group>"; };
 		3C0221082096956B007BF0CF /* DeactivateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeactivateViewController.h; sourceTree = "<group>"; };
@@ -154,23 +217,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12D2F1622E846303003E036B /* SmileIDNavigation in Frameworks */,
-				128E9BA92E8476E7004548BE /* SmileIDAnalytics in Frameworks */,
+				128CC0902E86E6590025AA9C /* SmileIDNavigation in Frameworks */,
 				B1FAE4BF2B8E9AEF00DE0879 /* libz.tbd in Frameworks */,
-				128E9BAB2E8476E7004548BE /* SmileIDCamera in Frameworks */,
-				128E9BA32E847167004548BE /* SmileIDML in Frameworks */,
-				128E9BAF2E8476E7004548BE /* SmileIDNavigation in Frameworks */,
 				B1FAE4BD2B8E9AE100DE0879 /* Security.framework in Frameworks */,
-				128E9BA52E847167004548BE /* SmileIDNavigation in Frameworks */,
-				128E9BA12E847167004548BE /* SmileIDCamera in Frameworks */,
-				128E9B9F2E847167004548BE /* SmileIDAnalytics in Frameworks */,
-				128E9BAD2E8476E7004548BE /* SmileIDML in Frameworks */,
-				12D2F15A2E846303003E036B /* SmileID in Frameworks */,
-				128E9BA72E8476E7004548BE /* SmileID in Frameworks */,
-				12D2F15E2E846303003E036B /* SmileIDCamera in Frameworks */,
+				128CC0882E86E6590025AA9C /* SmileID in Frameworks */,
+				128CC08C2E86E6590025AA9C /* SmileIDCamera in Frameworks */,
 				12B0ADC02DD613D000323F73 /* EntrustIGMobile.xcframework in Frameworks */,
-				12D2F1602E846303003E036B /* SmileIDML in Frameworks */,
-				12D2F15C2E846303003E036B /* SmileIDAnalytics in Frameworks */,
+				128CC08E2E86E6590025AA9C /* SmileIDML in Frameworks */,
+				128CC08A2E86E6590025AA9C /* SmileIDAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +263,10 @@
 				3CE38E3920860CE20098B44C /* ActivatedViewController.m */,
 				127AFA752E55C8570046F8B0 /* SmileIDDelegate.h */,
 				127AFA7C2E55D2A30046F8B0 /* AESHelper.h */,
+				1206BE1D2E93E8D700FCCEE9 /* CorporateEnrollmentViewController.h */,
+				1206BE1E2E93E8D700FCCEE9 /* CorporateEnrollmentViewController .m */,
+				127B805B2EBE37B700B60A9B /* EntrustUtilityVC.h */,
+				127B805C2EBE37B700B60A9B /* EntrustUtilityVC.m */,
 				127AFA7D2E55D2A30046F8B0 /* AESHelper.m */,
 				127AFA762E55C8570046F8B0 /* SmileIDDelegate.m */,
 				07088A801A4031C20010E3B8 /* AppDelegate.h */,
@@ -231,6 +289,12 @@
 				075D11EC1A5EC9F500BC9D78 /* PINRequestViewController.h */,
 				075D11ED1A5EC9F500BC9D78 /* PINRequestViewController.m */,
 				3C3B8F76208DC98500A9777F /* TripleDES.h */,
+				12A363952EB2793B00D9027D /* TempGetOtp.h */,
+				12EAA3C52EC3426A0033BFBF /* KeychainUtility.h */,
+				12EAA3C82EC345830033BFBF /* ProfileManager.h */,
+				12EAA3C92EC345830033BFBF /* ProfileManager.m */,
+				12EAA3C62EC3426A0033BFBF /* KeychainUtility.m */,
+				12A363962EB2793B00D9027D /* TempGetOtp.m */,
 				3C3B8F77208DC98500A9777F /* TripleDES.m */,
 				075D11E91A5C05E300BC9D78 /* SDKUtils.h */,
 				075D11EA1A5C05E300BC9D78 /* SDKUtils.m */,
@@ -251,6 +315,8 @@
 				3C02210C209732A7007BF0CF /* NSData+Base64.m */,
 				07088AAE1A4071390010E3B8 /* SecurityCodeViewController.h */,
 				07088AAF1A4071390010E3B8 /* SecurityCodeViewController.m */,
+				12A363922EB2733800D9027D /* SoftTokenViewController.h */,
+				12A363932EB2733800D9027D /* SoftTokenViewController.m */,
 				07C8EE461BED2DE4006B91FA /* Images-2.xcassets */,
 				B1CEE6112B93F29700F419B1 /* TermsViewController.h */,
 				B1CEE6122B93F29700F419B1 /* TermsViewController.m */,
@@ -260,6 +326,42 @@
 				122B5F922E3391780095C41D /* BVNDetails.m */,
 				12CF007A2E6F2D3A00FA2117 /* BridgeSwift.swift */,
 				12B751BF2E6F31DA0011CE93 /* FirstBankApp-Bridging-Header.h */,
+				12F809482E969746002A07AE /* EnrollmentInfoView.h */,
+				12F809492E969746002A07AE /* EnrollmentInfoView.m */,
+				12F8094B2E96A796002A07AE /* InstructionCardView.h */,
+				12A363892EB22B7C00D9027D /* CompanyProfileCell.h */,
+				12A3638A2EB22B7C00D9027D /* CompanyProfileCell.m */,
+				12A3638C2EB22D4900D9027D /* ProfilesViewController.h */,
+				12A3638D2EB22D4900D9027D /* ProfilesViewController.m */,
+				12F8094C2E96A796002A07AE /* InstructionCardView.m */,
+				12F8094E2E96BCC4002A07AE /* InfoCardView.h */,
+				12F8094F2E96BCC4002A07AE /* InfoCardView.m */,
+				12F809512E96CCCF002A07AE /* AccountConfirmationVCViewController.h */,
+				12F1DFB82EB8F3FB00647653 /* SettingsVC.h */,
+				12F1DFB92EB8F3FB00647653 /* SettingsVC.m */,
+				12F1DFBB2EB908AF00647653 /* EneterOldPin.h */,
+				12F1DFBC2EB908AF00647653 /* EneterOldPin.m */,
+				12F1DFBE2EB91E0C00647653 /* EneterNewPin.h */,
+				12F1DFBF2EB91E0C00647653 /* EneterNewPin.m */,
+				12F1DFC12EB91E2600647653 /* EneterReconfirmPin.h */,
+				12F1DFC22EB91E2600647653 /* EneterReconfirmPin.m */,
+				127B80522EBA35A400B60A9B /* ResetPinVC.h */,
+				127B80532EBA35A400B60A9B /* ResetPinVC.m */,
+				127B80552EBA390A00B60A9B /* DeactivateTokenVC.h */,
+				127B80562EBA390A00B60A9B /* DeactivateTokenVC.m */,
+				12F809522E96CCCF002A07AE /* AccountConfirmationVCViewController.m */,
+				12F809572E96D084002A07AE /* OTPInputView.h */,
+				12F809582E96D084002A07AE /* OTPInputView.m */,
+				12F8095A2E96D241002A07AE /* OTPVerificationVCViewController.h */,
+				12F8095B2E96D241002A07AE /* OTPVerificationVCViewController.m */,
+				12F8095D2E96D588002A07AE /* StatusPopupViewController.h */,
+				12F8095E2E96D588002A07AE /* StatusPopupViewController.m */,
+				128DF79F2EAF91A9004393C4 /* SuccessPopupViewController.h */,
+				128DF7A02EAF91A9004393C4 /* SuccessPopupViewController.m */,
+				12C546032EB0EBFD00CF935C /* PinSetUp.h */,
+				12C546042EB0EBFD00CF935C /* PinSetUp.m */,
+				12A3638F2EB26C4200D9027D /* EnterPinViewController.h */,
+				12A363902EB26C4200D9027D /* EnterPinViewController.m */,
 			);
 			path = FirstBankApp;
 			sourceTree = "<group>";
@@ -400,33 +502,57 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C3B8F7B208E0A4200A9777F /* URLConnection.m in Sources */,
+				12F1DFBA2EB8F3FB00647653 /* SettingsVC.m in Sources */,
 				075D11EB1A5C05E300BC9D78 /* SDKUtils.m in Sources */,
+				12A363912EB26C4300D9027D /* EnterPinViewController.m in Sources */,
 				07088AAD1A4062330010E3B8 /* RegistrationCodeViewController.m in Sources */,
 				122B5F932E3391780095C41D /* BVNDetails.m in Sources */,
 				127AFA7E2E55D2A30046F8B0 /* AESHelper.m in Sources */,
+				12F1DFC32EB91E2600647653 /* EneterReconfirmPin.m in Sources */,
 				127AFA772E55C8570046F8B0 /* SmileIDDelegate.m in Sources */,
 				075D11EE1A5EC9F500BC9D78 /* PINRequestViewController.m in Sources */,
 				07088AA71A4061E30010E3B8 /* AddIdentityViewController.m in Sources */,
 				07088A821A4031C20010E3B8 /* AppDelegate.m in Sources */,
+				12F8095C2E96D241002A07AE /* OTPVerificationVCViewController.m in Sources */,
+				12F8095F2E96D588002A07AE /* StatusPopupViewController.m in Sources */,
 				12D446692E154AC000378EEF /* OptionsOnboardigViewController.m in Sources */,
+				12EAA3CA2EC345830033BFBF /* ProfileManager.m in Sources */,
+				12F809502E96BCC4002A07AE /* InfoCardView.m in Sources */,
+				12EAA3C72EC3426A0033BFBF /* KeychainUtility.m in Sources */,
 				12DF114B2E6093E3002024FA /* AESHelperSwift.swift in Sources */,
 				3C55124C20861C6B0054A089 /* CreateUserViewController.m in Sources */,
+				12F8094A2E969746002A07AE /* EnrollmentInfoView.m in Sources */,
+				12A3638B2EB22B7C00D9027D /* CompanyProfileCell.m in Sources */,
 				1205A5542E2E95D400C87E74 /* ActivationProcessViewController.m in Sources */,
+				127B805D2EBE37B700B60A9B /* EntrustUtilityVC.m in Sources */,
+				12C546052EB0EBFD00CF935C /* PinSetUp.m in Sources */,
+				12F1DFC02EB91E0C00647653 /* EneterNewPin.m in Sources */,
 				075D11F41A67A30100BC9D78 /* ResetPINViewController.m in Sources */,
 				12CF007B2E6F2D3A00FA2117 /* BridgeSwift.swift in Sources */,
+				12F809532E96CCCF002A07AE /* AccountConfirmationVCViewController.m in Sources */,
 				3C022111209748DF007BF0CF /* NSString+MD5.m in Sources */,
+				127B80572EBA390A00B60A9B /* DeactivateTokenVC.m in Sources */,
+				128DF7A12EAF91A9004393C4 /* SuccessPopupViewController.m in Sources */,
+				12F8094D2E96A796002A07AE /* InstructionCardView.m in Sources */,
 				07088A7F1A4031C20010E3B8 /* main.m in Sources */,
 				B1CEE6132B93F29700F419B1 /* TermsViewController.m in Sources */,
 				12451E402E2FE2A500017F6A /* LineDrawingView.m in Sources */,
+				12F1DFBD2EB908AF00647653 /* EneterOldPin.m in Sources */,
+				12F809592E96D084002A07AE /* OTPInputView.m in Sources */,
 				3C022107209691E7007BF0CF /* DeactivateConfirmViewController.m in Sources */,
 				075D11F11A66703B00BC9D78 /* AppBlockViewController.m in Sources */,
+				1206BE1F2E93E8D700FCCEE9 /* CorporateEnrollmentViewController .m in Sources */,
 				12D8DCC02E32709600086C09 /* AccountValidationViewController.m in Sources */,
+				12A363942EB2733800D9027D /* SoftTokenViewController.m in Sources */,
 				3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */,
 				07088AB01A4071390010E3B8 /* SecurityCodeViewController.m in Sources */,
 				3C3B8F78208DC98500A9777F /* TripleDES.m in Sources */,
+				127B80542EBA35A400B60A9B /* ResetPinVC.m in Sources */,
 				07088AAA1A4062160010E3B8 /* EstablishPINViewController.m in Sources */,
 				3C02210A2096956B007BF0CF /* DeactivateViewController.m in Sources */,
+				12A3638E2EB22D4900D9027D /* ProfilesViewController.m in Sources */,
 				3C02210D209732A7007BF0CF /* NSData+Base64.m in Sources */,
+				12A363972EB2793B00D9027D /* TempGetOtp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,59 +812,23 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		128E9B9E2E847167004548BE /* SmileIDAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDAnalytics;
-		};
-		128E9BA02E847167004548BE /* SmileIDCamera */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDCamera;
-		};
-		128E9BA22E847167004548BE /* SmileIDML */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDML;
-		};
-		128E9BA42E847167004548BE /* SmileIDNavigation */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDNavigation;
-		};
-		128E9BA62E8476E7004548BE /* SmileID */ = {
+		128CC0872E86E6590025AA9C /* SmileID */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileID;
 		};
-		128E9BA82E8476E7004548BE /* SmileIDAnalytics */ = {
+		128CC0892E86E6590025AA9C /* SmileIDAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileIDAnalytics;
 		};
-		128E9BAA2E8476E7004548BE /* SmileIDCamera */ = {
+		128CC08B2E86E6590025AA9C /* SmileIDCamera */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileIDCamera;
 		};
-		128E9BAC2E8476E7004548BE /* SmileIDML */ = {
+		128CC08D2E86E6590025AA9C /* SmileIDML */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileIDML;
 		};
-		128E9BAE2E8476E7004548BE /* SmileIDNavigation */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDNavigation;
-		};
-		12D2F1592E846303003E036B /* SmileID */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileID;
-		};
-		12D2F15B2E846303003E036B /* SmileIDAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDAnalytics;
-		};
-		12D2F15D2E846303003E036B /* SmileIDCamera */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDCamera;
-		};
-		12D2F15F2E846303003E036B /* SmileIDML */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SmileIDML;
-		};
-		12D2F1612E846303003E036B /* SmileIDNavigation */ = {
+		128CC08F2E86E6590025AA9C /* SmileIDNavigation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SmileIDNavigation;
 		};

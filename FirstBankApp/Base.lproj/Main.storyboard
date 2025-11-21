@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ept-GF-ktT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rBg-NJ-i3j">
     <device id="retina6_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -59,6 +59,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfL-9l-euF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2760" y="-523"/>
+        </scene>
+        <!--Corporate Enrollment-->
+        <scene sceneID="hkL-dM-4iY">
+            <objects>
+                <viewController storyboardIdentifier="enrolmentID" id="p0h-Tu-8od" customClass="CorporateEnrollmentViewController" customModule="FirstBankApp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fhC-GT-XZr" userLabel="Corpo"/>
+                        <viewControllerLayoutGuide type="bottom" id="YbR-Ig-DE2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2rP-vg-fCj">
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Corporate Enrollment" leftItemsSupplementBackButton="YES" id="6Ke-gU-lXs" colorLabel="IBBuiltInLabel-Blue">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Support" id="BeQ-Mf-juO"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H3i-5h-zjt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2045.4545454545455" y="210.87866108786611"/>
         </scene>
         <!--Activation Process View Controller-->
         <scene sceneID="CRN-nU-Otb">
@@ -444,7 +465,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kBr-B0-kme" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1367" y="551"/>
+            <point key="canvasLocation" x="-475.90909090909093" y="550.41841004184107"/>
         </scene>
         <!--Security Code View Controller-->
         <scene sceneID="fUV-Sv-f86">
@@ -1158,7 +1179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jse-JW-UAP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="478.125" y="551.25"/>
+            <point key="canvasLocation" x="1369.0909090909092" y="551.04602510460256"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="J3Q-4o-lwV">
@@ -1190,7 +1211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vTv-d9-NJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="466.66666666666669" y="-311.41304347826087"/>
+            <point key="canvasLocation" x="1358.1818181818182" y="-311.92468619246864"/>
         </scene>
         <!--Deactivate View Controller-->
         <scene sceneID="if2-kG-TyC">
@@ -1596,7 +1617,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DOi-dC-UVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1282.608695652174" y="192.39130434782609"/>
+            <point key="canvasLocation" x="2173.636363636364" y="192.05020920502093"/>
         </scene>
         <!--Add Identity View Controller-->
         <scene sceneID="VkR-xh-ovb">
@@ -1930,6 +1951,24 @@
             </objects>
             <point key="canvasLocation" x="-371.75572519083966" y="-1581.6901408450706"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wuq-eA-ZZY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rBg-NJ-i3j" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NFI-3B-pN9">
+                        <rect key="frame" x="0.0" y="124" width="440" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="p0h-Tu-8od" kind="relationship" relationship="rootViewController" id="iWg-5G-cGV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dpH-c3-6KT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2937.2727272727275" y="210.87866108786611"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="4Us-U2-Ejw"/>
@@ -1943,6 +1982,7 @@
         <image name="1" width="1194" height="2166"/>
         <image name="6" width="1194" height="2166"/>
         <image name="Logo" width="362" height="98"/>
+        <image name="Support" width="16" height="16"/>
         <image name="background" width="359" height="650"/>
         <image name="input" width="72" height="72"/>
         <systemColor name="systemBackgroundColor">

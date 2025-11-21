@@ -40,6 +40,7 @@ class SmileIDEnrollmentDelegate: NSObject, SmartSelfieResultDelegate {
 @objc class SmileIDBridge: NSObject {
     @MainActor @objc static private var delegate: SmileIDEnrollmentDelegate?
 
+    /// Exposed method for Objective-C
     @MainActor @objc static func presentSelfieEnrollment(
         from controller: UIViewController,
         completion: @escaping (NSString?, NSString?) -> Void
@@ -61,7 +62,7 @@ class SmileIDEnrollmentDelegate: NSObject, SmartSelfieResultDelegate {
             }
         }
 
-        // Launch SmileID screen
+        // Show SmileID SwiftUI screen
         let selfieScreen = SmileID.smartSelfieEnrollmentScreen(delegate: enrollmentDelegate)
         let hostingController = UIHostingController(rootView: selfieScreen)
         controller.present(hostingController, animated: true)
@@ -69,44 +70,4 @@ class SmileIDEnrollmentDelegate: NSObject, SmartSelfieResultDelegate {
         delegate = enrollmentDelegate
     }
 }
-
-
-//@objc class SmileIDBridge: NSObject, SmartSelfieResultDelegate {
-//
-//    private var completion: ((NSString?, NSString?) -> Void)?
-//
-//    // Exposed to Objective-C
-//    @MainActor @objc static func presentSelfieEnrollment(
-//        from controller: UIViewController,
-//        completion: @escaping (NSString?, NSString?) -> Void
-//    ) {
-//        let bridge = SmileIDBridge()
-//        bridge.completion = completion
-//
-//        // Build the screen with delegate (not closure)
-//        let selfieScreen = SmileID.smartSelfieEnrollmentScreen(delegate: bridge)
-//
-//        let hostingController = UIHostingController(rootView: selfieScreen)
-//        controller.present(hostingController, animated: true)
-//    }
-//
-//    // MARK: - SmartSelfieResultDelegate
-//    func didSucceed(
-//        selfieImage: URL,
-//        livenessImages: [URL],
-//        apiResponse: SmartSelfieResponse?
-//    ) {
-//        if let response = apiResponse,
-//           let data = try? JSONEncoder().encode(response),
-//           let jsonString = String(data: data, encoding: .utf8) {
-//            completion?(jsonString as NSString, nil)
-//        } else {
-//            completion?(nil, "No response" as NSString)
-//        }
-//    }
-//
-//    func didError(error: Error) {
-//        completion?(nil, error.localizedDescription as NSString)
-//    }
-//}
 
