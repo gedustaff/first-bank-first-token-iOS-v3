@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *istructionalLabel;
 @property (weak, nonatomic) IBOutlet UIStackView *FacialStack;
 @property (weak, nonatomic) IBOutlet UIStackView *DebitCardStack;
+@property (weak, nonatomic) IBOutlet UILabel *facialTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *debitCardTitleLabel;
+
+
+
 
 - (IBAction)biometricButtonTapped:(id)sender;
 

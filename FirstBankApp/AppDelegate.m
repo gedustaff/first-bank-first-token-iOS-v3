@@ -14,6 +14,10 @@
 #import "SDKUtils.h"
 #import "FirstBankApp-Swift.h"
 
+
+
+
+
 // Import SmileID headers (v11+ uses modules)
 @import SmileID;
 
@@ -77,7 +81,8 @@ BOOL isRegistered = NO;
 // or SmileIDEnvironmentProduction
     // Get path of local smile_config.json
     // --- SmileID v11.1.0 setup ---
-
+    [SmileIDInitializer initializeSmileID];
+    
 
     return YES;
 }

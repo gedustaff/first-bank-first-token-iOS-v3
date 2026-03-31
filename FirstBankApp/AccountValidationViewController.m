@@ -24,7 +24,10 @@ static NSString *const KBAppKey=@"e3r564erthgfre3wedfrmjuyhb";
 static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
 
 
+
+
 @interface AccountValidationViewController () <UITextFieldDelegate>
+@property(nonatomic, strong)NSString *mBvn;
 
 
 - (NSString *)generateShortRequestId; // Declaration for the new helper method
@@ -166,7 +169,7 @@ static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
     // Trim leading/trailing whitespace from both strings
     NSString *trimmedBvn = [bvn stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *trimmedAccountNumber = [accountNumber stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
+    _mBvn=[bvn stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     // Use the trimmed strings in the API call
     NSDictionary *body = @{
         @"acc": trimmedAccountNumber,
@@ -192,15 +195,17 @@ static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
     
     // ... rest of the networking code remains the same
     
-    NSURL *url = [NSURL URLWithString:@"https://firsttokenapp.firstbanknigeria.com/AccountCIFID.php"];
+    NSURL *url = [NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FacialBiometric/AccountCIFID.php"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
+    request.timeoutInterval = 90.0;
     
     [request setHTTPBody:jsonData];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
-    [request setValue:kAppKey forHTTPHeaderField:@"AppKey"];
-    [request setValue:kAppId forHTTPHeaderField:@"AppId"];
+
+    [request setValue:@"hskgv4ngjb4d6st36fbd9h8rwIsKjdg" forHTTPHeaderField:@"AppKey"];
+       [request setValue:@"FirstToken" forHTTPHeaderField:@"AppId"];
     
     NSLog(@"POST URL: %@", url);
     NSString *rawJsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -267,11 +272,11 @@ static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
                 if ([status isEqualToString:@"success"]) {
 //                    NSDictionary *userDetails = decryptedJson[@"data"];
 //                    NSLog(@"user details %@", userDetails);
-                    NSString *returnedBvn = decryptedJson[@"bvn"];
+                    NSString *returnedBvn = decryptedJson[@"AccountName"];
                     NSLog(@"returned BVn %@", returnedBvn);
                     NSLog(@"trimedBVn %@", trimmedBvn);
                     
-                    if ([returnedBvn isEqualToString:trimmedBvn]) { // Use the trimmed BVN for comparison
+                    if (returnedBvn) { // Use the trimmed BVN for comparison
                         NSLog(@"BVN matches! Proceeding to send BVN details.");
                         [strongSelf sendBVNDetails:decryptedJson];
                     } else {
@@ -295,19 +300,22 @@ static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
                                                                     preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:loadingAlert animated:YES completion:nil];
 
-    NSURL *url = [NSURL URLWithString:@"https://firsttokenapp.firstbanknigeria.com/getBVNDetails.php"];
+    NSURL *url = [NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FacialBiometric/getBVNDetails.php"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
+    request.timeoutInterval = 90.0;
 
     // Extract necessary parameters from 'details' dictionary for getBVNDetails.php
     // Assuming getBVNDetails.php expects 'bvn', 'requestId', and 'countryId'
-    NSString *bvnValue = details[@"bvn"];
+    NSString *bvnValue = _mBvn;
+    
+    NSLog(@"bvn info @%", bvnValue);
     
     if (!self.passedData) {
         self.passedData = [NSMutableDictionary dictionary];
     }
    
-        self.passedData[@"bvn"] = details[@"bvn"];
+        self.passedData[@"bvn"] = bvnValue;
         self.passedData[@"cifid"]= details[@"CifId"];
         self.passedData[@"accountNumber"]=details[@"AccountNumber"];
     
@@ -338,10 +346,11 @@ static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
     [request setHTTPBody:jsonData];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"]; // Set Content-Type to application/json
     [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
-
+    [request setValue:@"2464aa24a88f9477a416396d7bc34ec6ec17" forHTTPHeaderField:@"AppKey"];
+       [request setValue:@"cfc07935190b09e78c177bd4458386127f46ce586" forHTTPHeaderField:@"AppId"];
     // IMPORTANT: Add custom headers for AppKey and AppId as required by your PHP backend
-    [request setValue:KBAppKey forHTTPHeaderField:@"AppKey"];
-    [request setValue:KBAppID forHTTPHeaderField:@"AppId"];
+//    [request setValue:KBAppKey forHTTPHeaderField:@"AppKey"];
+//    [request setValue:KBAppID forHTTPHeaderField:@"AppId"];
     
     NSLog(@"POST URL: %@", url);
     NSLog(@"POST Body (JSON Dictionary): %@", body);
@@ -440,6 +449,8 @@ static NSString *const KBAppID=@"23qweadserwfvdrefsxdgterfqmft";
                     }
 
                     if (strongSelf.navigationController) {
+                       
+
                         [strongSelf.navigationController pushViewController:bvnDetailsVC animated:YES];
                     } else {
                         NSLog(@"Error: Not embedded in a navigation controller for BVNDetailsVC push.");

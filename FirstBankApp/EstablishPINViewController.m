@@ -29,17 +29,49 @@ UIAlertController * alertIncorrect;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"========== EstablishPINViewController Loaded ==========");
+    NSLog(@"otpReference (property): %@", self.otpReference);
+    NSLog(@"userID (property): %@", self.userID);
+    NSLog(@"accountNumber (property): %@", self.accountNumber);
+    NSLog(@"phoneNumber (property): %@", self.phoneNumber);
+
+    NSLog(@"ref (global): %@", ref);
+    NSLog(@"userIdentity (global): %@", userIdentity);
+    NSLog(@"account (global): %@", account);
+    NSLog(@"phone (global): %@", phone);
+    NSLog(@"=======================================================");
+    
+    // Only set these if they haven't been set already
+    
+    
     responseDataEP = [NSMutableData new];
     activeIssue = NO;
     UIColor *color = [UIColor whiteColor];
+//    if (self.otpReference) {
+//        ref = self.otpReference;
+//    }
+//    if (self.userID) {
+//        userIdentity = self.userID;
+//    }
+//    if (self.accountNumber) {
+//        account = self.accountNumber;
+//    }
+//    if (self.phoneNumber) {
+//        phone = self.phoneNumber;
+//    }
+    
+    if (self.otpReference)   { ref = self.otpReference; }
+        if (self.userID)         { userIdentity = self.userID; }
+        if (self.accountNumber)  { account = self.accountNumber; }
+        if (self.phoneNumber)    { phone = self.phoneNumber; }
     _enteredOTP.attributedPlaceholder =
     [[NSAttributedString alloc]
      initWithString:@"Enter your OTP"
      attributes:@{NSForegroundColorAttributeName:color}];
-    ref = otpReference;
-    userIdentity = userID;
-    account = accountNumber;
-    phone = phoneNumber;
+//    ref = otpReference;
+//    userIdentity = userID;
+//    account = accountNumber;
+//    phone = phoneNumber;
     
     _pinValue.attributedPlaceholder =
     [[NSAttributedString alloc]
@@ -201,7 +233,8 @@ UIAlertController * alertIncorrect;
 
         if ([responseCode isEqualToString:@"000"]) {
             alertIncorrect.message = @"Verifying User Details...";
-            [EstablishPINViewController checkUser];
+//            [EstablishPINViewController checkUser];
+            [self checkUser];
             connCheckUser = [[NSURLConnection alloc] initWithRequest:requestUser delegate:self];
         } else {
             [self showAlertWithTitle:@"Error validating OTP" message:@"Please try again"];
@@ -211,28 +244,76 @@ UIAlertController * alertIncorrect;
     }
 }
 
+
+
 - (void)handleCheckUserResponse {
     NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
-    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
-    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    // Log response for debugging Biometric flow
+    NSLog(@"[DEBUG] handleCheckUserResponse: %@", responseText);
+    
+    NSError *jsonError = nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseDataEP options:0 error:&jsonError];
 
-    if ([json objectForKey:@"ResponseCode"]) {
+    if (json && [json objectForKey:@"ResponseCode"]) {
         responseCode = [json valueForKey:@"ResponseCode"];
 
         if ([responseCode isEqualToString:@"000"]) {
+            // Case: User found, now checking issuance status
             alertIncorrect.message = @"Validating Status...";
-            [EstablishPINViewController checkIssuance];
+            
+            // FIX: Call as instance method, not Class method
+            [self checkIssuance];
             connIssuance = [[NSURLConnection alloc] initWithRequest:requestIssuance delegate:self];
+            
         } else if ([responseCode isEqualToString:@"1001"]) {
+            // Case: User already setup/authenticated
             pinCode = submitPIN;
-            [self performSegueWithIdentifier:@"otpTocreate" sender:self];
+            
+            // FIX: Dismiss the alert before segueing, otherwise it stays stuck on screen!
+            [alertIncorrect dismissViewControllerAnimated:YES completion:^{
+                [self performSegueWithIdentifier:@"otpTocreate" sender:self];
+            }];
+            
         } else {
-            [self showAlertWithTitle:@"Error checking user state" message:@"Please try again"];
+            // Case: Server returned an error code (e.g., User not found)
+            [self showAlertWithTitle:@"Verification Failed"
+                             message:[json objectForKey:@"Message"] ?: @"User record not found."];
         }
     } else {
-        [self showAlertWithTitle:@"Error Activating App" message:@"Please contact the bank"];
+        // Case: Network succeeded but JSON is malformed or empty
+        NSLog(@"[ERROR] Malformed JSON: %@", responseText);
+        [self showAlertWithTitle:@"System Error"
+                         message:@"Received invalid response from server."];
     }
 }
+
+//- (void)handleCheckUserResponse {
+//    NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
+//    NSData *data = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+//    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//
+//    if ([json objectForKey:@"ResponseCode"]) {
+//        responseCode = [json valueForKey:@"ResponseCode"];
+//        NSLog(@"Success work well: %@", responseText);
+//
+//        if ([responseCode isEqualToString:@"000"]) {
+//            alertIncorrect.message = @"Validating Status...";
+//            NSLog(@"Server returned invalid JSON2: %@", responseText);
+//            [EstablishPINViewController checkIssuance];
+//            connIssuance = [[NSURLConnection alloc] initWithRequest:requestIssuance delegate:self];
+//        } else if ([responseCode isEqualToString:@"1001"]) {
+//            pinCode = submitPIN;
+//            [self performSegueWithIdentifier:@"otpTocreate" sender:self];
+//        } else {
+//            NSLog(@"Server returned invalid JSON1: %@", responseText);
+//            [self showAlertWithTitle:@"Error checking user state" message:@"Please try again"];
+//        }
+//    } else {
+//        NSLog(@"Server returned invalid JSON: %@", responseText);
+//        [self showAlertWithTitle:@"Error Activating App" message:@"Please contact the bank"];
+//    }
+//}
 
 - (void)handleIssuanceResponse {
     NSString *responseText = [[NSString alloc] initWithData:responseDataEP encoding:NSUTF8StringEncoding];
@@ -243,11 +324,13 @@ UIAlertController * alertIncorrect;
         BOOL statusRetrieved = [[json valueForKey:@"Status"] boolValue];
         if (statusRetrieved) {
             alertIncorrect.message = @"Activating token...";
-            [EstablishPINViewController getSerial];
+//            [EstablishPINViewController getSerial];
+            [self getSerial];
             connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
         } else {
             alertIncorrect.message = @"Validating token...";
-            [EstablishPINViewController checkActiveToken];
+//            [EstablishPINViewController checkActiveToken];
+            [self checkActiveToken];
             connActive = [[NSURLConnection alloc] initWithRequest:requestActive delegate:self];
         }
     } else {
@@ -268,7 +351,8 @@ UIAlertController * alertIncorrect;
             [self showAlertForActiveToken];
         } else {
             alertIncorrect.message = @"Activating token...";
-            [EstablishPINViewController getSerial];
+//            [EstablishPINViewController getSerial];
+            [self getSerial];
             connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
         }
     } else {
@@ -352,7 +436,8 @@ UIAlertController * alertIncorrect;
         activeIssue = YES;
         alertIncorrect = [UIAlertController alertControllerWithTitle:@"Activating App" message:@"Activating token..." preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:alertIncorrect animated:YES completion:nil];
-        [EstablishPINViewController getSerial];
+//        [EstablishPINViewController getSerial];
+        [self getSerial];
         connSerial = [[NSURLConnection alloc] initWithRequest:requestSerial delegate:self];
     }];
     UIAlertAction *noIncorrectButton = [UIAlertAction actionWithTitle:@"Cancel Activation" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -379,6 +464,9 @@ UIAlertController * alertIncorrect;
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+    NSLog(@"validateOTP called");
+    NSLog(@"submittedOTP: %@", submittedOTP);
+    NSLog(@"ref: %@", ref);
     
     //Calculate Length of message
     NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
@@ -404,10 +492,21 @@ UIAlertController * alertIncorrect;
     
 }
 
-+ (void) checkUser {
+
+- (void) checkUser {
+    
+    NSString *currentUID = self.userID ?: userIdentity;
+    NSLog(@"[DEBUG] checkUser executing for ID: %@", currentUID);
+
+        // 2. DEBUG: Verify the ID is not null before sending
+        if (!currentUID || [currentUID isEqualToString:@""]) {
+            NSLog(@"[CRITICAL ERROR] checkUser: No userID found. Request will fail.");
+            [self showAlertWithTitle:@"System Error" message:@"User identification missing. Please restart the process."];
+            return;
+        }
     
     
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&fid=%@",@"9",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", userIdentity ];
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&fid=%@",@"9",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", currentUID ];
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
@@ -419,6 +518,9 @@ UIAlertController * alertIncorrect;
     
     //Create URL Request
     requestUser = [[NSMutableURLRequest alloc] init];
+    
+    NSLog(@"checkUser called");
+    NSLog(@"userIdentity: %@", userIdentity);
     
     //Set URL
     [requestUser setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/checkUser.php"]];
@@ -437,7 +539,44 @@ UIAlertController * alertIncorrect;
     
 }
 
-+ (void) checkIssuance {
+//+ (void) checkUser {
+//    
+//    
+//    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&fid=%@",@"9",@"f8d66c19-ed29-403e-9cf1-387f6c15b223", userIdentity ];
+//    
+//    //Encode string
+//    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+//    
+//    NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+//    
+//    //Calculate Length of message
+//    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
+//    
+//    //Create URL Request
+//    requestUser = [[NSMutableURLRequest alloc] init];
+//    
+//    NSLog(@"checkUser called");
+//    NSLog(@"userIdentity: %@", userIdentity);
+//    
+//    //Set URL
+//    [requestUser setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/checkUser.php"]];
+//    
+//    //set HTTP Method
+//    [requestUser setHTTPMethod:@"POST"];
+//    
+//    //set HTTP Header
+//    [requestUser setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    
+//    //set Encoded header
+//    [requestUser setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    
+//    //set Body
+//    [requestUser setHTTPBody:postData];
+//    
+//}
+
+
+- (void) checkIssuance {
 
     NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", @"12321321" ];
     
@@ -451,6 +590,7 @@ UIAlertController * alertIncorrect;
     
     //Create URL Request
     requestIssuance = [[NSMutableURLRequest alloc] init];
+    
     
     [requestIssuance setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/checkIssuance.php"]];
     
@@ -469,9 +609,47 @@ UIAlertController * alertIncorrect;
     
 }
 
-+ (void) checkActiveToken {
+
+//+ (void) checkIssuance {
+//
+//    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"11",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", @"12321321" ];
+//    
+//    //Encode string
+//    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+//    
+//    NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+//    
+//    //Calculate Length of message
+//    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
+//    
+//    //Create URL Request
+//    requestIssuance = [[NSMutableURLRequest alloc] init];
+//    
+//    
+//    [requestIssuance setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/checkIssuance.php"]];
+//    
+//    //set HTTP Method
+//    [requestIssuance setHTTPMethod:@"POST"];
+//    
+//    //set HTTP Header
+//    [requestIssuance setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    
+//    //set Encoded header
+//    [requestIssuance setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    
+//    //set Body
+//    [requestIssuance setHTTPBody:postData];
+//    
+//    
+//}
+
+
+
+- (void) checkActiveToken {
+    NSString *currentUID = self.userID ?: userIdentity;
+    NSLog(@"[DEBUG] checkUser executing for ID: %@", currentUID);
     
-    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"10",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
+    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"10",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", currentUID ];
     
     //Encode string
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
@@ -502,7 +680,43 @@ UIAlertController * alertIncorrect;
     
 }
 
-+ (void) getSerial {
+//+ (void) checkActiveToken {
+//    
+//    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"10",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
+//    
+//    //Encode string
+//    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+//    
+//    NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+//    
+//    //Calculate Length of message
+//    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
+//    
+//    //Create URL Request
+//    requestActive = [[NSMutableURLRequest alloc] init];
+//    
+//    //Set URL
+//    [requestActive setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/checkActive.php"]];
+//    
+//    //set HTTP Method
+//    [requestActive setHTTPMethod:@"POST"];
+//    
+//    //set HTTP Header
+//    [requestActive setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    
+//    //set Encoded header
+//    [requestActive setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    
+//    //set Body
+//    [requestActive setHTTPBody:postData];
+//    
+//    
+//}
+
+
+-(void) getSerial {
+    NSString *currentUID = self.userID ?: userIdentity;
+    NSLog(@"[DEBUG] checkUser executing for ID: %@", currentUID);
     
     NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"5",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
     
@@ -516,6 +730,8 @@ UIAlertController * alertIncorrect;
     
     //Create URL Request
     requestSerial = [[NSMutableURLRequest alloc] init];
+    NSLog(@"getSerial called");
+    NSLog(@"userIdentity: %@", userIdentity);
     
     //Set URL
     [requestSerial setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/getSerial.php"]];
@@ -533,6 +749,41 @@ UIAlertController * alertIncorrect;
     [requestSerial setHTTPBody:postData];
     
 }
+
+
+//+ (void) getSerial {
+//    
+//    NSString *post = [NSString stringWithFormat:@"&id=%@&key=%@&app=%@&fid=%@",@"5",@"f8d66c19-ed29-403e-9cf1-387f6c15b223",@"FirstToken", userIdentity ];
+//    
+//    //Encode string
+//    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+//    
+//    NSString *posted = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+//    
+//    //Calculate Length of message
+//    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
+//    
+//    //Create URL Request
+//    requestSerial = [[NSMutableURLRequest alloc] init];
+//    NSLog(@"getSerial called");
+//    NSLog(@"userIdentity: %@", userIdentity);
+//    
+//    //Set URL
+//    [requestSerial setURL:[NSURL URLWithString:@"https://firsttokenprod.firstbanknigeria.com/FirstTokenmiddleware/getSerial.php"]];
+//    
+//    //set HTTP Method
+//    [requestSerial setHTTPMethod:@"POST"];
+//    
+//    //set HTTP Header
+//    [requestSerial setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    
+//    //set Encoded header
+//    [requestSerial setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    
+//    //set Body
+//    [requestSerial setHTTPBody:postData];
+//    
+//}
 
 + (NSString *)generateRandomStringWithLength:(NSInteger)length {
     NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -561,6 +812,11 @@ UIAlertController * alertIncorrect;
     
     //Create URL Request
     requestConsent = [[NSMutableURLRequest alloc] init];
+    
+    NSLog(@"sendConsent called");
+    NSLog(@"account: %@", account);
+    NSLog(@"userIdentity: %@", userIdentity);
+    NSLog(@"phone: %@", phone);
     
     //Set URL
     

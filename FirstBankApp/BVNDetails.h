@@ -8,7 +8,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 
-//@property (nonatomic, strong) NSString *userid;
+@property (nonatomic, strong) NSString *userid;
+@property (nonatomic, strong)NSString *jobid;
 //@property (nonatomic, strong) NSString *regPhoneNumber;
 //@property (nonatomic, strong) NSString *regAccount;
 //@property (nonatomic, strong) NSString *otpReference;

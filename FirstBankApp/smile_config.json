@@ -1,9 +1,10 @@
-{
-  "auth_token": "qQP6WwT+m/Eh5H05xkA8dVAoXzwgIg2fWa5YZZ6/n+sOCLW2DxLokY0mFrIYoS6I4ETj+d+fUGg4Cq9d/bF/l7jqhr8A3+fDlXglNEM7iL537jrlHe2JDu4u7RJ4dqqpyh/ME5nbbhsMaxdRdmDXEMF629TwfGmWSXyb0UUH6hI=",
-  "partner_id": "045",
-  "prod_lambda_url": "https://api.smileidentity.com/v1/",
-  "prod_url": "",
-  "test_lambda_url": "https://testapi.smileidentity.com/v1/",
-  "test_url": "",
-  "version": "1.0.0"
-}
+
+
+  {
+    "partner_id": "045",
+    "auth_token": "jR1VjHmyKnN4u4X44ki+k9unij6DQxFybN2vGXssn1kISWTnMeyiZch3ik2X0fbDu/eMuoeO+PKsXQ2ZaHCJrsSVw0+Fvv64DVP/5NNBoHdRKskZgIHKvT3TR7AgG5UcO7YKxaPsP6quayKfI7AwfGr5Zs2RAq/WhgP8M04m9Eg=",
+    "environment": "production",
+    "prod_lambda_url": "https://api.smileidentity.com/v1/",
+    "test_lambda_url": "https://testapi.smileidentity.com/v1/",
+    "version": "1.0.0"
+  }

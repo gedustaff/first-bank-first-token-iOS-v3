@@ -178,9 +178,7 @@ int counter;
     
     
     
-    
-    
-    
+
     
     if (![ETSoftTokenSDK isDeviceSecure]) {
         // Display a waring or error message to user.

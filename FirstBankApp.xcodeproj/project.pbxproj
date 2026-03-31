@@ -25,15 +25,21 @@
 		1205A5542E2E95D400C87E74 /* ActivationProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1205A5532E2E95D400C87E74 /* ActivationProcessViewController.m */; };
 		122B5F932E3391780095C41D /* BVNDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 122B5F922E3391780095C41D /* BVNDetails.m */; };
 		12451E402E2FE2A500017F6A /* LineDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12451E3F2E2FE2A500017F6A /* LineDrawingView.m */; };
+		126D4E9C2F6B678E002ABE42 /* EntrustIGMobile.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B0ADBF2DD613D000323F73 /* EntrustIGMobile.xcframework */; };
+		126D4E9D2F6B678E002ABE42 /* EntrustIGMobile.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12B0ADBF2DD613D000323F73 /* EntrustIGMobile.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		126D4EA02F6B6C4C002ABE42 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 126D4E9F2F6B6C4C002ABE42 /* PrivacyInfo.xcprivacy */; };
 		1275A1B52E3BA5F800267ED7 /* smile_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 1275A1B42E3BA5F800267ED7 /* smile_config.json */; };
 		127AFA772E55C8570046F8B0 /* SmileIDDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 127AFA762E55C8570046F8B0 /* SmileIDDelegate.m */; };
 		127AFA7E2E55D2A30046F8B0 /* AESHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 127AFA7D2E55D2A30046F8B0 /* AESHelper.m */; };
-		128CC0882E86E6590025AA9C /* SmileID in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC0872E86E6590025AA9C /* SmileID */; };
-		128CC08A2E86E6590025AA9C /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC0892E86E6590025AA9C /* SmileIDAnalytics */; };
-		128CC08C2E86E6590025AA9C /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC08B2E86E6590025AA9C /* SmileIDCamera */; };
-		128CC08E2E86E6590025AA9C /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC08D2E86E6590025AA9C /* SmileIDML */; };
-		128CC0902E86E6590025AA9C /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 128CC08F2E86E6590025AA9C /* SmileIDNavigation */; };
-		12B0ADC02DD613D000323F73 /* EntrustIGMobile.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B0ADBF2DD613D000323F73 /* EntrustIGMobile.xcframework */; };
+		12BFD1482F6B1210007CCACD /* SmileIDUI in Frameworks */ = {isa = PBXBuildFile; productRef = 12BFD1472F6B1210007CCACD /* SmileIDUI */; };
+		12BFD14A2F6B1216007CCACD /* SmileID in Frameworks */ = {isa = PBXBuildFile; productRef = 12BFD1492F6B1216007CCACD /* SmileID */; };
+		12BFD14C2F6B1221007CCACD /* SmileIDAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 12BFD14B2F6B1221007CCACD /* SmileIDAnalytics */; };
+		12BFD14E2F6B122A007CCACD /* SmileIDCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 12BFD14D2F6B122A007CCACD /* SmileIDCamera */; };
+		12BFD1502F6B122F007CCACD /* SmileIDML in Frameworks */ = {isa = PBXBuildFile; productRef = 12BFD14F2F6B122F007CCACD /* SmileIDML */; };
+		12BFD1522F6B1238007CCACD /* SmileIDNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 12BFD1512F6B1238007CCACD /* SmileIDNavigation */; };
+		12BFD1542F6B124C007CCACD /* SmileIDNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 12BFD1532F6B124C007CCACD /* SmileIDNetworking */; };
+		12BFD1562F6B1251007CCACD /* SmileIDStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 12BFD1552F6B1251007CCACD /* SmileIDStorage */; };
+		12BFD1592F6B5A12007CCACD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FAE4BC2B8E9AE100DE0879 /* Security.framework */; };
 		12CF007B2E6F2D3A00FA2117 /* BridgeSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CF007A2E6F2D3A00FA2117 /* BridgeSwift.swift */; };
 		12D446682E154AC000378EEF /* OptionsOnboardigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12D446672E154AC000378EEF /* OptionsOnboardigViewController.xib */; };
 		12D446692E154AC000378EEF /* OptionsOnboardigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D446662E154AC000378EEF /* OptionsOnboardigViewController.m */; };
@@ -49,17 +55,17 @@
 		3CE38E3A20860CE20098B44C /* ActivatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE38E3920860CE20098B44C /* ActivatedViewController.m */; };
 		B1CEE6132B93F29700F419B1 /* TermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CEE6122B93F29700F419B1 /* TermsViewController.m */; };
 		B1CEE6182B9F878700F419B1 /* fbnnewcert_new.der in Resources */ = {isa = PBXBuildFile; fileRef = B1CEE6172B9F878700F419B1 /* fbnnewcert_new.der */; };
-		B1FAE4BD2B8E9AE100DE0879 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FAE4BC2B8E9AE100DE0879 /* Security.framework */; };
 		B1FAE4BF2B8E9AEF00DE0879 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FAE4BE2B8E9AEF00DE0879 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B1FAE4B52B8E98CF00DE0879 /* Embed Frameworks */ = {
+		126D4E9E2F6B678E002ABE42 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				126D4E9D2F6B678E002ABE42 /* EntrustIGMobile.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +107,7 @@
 		122B5F922E3391780095C41D /* BVNDetails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BVNDetails.m; sourceTree = "<group>"; };
 		12451E3E2E2FE2A500017F6A /* LineDrawingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineDrawingView.h; sourceTree = "<group>"; };
 		12451E3F2E2FE2A500017F6A /* LineDrawingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LineDrawingView.m; sourceTree = "<group>"; };
+		126D4E9F2F6B6C4C002ABE42 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1275A1B42E3BA5F800267ED7 /* smile_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = smile_config.json; sourceTree = "<group>"; };
 		127AFA752E55C8570046F8B0 /* SmileIDDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmileIDDelegate.h; sourceTree = "<group>"; };
 		127AFA762E55C8570046F8B0 /* SmileIDDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmileIDDelegate.m; sourceTree = "<group>"; };
@@ -145,14 +152,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				128CC0902E86E6590025AA9C /* SmileIDNavigation in Frameworks */,
 				B1FAE4BF2B8E9AEF00DE0879 /* libz.tbd in Frameworks */,
-				B1FAE4BD2B8E9AE100DE0879 /* Security.framework in Frameworks */,
-				128CC0882E86E6590025AA9C /* SmileID in Frameworks */,
-				128CC08C2E86E6590025AA9C /* SmileIDCamera in Frameworks */,
-				12B0ADC02DD613D000323F73 /* EntrustIGMobile.xcframework in Frameworks */,
-				128CC08E2E86E6590025AA9C /* SmileIDML in Frameworks */,
-				128CC08A2E86E6590025AA9C /* SmileIDAnalytics in Frameworks */,
+				12BFD1502F6B122F007CCACD /* SmileIDML in Frameworks */,
+				12BFD1482F6B1210007CCACD /* SmileIDUI in Frameworks */,
+				12BFD1592F6B5A12007CCACD /* Security.framework in Frameworks */,
+				12BFD1542F6B124C007CCACD /* SmileIDNetworking in Frameworks */,
+				12BFD1562F6B1251007CCACD /* SmileIDStorage in Frameworks */,
+				126D4E9C2F6B678E002ABE42 /* EntrustIGMobile.xcframework in Frameworks */,
+				12BFD14C2F6B1221007CCACD /* SmileIDAnalytics in Frameworks */,
+				12BFD14A2F6B1216007CCACD /* SmileID in Frameworks */,
+				12BFD14E2F6B122A007CCACD /* SmileIDCamera in Frameworks */,
+				12BFD1522F6B1238007CCACD /* SmileIDNavigation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +180,7 @@
 				07088A951A4031C20010E3B8 /* FirstBankAppTests */,
 				07088A7A1A4031C20010E3B8 /* Products */,
 				3CB5AB2C2080B68400578CB7 /* Frameworks */,
+				126D4E9F2F6B6C4C002ABE42 /* PrivacyInfo.xcprivacy */,
 			);
 			sourceTree = "<group>";
 		};
@@ -310,7 +321,7 @@
 				07088A751A4031C20010E3B8 /* Sources */,
 				07088A761A4031C20010E3B8 /* Frameworks */,
 				07088A771A4031C20010E3B8 /* Resources */,
-				B1FAE4B52B8E98CF00DE0879 /* Embed Frameworks */,
+				126D4E9E2F6B678E002ABE42 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -347,7 +358,7 @@
 			);
 			mainGroup = 07088A701A4031C20010E3B8;
 			packageReferences = (
-				1252D6A22E6F80C80057EF20 /* XCRemoteSwiftPackageReference "ios" */,
+				12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */,
 			);
 			productRefGroup = 07088A7A1A4031C20010E3B8 /* Products */;
 			projectDirPath = "";
@@ -366,6 +377,7 @@
 				1275A1B52E3BA5F800267ED7 /* smile_config.json in Resources */,
 				07C0AAA91AC0484D002F4EEB /* Settings.bundle in Resources */,
 				07088A881A4031C20010E3B8 /* Main.storyboard in Resources */,
+				126D4EA02F6B6C4C002ABE42 /* PrivacyInfo.xcprivacy in Resources */,
 				B1CEE6182B9F878700F419B1 /* fbnnewcert_new.der in Resources */,
 				12D446682E154AC000378EEF /* OptionsOnboardigViewController.xib in Resources */,
 				07088A8D1A4031C20010E3B8 /* LaunchScreen.xib in Resources */,
@@ -553,8 +565,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.4.1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NUGGV6Q5X4;
 				ENABLE_BITCODE = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -566,6 +579,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.3.8;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-objC",
@@ -575,7 +589,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gedutechnologies.firstbank.FirstToken;
 				PRODUCT_NAME = FirstBankApp;
-				PROVISIONING_PROFILE = "2f460e09-9154-41eb-89b8-1a7a39e8d864";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstBankApp/FirstBankApp-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -599,8 +613,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.4.1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NUGGV6Q5X4;
 				ENABLE_BITCODE = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -612,6 +627,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.3.8;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-objC",
@@ -621,7 +637,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gedutechnologies.firstbank.FirstToken;
 				PRODUCT_NAME = FirstBankApp;
-				PROVISIONING_PROFILE = "c9776d57-62c4-4b65-8fc8-f1bd27b126aa";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstBankApp/FirstBankApp-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -657,36 +673,56 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1252D6A22E6F80C80057EF20 /* XCRemoteSwiftPackageReference "ios" */ = {
+		12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/smileidentity/ios";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = exactVersion;
+				version = 11.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		128CC0872E86E6590025AA9C /* SmileID */ = {
+		12BFD1472F6B1210007CCACD /* SmileIDUI */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */;
+			productName = SmileIDUI;
+		};
+		12BFD1492F6B1216007CCACD /* SmileID */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */;
 			productName = SmileID;
 		};
-		128CC0892E86E6590025AA9C /* SmileIDAnalytics */ = {
+		12BFD14B2F6B1221007CCACD /* SmileIDAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */;
 			productName = SmileIDAnalytics;
 		};
-		128CC08B2E86E6590025AA9C /* SmileIDCamera */ = {
+		12BFD14D2F6B122A007CCACD /* SmileIDCamera */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */;
 			productName = SmileIDCamera;
 		};
-		128CC08D2E86E6590025AA9C /* SmileIDML */ = {
+		12BFD14F2F6B122F007CCACD /* SmileIDML */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */;
 			productName = SmileIDML;
 		};
-		128CC08F2E86E6590025AA9C /* SmileIDNavigation */ = {
+		12BFD1512F6B1238007CCACD /* SmileIDNavigation */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */;
 			productName = SmileIDNavigation;
+		};
+		12BFD1532F6B124C007CCACD /* SmileIDNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */;
+			productName = SmileIDNetworking;
+		};
+		12BFD1552F6B1251007CCACD /* SmileIDStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 12BFD1462F6B110A007CCACD /* XCRemoteSwiftPackageReference "ios" */;
+			productName = SmileIDStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -47,7 +47,7 @@
             [myLineView.heightAnchor constraintEqualToConstant:20]
         ]];
     } else {
-        NSLog(@"⚠️ instructionsStackView is nil. Line view will not be positioned correctly.");
+        NSLog(@"instructionsStackView is nil. Line view will not be positioned correctly.");
     }
 }
 
@@ -61,7 +61,7 @@
     if (accountValidationVC) {
         [self.navigationController pushViewController:accountValidationVC animated:YES];
     } else {
-        NSLog(@"❌ Could not find view controller with identifier 'AccountValidationVCID'");
+        NSLog(@" Could not find view controller with identifier 'AccountValidationVCID'");
     }
 }
 
